@@ -2,24 +2,37 @@
   "name": "webesidevopsmetrics",
   "version": "0.0.0",
   "scripts": {
+    "heroku-postbuild": "ng build --prod",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "engines": {
+    "node": "12.18.3",
+    "npm": "6.14.8"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.0.0",
-    "@angular/common": "~12.0.0",
-    "@angular/compiler": "~12.0.0",
-    "@angular/core": "~12.0.0",
-    "@angular/forms": "~12.0.0",
-    "@angular/platform-browser": "~12.0.0",
-    "@angular/platform-browser-dynamic": "~12.0.0",
-    "@angular/router": "~12.0.0",
+    "@angular/animations": "~10.1.2",
+    "@angular/cdk": "^10.2.3",
+    "@angular/common": "~10.1.2",
+    "@angular/compiler": "~10.1.2",
+    "@angular/compiler-cli": "^10.1.2",
+    "@angular/core": "~10.1.2",
+    "@angular/forms": "~10.1.2",
+    "@angular/localize": "~10.1.2",
+    "@angular/material": "^10.2.3",
+    "@angular/platform-browser": "~10.1.2",
+    "@angular/platform-browser-dynamic": "~10.1.2",
+    "@angular/router": "~10.1.2",
+    "@ng-bootstrap/ng-bootstrap": "^9.1.1",
+    "express": "^4.17.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
+    "typescript": "~4.0.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
