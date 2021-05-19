@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { jsPDF } from 'jspdf';
+import domtoimage from 'dom-to-image';
 
 export interface RepositoryData {
   repository:string;  
@@ -24,6 +26,43 @@ export class RepositoriesComponent implements OnInit {
   public chartData: string;
   public repositoriesLenght : number = 0;
 
+
+  async pdf(){
+
+    let ids: Array<string>;
+    ids = ['imprimir', 'imprimir2'];
+
+    const div = document.getElementById('imprimir')!;
+    var scale = 2;
+    const doc = new jsPDF('l', 'mm', 'a4');
+
+    const length = ids.length;
+    for (let i = 0; i < length; i++) {
+      const chart = document.getElementById(ids[i])!;
+      await domtoimage.toPng(chart, {
+        width: chart.clientWidth * scale,
+        height: chart.clientHeight * scale,
+        style: {
+         transform: 'scale('+scale+')',
+         transformOrigin: 'top left'
+       },
+       quality: 1
+      }).then((dataUrl) => {
+      
+        doc.addImage(dataUrl, 'PNG', 50, 50, 160, 110);
+        if (i < (length - 1)) {
+          doc.addPage();
+        }
+        
+      });
+    }
+
+    var f = new Date();
+    var mes = f.getMonth() + 1;
+    doc.save('Commits_report_Branch_' + f.getDate() + "-" + mes + "-" + f.getFullYear() + '-' + f.getHours() + '-' + f.getMinutes() + '.pdf');
+  
+
+  }
 
   constructor(private route: ActivatedRoute,
     private router: Router,
