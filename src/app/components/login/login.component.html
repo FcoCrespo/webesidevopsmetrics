@@ -1,0 +1,26 @@
+
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+<div class="login">
+    <div class="logo-image">
+        <!--src : https://idgrup.com/wp-content/uploads/2018/07/devops1-1024x524.png -->
+        <img src="../../../assets/devops.png" alt="Logo" title="Logo" width="300">
+    </div>
+    <h2 class="login-header">DevOps Metrics</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
+        <div class="form-group">
+            <input type="UserName" placeholder="usuario" id="username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Debes introducir el nombre de usuario</div>
+            </div>
+            <input type="password" placeholder="password" id="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Debes introducir una Contraseña</div>
+            </div>
+
+            <button id="botonAcceso" type="submit" class="form-group" value="Acceder">
+                Acceder
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+.bg-img {
+   /* Location of the image-> src: https://wallpaperscraft.com/wallpaper/office_work_interior_walls_80538  */
+ background-image: url(./assets/office.jpg);
+ 
+ /* Background image is centered vertically and horizontally at all times */
+ background-position: center center;
+ 
+ /* Background image doesn't tile */
+ background-repeat: no-repeat;
+ 
+ /* Background image is fixed in the viewport so that it doesn't move when 
+    the content's height is greater than the image's height */
+ background-attachment: fixed;
+ 
+ /* This is what makes the background image rescale based
+    on the container's size */
+ background-size: cover;
+ 
+ /* Set a background color that will be displayed
+    while the background image is loading */
+ background-color: #464646;
+}
+
+.bg-img-white {
+   /* Location of the image-> src: https://wallpaperscraft.com/wallpaper/office_work_interior_walls_80538  */
+ background-image: none;
+ 
+ /* Background image is centered vertically and horizontally at all times */
+ background-position: center center;
+ 
+ /* Background image doesn't tile */
+ background-repeat: no-repeat;
+ 
+ /* Background image is fixed in the viewport so that it doesn't move when 
+    the content's height is greater than the image's height */
+ background-attachment: fixed;
+ 
+ /* This is what makes the background image rescale based
+    on the container's size */
+ background-size: cover;
+ 
+ /* Set a background color that will be displayed
+    while the background image is loading */
+ background-color: #ffffff;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
