@@ -1,9 +1,18 @@
-import { Component, OnInit  } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { jsPDF } from 'jspdf';
 import domtoimage from 'dom-to-image';
+import autoTable from 'jspdf-autotable';
 
 export interface RepositoryData {
   repository:string;  
@@ -26,7 +35,7 @@ export class RepositoriesComponent implements OnInit {
   public chartData: string;
   public repositoriesLenght : number = 0;
 
-
+  
   async pdf(){
 
     let ids: Array<string>;
@@ -48,8 +57,14 @@ export class RepositoriesComponent implements OnInit {
        },
        quality: 1
       }).then((dataUrl) => {
-      
-        doc.addImage(dataUrl, 'PNG', 50, 50, 160, 110);
+
+        console.log(document.getElementById(ids[i])?.tagName);
+        if(document.getElementById(ids[i])?.tagName === "TABLE"){
+          autoTable(doc, { html: '#'+ids[i] });
+        }
+        else{
+          doc.addImage(dataUrl, 'PNG', 50, 50, 160, 110);
+        }
         if (i < (length - 1)) {
           doc.addPage();
         }
@@ -67,7 +82,7 @@ export class RepositoriesComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private commitService : CommitService,) {
+    private commitService : CommitService) {
 
     var values = JSON.parse(localStorage.getItem("currentUser")!);
     this.username = values.username;
