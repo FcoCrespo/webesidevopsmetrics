@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -28,6 +28,9 @@ import { LOCALE_ID} from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { FilterPipe } from './pipes/filter.pipe';
+import { CommitsmetricsComponent } from './components/commitsmetrics/commitsmetrics.component';
+import { ReposComponent } from './components/repos/repos.component';
+import { BranchesComponent } from './components/branches/branches.component';
 
 
 registerLocaleData(localeES, 'es');
@@ -37,7 +40,10 @@ registerLocaleData(localeES, 'es');
     LoginComponent,
     RepositoriesComponent,
     FilterPipe,
-    AppComponent    
+    AppComponent,
+    CommitsmetricsComponent,
+    ReposComponent,
+    BranchesComponent    
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,7 @@ registerLocaleData(localeES, 'es');
     MatFormFieldModule,
     MatInputModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

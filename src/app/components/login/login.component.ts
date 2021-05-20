@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         data => {
           switch (this.authService.currentUserValue.role) {
             case "admin": {
-              this.router.navigate(['/repositories']);
+              this.router.navigate(['/repos']);
               break;
             }
           }
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
     if (this.authService.currentUserValue) {
       switch (this.authService.currentUserValue.role) {
         case "admin": {
-          this.router.navigate(['/repositories']);
+          this.router.navigate(['/repos']);
           break;
         }
       }

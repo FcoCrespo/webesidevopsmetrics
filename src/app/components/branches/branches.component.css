@@ -1,0 +1,4 @@
+li.branches { cursor: pointer; }
+li.branches:hover {
+    text-decoration: underline;
+}

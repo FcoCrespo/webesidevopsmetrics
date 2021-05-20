@@ -1,0 +1,9 @@
+li { cursor: pointer;
+    margin: 0 0 5px 0; }
+li.repositories { cursor: pointer; }
+li.repositories:hover {
+    text-decoration: underline;
+}
+.titulo{
+    cursor: pointer;
+}
