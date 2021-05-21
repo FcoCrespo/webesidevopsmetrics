@@ -6,6 +6,9 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ElementRef,
+  AfterViewInit,
+  Renderer2
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,14 +16,21 @@ import { CommitService } from 'src/app/services/commit.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Chart } from 'admin-lte/node_modules/chart.js';
 import { Observable } from 'rxjs';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
+import domtoimage from 'dom-to-image';
+import autoTable from 'jspdf-autotable';
 
 export interface BranchesData {
   idGithub: string;
   repository: string;
   name: string;
   order: string;
+}
+
+export interface UsersCommits {
+  n: number;
+  name: string;
+  ncommits: number;
 }
 
 export interface CommitsData {
@@ -46,8 +56,12 @@ export class CommitsmetricsComponent implements OnInit {
   public idCanvas: number = 0;
 
   branch = {} as BranchesData;
+  commitsTable = {} as UsersCommits;
+  commitsTableArray: UsersCommits[] = [];
   data: CommitsData[] = [];
   commits: CommitsData[] = [];
+
+  
 
   public commitsLenght: number = 0;
 
@@ -75,19 +89,26 @@ export class CommitsmetricsComponent implements OnInit {
     'rgb(0, 255, 201)'];
 
 
+
+
+  public trs;
+
   constructor(
     private commitService: CommitService,
     public route: ActivatedRoute,
     public router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    public renderer: Renderer2, 
+    public elementRef: ElementRef
   ) {
     this.idCanvas = 0;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     document.body.classList.add('bg-img-white');
     
 
+    this.charts = [];
     this.branch = JSON.parse(localStorage.getItem("BranchData")!);
     console.log(this.branch);
     var values = JSON.parse(localStorage.getItem("currentUser")!);
@@ -106,7 +127,7 @@ export class CommitsmetricsComponent implements OnInit {
       owner = 'FcoCrespo';
     }
 
-    this.commitService.getCommitsBranch(this.tokenpass, this.branch.name, this.branch.repository, owner)
+    await this.commitService.getCommitsBranch(this.tokenpass, this.branch.name, this.branch.repository, owner)
       .subscribe((data: CommitsData[]) => {
         this.data = data;
         this.commitsLenght = data.length;
@@ -117,6 +138,8 @@ export class CommitsmetricsComponent implements OnInit {
         console.log(this.labelsCommitsAuthor);
         this.contarCommitsAuthor();
         console.log(this.numCommitsAuthor);
+        
+
 
         var colores = 0;
         for (var cont = 0; cont < this.labelsCommitsAuthor.length; cont++) {
@@ -128,12 +151,76 @@ export class CommitsmetricsComponent implements OnInit {
         }
         this.crearCanvasBarCommitAuthor();
         this.crearCanvasPieCommitAuthor();
+        document.getElementById("report")!.style.visibility = "visible";
+        console.log(this.charts[0]);
+        console.log(this.charts[1]);
+
+        this.obtenerDatosTabla();
+        console.log(this.commitsTableArray);
+        this.rellenarDatosTabla();
+
+        this.ngAfterViewInit();
+        
       });
-
-    document.getElementById("report")!.style.visibility = "visible";
-
+    
   }
 
+  public ngAfterViewInit() {
+    // Solution for catching click events on anchors using querySelectorAll:
+    this.trs = this.elementRef.nativeElement.querySelectorAll('tr');
+    this.trs.forEach((tr: HTMLTableRowElement) => {
+      tr.addEventListener('click', this.handleAnchorClick)
+    })
+  }
+
+  public handleAnchorClick = (event: Event) => {
+    event.preventDefault();
+    const element = event.target as HTMLTableDataCellElement;
+    if(element.getAttribute("class")==="nombre" && element.textContent!=null){
+      localStorage.setItem('DataLabelChart', element.textContent);
+      this.router.navigate(['/commitsauthor']);
+    }
+  }
+
+  rellenarDatosTabla(){
+    var myhtml = "";
+    var myhtmlaux = "";
+    for (var i = 0; i < this.commitsTableArray.length; i++) {
+      
+      var tr = document.createElement('tr');
+      
+
+      var td1 = document.createElement('td');
+      td1.innerText = String(this.commitsTableArray[i].n);
+      var td2 = document.createElement('td');
+      td2.setAttribute("class", "nombre");
+      td2.setAttribute("style", "background-color:white");
+      td2.setAttribute("onmouseover", "this.setAttribute('style','background-color:#D3D3D3; cursor:pointer;');");
+      td2.setAttribute("onmouseout", "this.setAttribute('style','background-color:white');");
+      td2.innerText = String(this.commitsTableArray[i].name);
+      var td3 = document.createElement('td');
+      td3.innerText = String(this.commitsTableArray[i].ncommits);
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+
+      document.getElementById('tableBodyCommits')!.appendChild(tr);
+
+    }
+
+    
+  }
+
+  obtenerDatosTabla(){
+    
+    for (var i = 0; i < this.labelsCommitsAuthor.length; i++) {
+
+      this.commitsTable={n: (i+1), name: this.labelsCommitsAuthor[i], ncommits: this.numCommitsAuthor[i]};
+
+      this.commitsTableArray.push(this.commitsTable);
+    }
+  }
 
   obtenerLabelsCommitsAuthor() {
     var labelsCommitsAuthoraux = [];
@@ -171,7 +258,7 @@ export class CommitsmetricsComponent implements OnInit {
     myCanvasExample.setAttribute("style", "min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;");
     document.getElementById('divChart')!.appendChild(myCanvasExample);
     var myRouter = this.router;
-    var myChart = new Chart("myChart" + this.idCanvas, {
+    this.charts[0] = new Chart("myChart" + this.idCanvas, {
       type: 'bar',
       data: {
         labels: this.labelsCommitsAuthor,
@@ -203,7 +290,7 @@ export class CommitsmetricsComponent implements OnInit {
     myCanvasExample.setAttribute("style", "min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;");
     document.getElementById('divChartCircle')!.appendChild(myCanvasExample);
     var myRouter = this.router;
-    var myChart = new Chart("myChart" + this.idCanvas, {
+    this.charts[1] = new Chart("myChart" + this.idCanvas, {
       type: 'doughnut',
       data: {
         labels: this.labelsCommitsAuthor,
@@ -216,6 +303,45 @@ export class CommitsmetricsComponent implements OnInit {
         }]
       }
     });
+  }
+
+  async pdf(){
+
+    let ids: Array<string>;
+    ids = ['divChart', 'divChartCircle'];
+
+    const div = document.getElementById('imprimir')!;
+    var scale = 2;
+    const doc = new jsPDF('l', 'mm', 'a4');
+
+    const length = ids.length;
+    for (let i = 0; i < length; i++) {
+      const chart = document.getElementById(ids[i])!;
+      await domtoimage.toPng(chart, {
+        width: chart.clientWidth * scale,
+        height: chart.clientHeight * scale,
+        style: {
+         transform: 'scale('+scale+')',
+         transformOrigin: 'top left'
+       },
+       quality: 1
+      }).then((dataUrl) => {
+
+        
+        doc.addImage(dataUrl, 'PNG', 50, 50, 160, 110);
+        
+        if (i < (length - 1)) {
+          doc.addPage();
+        }
+        
+      });
+    }
+
+    var f = new Date();
+    var mes = f.getMonth() + 1;
+    doc.save('Commits_report_Branch_'+this.branch.name+"_Repository_"+this.branch.repository+"-"+ f.getDate() + "-" + mes + "-" + f.getFullYear() + '-' + f.getHours() + '-' + f.getMinutes() + '.pdf');
+  
+
   }
 
   goHome() {

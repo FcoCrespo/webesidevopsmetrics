@@ -1,0 +1,18 @@
+<h1 id="titulo"></h1>
+<div id="buscador" style="visibility: hidden"><app-searchcommits (search)="handleSearch($event)"></app-searchcommits></div>
+<div class="table-responsive">
+    <table class="table m-0">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Author</th>
+        <th>Date</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commit of commits | filter:['oid','authorName']:filtro_valor"><td>{{ commit.oid }}</td><td>{{ commit.authorName }}</td><td>{{ commitDate(commit) }}</td></tr> 
+      </tbody>
+    </table>
+</div>
+
+

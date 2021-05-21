@@ -126,34 +126,28 @@
         </div>
         <!-- /.content-header -->
 
-        <section class="content">
-
-            <div id="report" class="container-fluid" style="visibility: hidden">
-                <!-- Info boxes -->
-                <div class="row" >
-                    <!-- /.col -->
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                            <div class="info-box-icon bg-info elevation-1">
-                                <img src="assets/img/reports-200.png" class="img-circle elevation-2" alt="Print report">
-                            </div>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Print Report of Commits Metrics</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-
-                </div>
-            </div>
-        </section>
-
         <!-- Main content -->
         <section class="content">
 
             <div id="contentreport" class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                      <div id="report" (click)="pdf()" class="info-box">
+                        <span class="info-box-icon bg-info elevation-1">
+                          <img src="assets/img/reports-200.png" class="img-circle elevation-2" alt="Print report">
+                        </span>
+          
+                        <div class="info-box-content">
+                          <span class="info-box-text">Print Report</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                      <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
 
                 <div class="row">
                     <div class="col-md-6">
@@ -204,6 +198,38 @@
                     </div>       
                     <!-- /.card -->
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">COMMITS OF {{this.branch.name.toUpperCase()}} BRANCH</h3>
+                          <div class="card-body p-0">
+                            <div class="table-responsive">
+                              <table class="table m-0">
+                                <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>User</th>
+                                  <th># Commits</th>
+                                </tr>
+                                </thead>
+                                <tbody id=tableBodyCommits>
+                        
+                                </tbody>
+                              </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                          </div>
+          
+                        </div>
+                        <!-- /.card-header -->
+                        
+                      </div>
+                      <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
                 
             </div>
             <!--/. container-fluid -->

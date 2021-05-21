@@ -31,6 +31,8 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { CommitsmetricsComponent } from './components/commitsmetrics/commitsmetrics.component';
 import { ReposComponent } from './components/repos/repos.component';
 import { BranchesComponent } from './components/branches/branches.component';
+import { CommitsauthorComponent } from './components/commitsauthor/commitsauthor.component';
+import { SearchcommitsComponent } from './components/searchcommits/searchcommits.component';
 
 
 registerLocaleData(localeES, 'es');
@@ -43,7 +45,9 @@ registerLocaleData(localeES, 'es');
     AppComponent,
     CommitsmetricsComponent,
     ReposComponent,
-    BranchesComponent    
+    BranchesComponent,
+    CommitsauthorComponent,
+    SearchcommitsComponent    
   ],
   imports: [
     BrowserModule,
