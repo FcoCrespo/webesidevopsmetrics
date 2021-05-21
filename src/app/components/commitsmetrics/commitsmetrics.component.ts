@@ -78,6 +78,7 @@ export class CommitsmetricsComponent implements OnInit {
   ordersBranches: Array<string> = [];
   colorsCommits: Array<string> = [];
   charts: Array<Chart> = [];
+  arrayDeCadenas: Array<string> = [];
   colors: Array<string> = ['rgb(255, 99, 132)',
     'rgb(54, 162, 235)',
     'rgb(255, 206, 86)',
@@ -168,18 +169,22 @@ export class CommitsmetricsComponent implements OnInit {
   public ngAfterViewInit() {
     // Solution for catching click events on anchors using querySelectorAll:
     this.trs = this.elementRef.nativeElement.querySelectorAll('tr');
-    this.trs.forEach((tr: HTMLTableRowElement) => {
+    this.trs.forEach((tr: HTMLTableElement) => {
       tr.addEventListener('click', this.handleAnchorClick)
     })
   }
 
   public handleAnchorClick = (event: Event) => {
     event.preventDefault();
-    const element = event.target as HTMLTableDataCellElement;
-    if(element.getAttribute("class")==="nombre" && element.textContent!=null){
-      localStorage.setItem('DataLabelChart', element.textContent);
-      this.router.navigate(['/commitsauthor']);
-    }
+  
+    const element = event.target as HTMLTableElement;
+    const padre = element.parentNode;
+    const hijos = padre?.children;
+
+    // @ts-ignore
+    localStorage.setItem('DataLabelChart', hijos[1].textContent);
+    this.router.navigate(['/commitsauthor']);
+
   }
 
   rellenarDatosTabla(){
@@ -188,15 +193,14 @@ export class CommitsmetricsComponent implements OnInit {
     for (var i = 0; i < this.commitsTableArray.length; i++) {
       
       var tr = document.createElement('tr');
+      tr.setAttribute("style", "background-color:white");
+      tr.setAttribute("onmouseover", "this.setAttribute('style','background-color:#D3D3D3; cursor:pointer;');");
+      tr.setAttribute("onmouseout", "this.setAttribute('style','background-color:white');");
       
 
       var td1 = document.createElement('td');
       td1.innerText = String(this.commitsTableArray[i].n);
       var td2 = document.createElement('td');
-      td2.setAttribute("class", "nombre");
-      td2.setAttribute("style", "background-color:white");
-      td2.setAttribute("onmouseover", "this.setAttribute('style','background-color:#D3D3D3; cursor:pointer;');");
-      td2.setAttribute("onmouseout", "this.setAttribute('style','background-color:white');");
       td2.innerText = String(this.commitsTableArray[i].name);
       var td3 = document.createElement('td');
       td3.innerText = String(this.commitsTableArray[i].ncommits);

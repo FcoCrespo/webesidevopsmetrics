@@ -1,7 +1,48 @@
 <h1 id="titulo"></h1>
+<div class="col-12 col-sm-6 col-md-3">
+    <div id="report" (click)="pdf()" class="info-box" style="visibility: hidden;">
+      <span class="info-box-icon bg-info elevation-1">
+        <img src="assets/img/reports-200.png" class="img-circle elevation-2" alt="Print report">
+      </span>
+
+      <div class="info-box-content">
+        <span class="info-box-text">Imprimir</span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+</div>
+<br>
+<br>
+<label id="labelFiltroDates"  style="visibility: hidden;">Filter between data in the table:</label>
+
+<br>
+<!-- filtros -->
+<div class="row d-flex mt-3">
+
+  <!-- date time picker component -->
+  <form id="selectorfechas1" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
+       <input [(ngModel)]="idfechas1" type="date"  [(ngModel)]="desde" name="desde">
+  </form>
+
+  <form id="selectorfechas2" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
+    <input [(ngModel)]="idfechas2" type="date"  [(ngModel)]="hasta" name="hasta">
+  </form>
+
+</div>
+<br>
+<br>
+<button id="filterdates" style="visibility: hidden;">Filter between dates</button>
+<button id="resetdates" style="visibility: hidden;" (click)="ReiniciarFechas()">Reset dates values</button>
+<br>
+<br>
+<label id="labelFiltroTabla"  style="visibility: hidden;">Filter between data in the table:</label>
+<br>
 <div id="buscador" style="visibility: hidden"><app-searchcommits (search)="handleSearch($event)"></app-searchcommits></div>
-<div class="table-responsive">
-    <table class="table m-0">
+<br>
+<br>
+<div id="tablacommits" class="table-responsive" style="visibility: hidden;">
+    <table id="imprimir" class="table m-0">
       <thead>
       <tr>
         <th>ID</th>
@@ -10,7 +51,7 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let commit of commits | filter:['oid','authorName']:filtro_valor"><td>{{ commit.oid }}</td><td>{{ commit.authorName }}</td><td>{{ commitDate(commit) }}</td></tr> 
+        <tr *ngFor="let commit of commits | filter:['oid','authorName']:filtro_valor"><td>{{ commit.oid }}</td><td>{{ commit.authorName }}</td><td>{{ commit.pushedDate | date: 'long' }}</td></tr> 
       </tbody>
     </table>
 </div>

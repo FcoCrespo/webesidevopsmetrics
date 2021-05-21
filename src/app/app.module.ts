@@ -10,6 +10,10 @@ import {DecimalPipe} from '@angular/common';
 /*Angular material*/
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+
 
 /*Angular routing*/
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +39,7 @@ import { CommitsauthorComponent } from './components/commitsauthor/commitsauthor
 import { SearchcommitsComponent } from './components/searchcommits/searchcommits.component';
 
 
-registerLocaleData(localeES, 'es');
+//registerLocaleData(localeES, 'es');
 
 @NgModule({
   declarations: [
@@ -58,14 +62,19 @@ registerLocaleData(localeES, 'es');
     HttpClientModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'es' },
-    DecimalPipe
+    { provide: LOCALE_ID, useValue: 'en-US' },
+    DecimalPipe,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
     
   bootstrap: [AppComponent]
