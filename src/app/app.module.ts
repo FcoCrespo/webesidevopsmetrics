@@ -51,7 +51,7 @@ import { SearchcommitsComponent } from './components/searchcommits/searchcommits
     ReposComponent,
     BranchesComponent,
     CommitsauthorComponent,
-    SearchcommitsComponent    
+    SearchcommitsComponent
   ],
   imports: [
     BrowserModule,

@@ -21,13 +21,20 @@
 <div class="row d-flex mt-3">
 
   <!-- date time picker component -->
-  <form id="selectorfechas1" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
-       <input [(ngModel)]="idfechas1" type="date"  [(ngModel)]="desde" name="desde">
-  </form>
-
-  <form id="selectorfechas2" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
-    <input [(ngModel)]="idfechas2" type="date"  [(ngModel)]="hasta" name="hasta">
-  </form>
+  <div class="row">
+    <!-- date time picker component -->
+    <label id="labelfechas1"  style="visibility: hidden;">From: </label>
+    <form id="selectorfechas1" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
+         <input [(ngModel)]="idfechas1" type="date"  [(ngModel)]="desde" name="desde">
+    </form>
+  </div>
+  
+  <div class="row">
+    <label id="labelfechas2"  style="visibility: hidden;">To: </label>
+    <form id="selectorfechas2" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
+      <input [(ngModel)]="idfechas2" type="date"  [(ngModel)]="hasta" name="hasta">
+    </form>
+  </div>
 
 </div>
 <br>
@@ -51,7 +58,7 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let commit of commits | filter:['oid','authorName']:filtro_valor"><td>{{ commit.oid }}</td><td>{{ commit.authorName }}</td><td>{{ commit.pushedDate | date: 'long' }}</td></tr> 
+        <tr *ngFor="let commit of commits | filter:['oid','authorName']:filtro_valor"><td>{{ commit.oid }}</td><td>{{ commit.authorName }}</td><td>{{ commit.pushedDate | date: 'medium' }}</td></tr> 
       </tbody>
     </table>
 </div>

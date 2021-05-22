@@ -61,7 +61,7 @@ export class CommitsmetricsComponent implements OnInit {
   data: CommitsData[] = [];
   commits: CommitsData[] = [];
 
-  
+
 
   public commitsLenght: number = 0;
 
@@ -99,7 +99,7 @@ export class CommitsmetricsComponent implements OnInit {
     public route: ActivatedRoute,
     public router: Router,
     public authService: AuthService,
-    public renderer: Renderer2, 
+    public renderer: Renderer2,
     public elementRef: ElementRef
   ) {
     this.idCanvas = 0;
@@ -107,7 +107,7 @@ export class CommitsmetricsComponent implements OnInit {
 
   async ngOnInit() {
     document.body.classList.add('bg-img-white');
-    
+
 
     this.charts = [];
     this.branch = JSON.parse(localStorage.getItem("BranchData")!);
@@ -139,7 +139,7 @@ export class CommitsmetricsComponent implements OnInit {
         console.log(this.labelsCommitsAuthor);
         this.contarCommitsAuthor();
         console.log(this.numCommitsAuthor);
-        
+
 
 
         var colores = 0;
@@ -161,9 +161,9 @@ export class CommitsmetricsComponent implements OnInit {
         this.rellenarDatosTabla();
 
         this.ngAfterViewInit();
-        
+
       });
-    
+
   }
 
   public ngAfterViewInit() {
@@ -176,27 +176,33 @@ export class CommitsmetricsComponent implements OnInit {
 
   public handleAnchorClick = (event: Event) => {
     event.preventDefault();
-  
+
     const element = event.target as HTMLTableElement;
     const padre = element.parentNode;
     const hijos = padre?.children;
 
     // @ts-ignore
-    localStorage.setItem('DataLabelChart', hijos[1].textContent);
-    this.router.navigate(['/commitsauthor']);
+    if (hijos[0].textContent !== '#' && hijos[1].textContent !== 'User' && hijos[2].textContent !== '# Commits') {
+      // @ts-ignore
+      console.log(hijos[0].textContent + " - " + hijos[1].textContent + " - " + hijos[2].textContent);
+      // @ts-ignore
+      localStorage.setItem('DataLabelChart', hijos[1].textContent);
+      this.router.navigate(['/commitsauthor']);
+    }
+
 
   }
 
-  rellenarDatosTabla(){
+  rellenarDatosTabla() {
     var myhtml = "";
     var myhtmlaux = "";
     for (var i = 0; i < this.commitsTableArray.length; i++) {
-      
+
       var tr = document.createElement('tr');
       tr.setAttribute("style", "background-color:white");
       tr.setAttribute("onmouseover", "this.setAttribute('style','background-color:#D3D3D3; cursor:pointer;');");
       tr.setAttribute("onmouseout", "this.setAttribute('style','background-color:white');");
-      
+
 
       var td1 = document.createElement('td');
       td1.innerText = String(this.commitsTableArray[i].n);
@@ -213,14 +219,14 @@ export class CommitsmetricsComponent implements OnInit {
 
     }
 
-    
+
   }
 
-  obtenerDatosTabla(){
-    
+  obtenerDatosTabla() {
+
     for (var i = 0; i < this.labelsCommitsAuthor.length; i++) {
 
-      this.commitsTable={n: (i+1), name: this.labelsCommitsAuthor[i], ncommits: this.numCommitsAuthor[i]};
+      this.commitsTable = { n: (i + 1), name: this.labelsCommitsAuthor[i], ncommits: this.numCommitsAuthor[i] };
 
       this.commitsTableArray.push(this.commitsTable);
     }
@@ -309,7 +315,7 @@ export class CommitsmetricsComponent implements OnInit {
     });
   }
 
-  async pdf(){
+  async pdf() {
 
     let ids: Array<string>;
     ids = ['divChart', 'divChartCircle'];
@@ -325,26 +331,26 @@ export class CommitsmetricsComponent implements OnInit {
         width: chart.clientWidth * scale,
         height: chart.clientHeight * scale,
         style: {
-         transform: 'scale('+scale+')',
-         transformOrigin: 'top left'
-       },
-       quality: 1
+          transform: 'scale(' + scale + ')',
+          transformOrigin: 'top left'
+        },
+        quality: 1
       }).then((dataUrl) => {
 
-        
+
         doc.addImage(dataUrl, 'PNG', 50, 50, 160, 110);
-        
+
         if (i < (length - 1)) {
           doc.addPage();
         }
-        
+
       });
     }
 
     var f = new Date();
     var mes = f.getMonth() + 1;
-    doc.save('Commits_report_Branch_'+this.branch.name+"_Repository_"+this.branch.repository+"-"+ f.getDate() + "-" + mes + "-" + f.getFullYear() + '-' + f.getHours() + '-' + f.getMinutes() + '.pdf');
-  
+    doc.save('Commits_report_Branch_' + this.branch.name + "_Repository_" + this.branch.repository + "-" + f.getDate() + "-" + mes + "-" + f.getFullYear() + '-' + f.getHours() + '-' + f.getMinutes() + '.pdf');
+
 
   }
 

@@ -95,7 +95,7 @@ export class CommitsauthorComponent implements OnInit {
         this.commitsLenght = data.length;
         console.log(this.commitsLenght);
         this.commits = this.data;
-        
+
         document.getElementById("buscador")!.style.visibility = "visible";
         document.getElementById("titulo")!.innerText="Commits Information in Branch "+this.branch.name+" of "+this.authorName+". Total: "+data.length;
 
@@ -107,6 +107,8 @@ export class CommitsauthorComponent implements OnInit {
         document.getElementById("labelFiltroTabla")!.style.visibility = "visible";
         document.getElementById("resetdates")!.style.visibility = "visible";
         document.getElementById("labelFiltroDates")!.style.visibility = "visible";
+        document.getElementById("labelfechas1")!.style.visibility = "visible";
+        document.getElementById("labelfechas2")!.style.visibility = "visible";
 
     });
 
@@ -135,11 +137,10 @@ export class CommitsauthorComponent implements OnInit {
     //let pipe = new DatePipe('es-ES');
     let pipe = new DatePipe('en-En');
 
-    const time = pipe.transform(dateTime, 'mediumTime', 'UTC');
 
-    const date = pipe.transform(dateTime, 'dd MMMM yyyy', 'UTC');
+    const date = pipe.transform(dateTime, 'medium', 'UTC');
 
-    return date + ' Hour: ' + time;
+    return date;
   }
 
   handleSearch(value: string){
