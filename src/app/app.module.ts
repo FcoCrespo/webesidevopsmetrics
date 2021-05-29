@@ -37,6 +37,7 @@ import { ReposComponent } from './components/repos/repos.component';
 import { BranchesComponent } from './components/branches/branches.component';
 import { CommitsauthorComponent } from './components/commitsauthor/commitsauthor.component';
 import { SearchcommitsComponent } from './components/searchcommits/searchcommits.component';
+import { CommitsauthorfechasComponent } from './components/commitsauthorfechas/commitsauthorfechas.component';
 
 
 //registerLocaleData(localeES, 'es');
@@ -51,7 +52,8 @@ import { SearchcommitsComponent } from './components/searchcommits/searchcommits
     ReposComponent,
     BranchesComponent,
     CommitsauthorComponent,
-    SearchcommitsComponent
+    SearchcommitsComponent,
+    CommitsauthorfechasComponent
   ],
   imports: [
     BrowserModule,

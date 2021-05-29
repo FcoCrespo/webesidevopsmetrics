@@ -26,5 +26,9 @@ export class CommitService {
   getCommitsBranchAuthor(tokenpass: string, branch: string, authorname: string, reponame: string, owner: string){
     return this.http.get<any[]>(`${environment.apiUrl}/commits/commitsbranchauthor?tokenpass=${tokenpass}&branch=${branch}&reponame=${reponame}&authorname=${authorname}&owner=${owner}`);
   }
+
+  getCommitsBranchAuthorDates(tokenpass: string, message){
+    return this.http.post<any[]>(`${environment.apiUrl}/commits/commitsbranchdateauthor?tokenpass=${tokenpass}`, message);
+  }
     
 }

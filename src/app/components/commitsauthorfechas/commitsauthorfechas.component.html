@@ -25,21 +25,21 @@
     <!-- date time picker component -->
     <label id="labelfechas1"  style="visibility: hidden;">From: </label>
     <form id="selectorfechas1" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
-         <input [(ngModel)]="idfechas1" type="date"  [(ngModel)]="desde" name="desde">
+         <input [(ngModel)]="idfechas1" type="date"  [(ngModel)]="desde" name="desde" disabled="disabled">
     </form>
   </div>
   
   <div class="row">
     <label id="labelfechas2"  style="visibility: hidden;">To: </label>
     <form id="selectorfechas2" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
-      <input [(ngModel)]="idfechas2" type="date"  [(ngModel)]="hasta" name="hasta">
+      <input [(ngModel)]="idfechas2" type="date"  [(ngModel)]="hasta" name="hasta" disabled="disabled">
     </form>
   </div>
 
 </div>
 <br>
 <br>
-<button id="filterdates" style="visibility: hidden;" (click)="FiltrarFechas()">Filter between dates</button>
+<button id="resetdates" style="visibility: hidden;" (click)="ReiniciarFechas()">Reset dates values</button>
 <br>
 <br>
 <label id="labelFiltroTabla"  style="visibility: hidden;">Filter between data in the table:</label>
@@ -61,5 +61,3 @@
       </tbody>
     </table>
 </div>
-
-

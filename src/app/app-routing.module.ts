@@ -7,7 +7,9 @@ import { ReposComponent } from './components/repos/repos.component';
 import { BranchesComponent } from './components/branches/branches.component';
 import { CommitsmetricsComponent } from './components/commitsmetrics/commitsmetrics.component';
 import { CommitsauthorComponent } from './components/commitsauthor/commitsauthor.component';
+import { CommitsauthorfechasComponent } from './components/commitsauthorfechas/commitsauthorfechas.component';
 import { LoginComponent } from './components/login/login.component';
+
 
 import { AuthGuard } from './guards';
 
@@ -18,6 +20,7 @@ const routes: Routes = [
   { path: 'branches', component: BranchesComponent, canActivate: [AuthGuard] },
   { path: 'commitsmetrics', component: CommitsmetricsComponent, canActivate: [AuthGuard] },
   { path: 'commitsauthor', component: CommitsauthorComponent, canActivate: [AuthGuard] },
+  { path: 'commitsauthorfechas', component: CommitsauthorfechasComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

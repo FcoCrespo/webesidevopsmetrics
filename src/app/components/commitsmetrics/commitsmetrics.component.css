@@ -1,8 +1,3 @@
 #report{
     cursor: pointer;
 }
-.trow:hover{
-    cursor:pointer; 
-    background-color:blue; 
-    box-shadow: 5px 10px #888888; 
-}
