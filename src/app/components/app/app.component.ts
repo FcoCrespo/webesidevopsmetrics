@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { HostListener, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services';
 
@@ -10,6 +10,16 @@ export class AppComponent {
   title = 'webesidevopsmetrics';
 
   currentUser: any;
+
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    localStorage.clear();
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    localStorage.clear();
+  }
 
   constructor(
     private router: Router,

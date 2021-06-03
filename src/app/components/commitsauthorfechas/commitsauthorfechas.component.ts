@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit} from '@angular/core';
+import { HostListener, Component, OnInit} from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from 'src/app/services/auth.service';
@@ -37,6 +37,16 @@ export interface CommitsData {
   styleUrls: ['./commitsauthorfechas.component.css']
 })
 export class CommitsauthorfechasComponent  implements OnInit {
+
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    localStorage.clear();
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    localStorage.clear();
+  }
 
   desde = new  Date('December 25, 1995 13:30:00');
   hasta =  new Date();
@@ -92,16 +102,6 @@ export class CommitsauthorfechasComponent  implements OnInit {
 
   ngOnInit() {
     document.body.classList.add('bg-img-white');
-    var owner = "";
-
-    if(this.branch.repository.localeCompare("eSalud")==0){
-      console.log("entro en sherrerap");
-      owner='sherrerap';
-    }
-    else{
-      console.log("entro en crespo");
-      owner='FcoCrespo';
-    }
 
     const message = {reponame:this.branch.repository,
                      authorname:this.authorName,
@@ -209,6 +209,7 @@ export class CommitsauthorfechasComponent  implements OnInit {
 
 
   logout() {
+    localStorage.clear();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

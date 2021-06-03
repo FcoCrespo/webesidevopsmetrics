@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -17,6 +17,16 @@ export class LoginComponent implements OnInit {
   returnUrl!: string;
   error!: string;
   success!: string;
+
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    localStorage.clear();
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    localStorage.clear();
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -91,6 +101,7 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
+    localStorage.clear();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

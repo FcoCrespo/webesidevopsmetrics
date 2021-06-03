@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { HostListener ,Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,6 +17,16 @@ export interface BranchesData {
 })
 
 export class BranchesComponent implements OnInit {
+
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    localStorage.clear();
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    localStorage.clear();
+  }
 
   data: BranchesData[] = [];
   branches: BranchesData[] = [];
@@ -87,13 +97,14 @@ export class BranchesComponent implements OnInit {
   goHome(){
 		this.router.navigate(['/repos']); // navigate to other page
 	}
-  
+
   goToRepositories(){
 		this.router.navigate(['/repos']); // navigate to other page
 	}
 
 
   logout() {
+    localStorage.clear();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

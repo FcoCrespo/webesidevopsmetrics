@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,6 +14,16 @@ export interface RepositoryData {
   styleUrls: ['./repos.component.css']
 })
 export class ReposComponent implements OnInit {
+
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    localStorage.clear();
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    localStorage.clear();
+  }
 
   data: RepositoryData[] = [];
   repositories: RepositoryData[] = [];
@@ -78,6 +88,7 @@ export class ReposComponent implements OnInit {
 	}
 
   logout() {
+    localStorage.clear();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

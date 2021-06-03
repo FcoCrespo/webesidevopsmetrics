@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from 'src/app/services/auth.service';
@@ -38,6 +38,16 @@ export interface CommitsData {
 })
 export class CommitsauthorComponent implements OnInit {
 
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    localStorage.clear();
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    localStorage.clear();
+  }
+
   desde = new Date('December 25, 1995 13:30:00');
   hasta = new Date();
 
@@ -59,7 +69,8 @@ export class CommitsauthorComponent implements OnInit {
   public authorName: string = "";
   public filtro_valor: string = "";
 
-
+  public repositoryName : string = "";
+  public owner : string = "";
   idfechas1: string;
   idfechas2: string;
 
@@ -74,22 +85,14 @@ export class CommitsauthorComponent implements OnInit {
     this.role = values.role;
     this.branch = JSON.parse(localStorage.getItem("BranchData")!);
     this.authorName = localStorage.getItem("DataLabelChart")!;
+    var repository = JSON.parse(localStorage.getItem("RepositoryData")!);
+    this.repositoryName = repository.repository;
+    this.owner = repository.owner;
   }
 
   ngOnInit() {
     document.body.classList.add('bg-img-white');
     var owner = "";
-    
-    
-
-    if (this.branch.repository.localeCompare("eSalud") == 0) {
-      console.log("entro en sherrerap");
-      owner = 'sherrerap';
-    }
-    else {
-      console.log("entro en crespo");
-      owner = 'FcoCrespo';
-    }
 
     this.commitService.getCommitsBranchAuthor(this.tokenpass, this.branch.name, this.authorName, this.branch.repository, owner)
       .subscribe((data: CommitsData[]) => {
@@ -199,6 +202,7 @@ export class CommitsauthorComponent implements OnInit {
 
 
   logout() {
+    localStorage.clear();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

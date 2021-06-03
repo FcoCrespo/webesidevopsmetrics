@@ -8,7 +8,8 @@ import {
   ViewChildren,
   ElementRef,
   AfterViewInit,
-  Renderer2
+  Renderer2,
+  HostListener
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
@@ -53,6 +54,16 @@ export interface CommitsData {
 })
 export class CommitsmetricsComponent implements OnInit {
 
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+    localStorage.clear();
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    localStorage.clear();
+  }
+
   public idCanvas: number = 0;
 
   branch = {} as BranchesData;
@@ -94,6 +105,9 @@ export class CommitsmetricsComponent implements OnInit {
 
   public trs;
 
+  public repositoryName : string = "";
+  public owner : string = "";
+
   constructor(
     private commitService: CommitService,
     public route: ActivatedRoute,
@@ -103,6 +117,9 @@ export class CommitsmetricsComponent implements OnInit {
     public elementRef: ElementRef
   ) {
     this.idCanvas = 0;
+    var repository = JSON.parse(localStorage.getItem("RepositoryData")!);
+    this.repositoryName = repository.repository;
+    this.owner = repository.owner;
   }
 
   async ngOnInit() {
@@ -117,18 +134,9 @@ export class CommitsmetricsComponent implements OnInit {
     this.tokenpass = values.tokenPass;
     this.role = values.role;
 
-    var owner = "";
+    
 
-    if (this.branch.repository.localeCompare("eSalud") == 0) {
-      console.log("entro en sherrerap");
-      owner = 'sherrerap';
-    }
-    else {
-      console.log("entro en crespo");
-      owner = 'FcoCrespo';
-    }
-
-    await this.commitService.getCommitsBranch(this.tokenpass, this.branch.name, this.branch.repository, owner)
+    await this.commitService.getCommitsBranch(this.tokenpass, this.branch.name, this.branch.repository, this.owner)
       .subscribe((data: CommitsData[]) => {
         
         document.getElementById('userlogin')!.innerText = this.username;
@@ -371,6 +379,7 @@ export class CommitsmetricsComponent implements OnInit {
 
 
   logout() {
+    localStorage.clear();
     this.authService.logout();
     this.router.navigate(['/login']);
   }
