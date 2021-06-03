@@ -79,6 +79,8 @@ export class CommitsauthorComponent implements OnInit {
   ngOnInit() {
     document.body.classList.add('bg-img-white');
     var owner = "";
+    
+    document.getElementById('userlogin')!.innerText = this.username;
 
     if (this.branch.repository.localeCompare("eSalud") == 0) {
       console.log("entro en sherrerap");
@@ -95,7 +97,7 @@ export class CommitsauthorComponent implements OnInit {
         this.commitsLenght = data.length;
         console.log(this.commitsLenght);
         this.commits = this.data;
-
+  
         document.getElementById("buscador")!.style.visibility = "visible";
         document.getElementById("titulo")!.innerText = "Commits Information in Branch " + this.branch.name + " of " + this.authorName + ". Total: " + data.length;
 
@@ -108,6 +110,7 @@ export class CommitsauthorComponent implements OnInit {
         document.getElementById("labelFiltroDates")!.style.visibility = "visible";
         document.getElementById("labelfechas1")!.style.visibility = "visible";
         document.getElementById("labelfechas2")!.style.visibility = "visible";
+        window.scrollTo(0,0);
 
       });
 
@@ -177,4 +180,27 @@ export class CommitsauthorComponent implements OnInit {
     return this.setDateTime(commit.pushedDate);
   }
 
+  goHome(){
+		this.router.navigate(['/repos']); // navigate to other page
+	}
+
+  goToRepositories(){
+		this.router.navigate(['/repos']); // navigate to other page
+	}
+
+  goToBranches(){
+		this.router.navigate(['/branches']); // navigate to other page
+	}
+
+  goToCommits(){
+		this.router.navigate(['/commitsmetrics']); // navigate to other page
+	}
+
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  
 }

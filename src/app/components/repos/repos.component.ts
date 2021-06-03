@@ -52,6 +52,7 @@ export class ReposComponent implements OnInit {
         this.repositoriesLenght = data.length;
         this.repositories = this.data;
         localStorage.setItem('repositories', JSON.stringify(this.repositories));
+        document.getElementById('userlogin')!.innerText = this.username;
     });
   }
 

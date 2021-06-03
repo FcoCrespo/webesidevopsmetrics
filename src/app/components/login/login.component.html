@@ -4,22 +4,22 @@
 <div class="login">
     <div class="logo-image">
         <!--src : https://idgrup.com/wp-content/uploads/2018/07/devops1-1024x524.png -->
-        <img src="../../../assets/devops.png" alt="Logo" title="Logo" width="300">
+        <img src="assets/img/devops-login.png" alt="Logo" title="Logo" width="400">
     </div>
     <h2 class="login-header">DevOps Metrics</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
         <div class="form-group">
-            <input type="UserName" placeholder="usuario" id="username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <input type="UserName" placeholder="user" id="username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Debes introducir el nombre de usuario</div>
+                <div *ngIf="f.username.errors.required">You must enter the username</div>
             </div>
             <input type="password" placeholder="password" id="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Debes introducir una Contraseña</div>
+                <div *ngIf="f.password.errors.required">You must enter the password</div>
             </div>
 
-            <button id="botonAcceso" type="submit" class="form-group" value="Acceder">
-                Acceder
+            <button id="botonAcceso" type="submit" class="form-group" value="Login">
+                Login
             </button>
         </div>
     </form>

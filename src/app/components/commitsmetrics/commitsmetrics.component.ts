@@ -39,7 +39,7 @@ export interface CommitsData {
   messageHeadline: string;
   message: string;
   pushedDate: DatePipe;
-  changedFiles: number;
+  changedFiles: string;
   authorName: string;
   branch: string;
   repository: string;
@@ -130,6 +130,8 @@ export class CommitsmetricsComponent implements OnInit {
 
     await this.commitService.getCommitsBranch(this.tokenpass, this.branch.name, this.branch.repository, owner)
       .subscribe((data: CommitsData[]) => {
+        
+        document.getElementById('userlogin')!.innerText = this.username;
         this.data = data;
         this.commitsLenght = data.length;
         this.commits = this.data;
@@ -161,6 +163,7 @@ export class CommitsmetricsComponent implements OnInit {
         this.rellenarDatosTabla();
 
         this.ngAfterViewInit();
+
 
       });
 
@@ -357,6 +360,15 @@ export class CommitsmetricsComponent implements OnInit {
   goHome() {
     this.router.navigate(['/repos']); // navigate to other page
   }
+
+  goToRepositories(){
+		this.router.navigate(['/repos']); // navigate to other page
+	}
+
+  goToBranches(){
+		this.router.navigate(['/branches']); // navigate to other page
+	}
+
 
   logout() {
     this.authService.logout();

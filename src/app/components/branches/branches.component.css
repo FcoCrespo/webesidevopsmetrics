@@ -2,3 +2,6 @@ li.branches { cursor: pointer; }
 li.branches:hover {
     text-decoration: underline;
 }
+#repositoriesMenu{
+    cursor: pointer;
+}

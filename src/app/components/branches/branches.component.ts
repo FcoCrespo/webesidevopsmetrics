@@ -62,6 +62,7 @@ export class BranchesComponent implements OnInit {
         localStorage.setItem('branches', JSON.stringify(this.branches));
         this.repositoryName = this.branches[0].repository;
         document.getElementById("repositoryname")!.style.visibility = "visible";
+        document.getElementById('userlogin')!.innerText = this.username;
     });
 
   }
@@ -86,6 +87,11 @@ export class BranchesComponent implements OnInit {
   goHome(){
 		this.router.navigate(['/repos']); // navigate to other page
 	}
+  
+  goToRepositories(){
+		this.router.navigate(['/repos']); // navigate to other page
+	}
+
 
   logout() {
     this.authService.logout();

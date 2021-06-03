@@ -19,6 +19,14 @@ export class CommitService {
       return this.http.get<any[]>(`${environment.apiUrl}/commits/allbranches?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
   }
 
+  getBranchesFirstCommit(tokenpass: string, reponame: string, owner: string) {
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/branchesfirstcommit?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
+  }
+
+  getCommits(tokenpass: string, reponame: string, owner: string) {
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/allcommits?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
+  }
+
   getCommitsBranch(tokenpass: string, branch: string, reponame: string, owner: string){
     return this.http.get<any[]>(`${environment.apiUrl}/commits/commitsbranch?tokenpass=${tokenpass}&branch=${branch}&reponame=${reponame}&owner=${owner}`);
   }

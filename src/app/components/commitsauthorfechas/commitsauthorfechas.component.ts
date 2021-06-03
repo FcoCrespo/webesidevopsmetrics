@@ -92,6 +92,7 @@ export class CommitsauthorfechasComponent  implements OnInit {
 
   ngOnInit() {
     document.body.classList.add('bg-img-white');
+    document.getElementById('userlogin')!.innerText = this.username;
     var owner = "";
 
     if(this.branch.repository.localeCompare("eSalud")==0){
@@ -131,6 +132,7 @@ export class CommitsauthorfechasComponent  implements OnInit {
         document.getElementById("labelfechas2")!.style.visibility = "visible";
         this.idfechas1=localStorage.getItem("begindate")!;
         this.idfechas2=localStorage.getItem("enddate")!;
+        window.scrollTo(0,0);
 
     });
 
@@ -187,6 +189,28 @@ export class CommitsauthorfechasComponent  implements OnInit {
 
   commitDate(commit: CommitsData){
     return this.setDateTime(commit.pushedDate); 
+  }
+
+  goHome(){
+		this.router.navigate(['/repos']); // navigate to other page
+	}
+
+  goToRepositories(){
+		this.router.navigate(['/repos']); // navigate to other page
+	}
+
+  goToBranches(){
+		this.router.navigate(['/branches']); // navigate to other page
+	}
+
+  goToCommits(){
+		this.router.navigate(['/commitsmetrics']); // navigate to other page
+	}
+
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
   
 }

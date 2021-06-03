@@ -1,65 +1,274 @@
-<h1 id="titulo"></h1>
-<div class="col-12 col-sm-6 col-md-3">
-    <div id="report" (click)="pdf()" class="info-box" style="visibility: hidden;">
-      <span class="info-box-icon bg-info elevation-1">
-        <img src="assets/img/reports-200.png" class="img-circle elevation-2" alt="Print report">
-      </span>
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a (click)="goHome()" class="nav-link">Home</a>
+      </li>
+    </ul>
 
-      <div class="info-box-content">
-        <span class="info-box-text">Imprimir</span>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a (click)="logout()" class="nav-link">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a (click)="goHome()" class="brand-link">
+      <img src="assets/img/devopsicon-bg.jpg" alt="esidevopsmetrics Logo"
+        class="titulo brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light titulo">esidevopsmetrics</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="assets/img/userlogged.png" class="img-circle" alt="User Image">
+        </div>
+        <div class="info">
+          <a class="d-block">LOGGED USER :</a>
+          <a id="userlogin" class="d-block font-weight: bolder;"></a>
+        </div>
       </div>
-      <!-- /.info-box-content -->
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Menu
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a (click)="goToRepositories()"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Repositories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a (click)="goToBranches()" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Branches</p>
+                  </a>
+              </li> 
+              <li class="nav-item">
+                <a (click)="goToCommits()" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Commits</p>
+                </a>
+              </li> 
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars nav-icon"></i>
+              <p>Show Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a (click)="logout()" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p class="text">Logout</p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.info-box -->
-</div>
-<br>
-<br>
-<label id="labelFiltroDates"  style="visibility: hidden;">Filter between data in the table:</label>
+    <!-- /.sidebar -->
+  </aside>
 
-<br>
-<!-- filtros -->
-<div class="row d-flex mt-3">
 
-  <!-- date time picker component -->
-  <div class="row">
-    <!-- date time picker component -->
-    <label id="labelfechas1"  style="visibility: hidden;">From: </label>
-    <form id="selectorfechas1" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
-         <input [(ngModel)]="idfechas1" type="date"  [(ngModel)]="desde" name="desde">
-    </form>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Commits Author List</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a (click)="goHome()">Home</a></li>
+              <li class="breadcrumb-item"><a (click)="goToRepositories()">Repositories</a></li>
+              <li class="breadcrumb-item"><a (click)="goToBranches()">Branches</a></li>
+              <li class="breadcrumb-item"><a (click)="goToCommits()">Commits</a></li>
+              <li class="breadcrumb-item active">Commits Author List</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 id="titulo" class="card-title"></h5>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div id="report" (click)="pdf()" class="info-box" style="visibility: hidden;">
+                    <span class="info-box-icon bg-info elevation-1">
+                      <img src="assets/img/reports-200.png" class="img-circle elevation-2" alt="Print report">
+                    </span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Print Report</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <div class="row">
+                  <label id="labelFiltroDates" style="visibility: hidden;">Filter between data in the table:</label>
+
+                  <br>
+                  <!-- filtros -->
+                  <div class="row d-flex mt-3">
+                    <div class="row">
+                        <!-- date time picker component -->
+                        <div class="row">
+                          <!-- date time picker component -->
+                          <label id="labelfechas1" style="visibility: hidden;">From: </label>
+                          <label style="visibility: hidden;"></label>
+                          <form id="selectorfechas1" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
+                            <input [(ngModel)]="idfechas1" type="date" [(ngModel)]="desde" name="desde">
+                          </form>
+                        </div>
+
+                        <div class="row">
+                          <label style="visibility: hidden;"></label>
+                          <label id="labelfechas2" style="visibility: hidden;">To: </label>
+                          <label style="visibility: hidden;"></label>
+                          <form id="selectorfechas2" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
+                            <input [(ngModel)]="idfechas2" type="date" [(ngModel)]="hasta" name="hasta">
+                          </form>
+                        </div>
+
+                        </div>
+                    </div>
+
+                   
+                  <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                      <label style="visibility: hidden;"></label>
+
+                      <br>
+                      <div id="filterdates" (click)="FiltrarFechas()" class="info-box" style="visibility: hidden;">
+                        <div class="info-box-content">
+                          <span class="info-box-text">Filter between dates</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                      <!-- /.info-box -->
+                    </div>
+                  </div>
+                  
+                  
+                  <br>
+                  <br>
+                  <label id="labelFiltroTabla" style="visibility: hidden;">Filter between data in the table:</label>
+                  <br>
+                  <div id="buscador" style="visibility: hidden">
+                    <app-searchcommits (search)="handleSearch($event)"></app-searchcommits>
+                  </div>
+                  <br>
+                  <br>
+                  <div id="tablacommits" class="table-responsive" style="visibility: hidden;">
+                    <table id="imprimir" class="table m-0 table-fixed">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Author</th>
+                          <th>Repository</th>
+                          <th>Branch</th>
+                          <th>Changed Lines</th>
+                          <th>Message</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let commit of commits | filter:['message']:filtro_valor">
+                          <td>{{ commit.pushedDate | date: 'medium' }}</td>
+                          <td>{{ commit.authorName }}</td>
+                          <td>{{ commit.repository }}</td>
+                          <td>{{ commit.branch }}</td>
+                          <td>{{ commit.changedFiles }}</td>
+                          <td>{{ commit.message }}</td>     
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+                <!-- /.row -->
+              </div>
+
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+
+        <!-- /.row -->
+      </div>
+      <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+
   </div>
-  
-  <div class="row">
-    <label id="labelfechas2"  style="visibility: hidden;">To: </label>
-    <form id="selectorfechas2" #myForm="ngForm" novalidate class="col-6" style="visibility: hidden;">
-      <input [(ngModel)]="idfechas2" type="date"  [(ngModel)]="hasta" name="hasta">
-    </form>
-  </div>
+  <!-- /.content-wrapper -->
 
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2020-2021 <a href="https://esidevopsmetrics.herokuapp.com/">esidevopsmetrics</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0.0
+    </div>
+  </footer>
 </div>
-<br>
-<br>
-<button id="filterdates" style="visibility: hidden;" (click)="FiltrarFechas()">Filter between dates</button>
-<br>
-<br>
-<label id="labelFiltroTabla"  style="visibility: hidden;">Filter between data in the table:</label>
-<br>
-<div id="buscador" style="visibility: hidden"><app-searchcommits (search)="handleSearch($event)"></app-searchcommits></div>
-<br>
-<br>
-<div id="tablacommits" class="table-responsive" style="visibility: hidden;">
-    <table id="imprimir" class="table m-0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Author</th>
-        <th>Date</th>
-      </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let commit of commits | filter:['oid','authorName']:filtro_valor"><td>{{ commit.oid }}</td><td>{{ commit.authorName }}</td><td>{{ commit.pushedDate | date: 'medium' }}</td></tr> 
-      </tbody>
-    </table>
-</div>
-
-
+<!-- ./wrapper -->
+<router-outlet></router-outlet>

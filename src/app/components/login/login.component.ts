@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           document.getElementById('botonAcceso')!.removeAttribute("disabled");
-          this.error = "Error: No se ha encontrado ningún usuario con esos datos.";
+          this.error = "No active account found with the given credentials.";
           this.loading = false;
         });
   }
