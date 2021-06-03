@@ -92,7 +92,6 @@ export class CommitsauthorfechasComponent  implements OnInit {
 
   ngOnInit() {
     document.body.classList.add('bg-img-white');
-    document.getElementById('userlogin')!.innerText = this.username;
     var owner = "";
 
     if(this.branch.repository.localeCompare("eSalud")==0){
@@ -132,6 +131,7 @@ export class CommitsauthorfechasComponent  implements OnInit {
         document.getElementById("labelfechas2")!.style.visibility = "visible";
         this.idfechas1=localStorage.getItem("begindate")!;
         this.idfechas2=localStorage.getItem("enddate")!;
+        document.getElementById('userlogin')!.innerText = this.username;
         window.scrollTo(0,0);
 
     });

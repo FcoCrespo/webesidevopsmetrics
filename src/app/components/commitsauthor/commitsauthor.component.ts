@@ -80,7 +80,7 @@ export class CommitsauthorComponent implements OnInit {
     document.body.classList.add('bg-img-white');
     var owner = "";
     
-    document.getElementById('userlogin')!.innerText = this.username;
+    
 
     if (this.branch.repository.localeCompare("eSalud") == 0) {
       console.log("entro en sherrerap");
@@ -110,6 +110,7 @@ export class CommitsauthorComponent implements OnInit {
         document.getElementById("labelFiltroDates")!.style.visibility = "visible";
         document.getElementById("labelfechas1")!.style.visibility = "visible";
         document.getElementById("labelfechas2")!.style.visibility = "visible";
+        document.getElementById('userlogin')!.innerText = this.username;
         window.scrollTo(0,0);
 
       });
