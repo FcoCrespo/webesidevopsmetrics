@@ -16,10 +16,11 @@ export class CommitService {
   }
 
   getBranches(tokenpass: string, reponame: string, owner: string) {
-      return this.http.get<any[]>(`${environment.apiUrl}/commits/allbranches?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/allbranches?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
   }
 
   getBranchesFirstCommit(tokenpass: string, reponame: string, owner: string) {
+    console.log(`${environment.apiUrl}/commits/branchesfirstcommit?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
     return this.http.get<any[]>(`${environment.apiUrl}/commits/branchesfirstcommit?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
   }
 

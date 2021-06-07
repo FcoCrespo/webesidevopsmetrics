@@ -63,18 +63,6 @@
                                     <p>Dashboard v1</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="./index2.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v2</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="./index3.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v3</p>
-                                </a>
-                            </li>
                             
                         </ul>
                     </li>
@@ -120,6 +108,8 @@
         <section class="content">
             <div class="container-fluid">
                 
+                
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -155,6 +145,40 @@
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
+
+                <div class="row">
+                    <p class="text-left">
+                        <strong>  New Repository Form</strong>
+                    </p>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <input id="idrespositoryinput" class="form-control form-control-navbar" type="repository" placeholder="repository" aria-label="repository">                   
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <input id="idownerinput" class="form-control form-control-navbar" type="owner" placeholder="owner" aria-label="owner">                   
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <label style="visibility: hidden;"></label>
+                <label style="visibility: hidden;"></label>
+
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div id="report" (click)="AddNewRepository()" class="info-box">
+                            <span class="info-box-icon bg-info elevation-1">
+                                <img src="assets/img/repository.png" class="img-circle elevation-2" alt="Print report">
+                            </span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Add New Repository</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
 
                 <!-- Main row -->
 

@@ -38,15 +38,7 @@ export interface CommitsData {
 })
 export class CommitsauthorfechasComponent  implements OnInit {
 
-  @HostListener('window:unload', [ '$event' ])
-  unloadHandler(event) {
-    localStorage.clear();
-  }
-
-  @HostListener('window:beforeunload', [ '$event' ])
-  beforeUnloadHandler(event) {
-    localStorage.clear();
-  }
+ 
 
   desde = new  Date('December 25, 1995 13:30:00');
   hasta =  new Date();

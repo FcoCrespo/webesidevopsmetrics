@@ -18,15 +18,7 @@ export class LoginComponent implements OnInit {
   error!: string;
   success!: string;
 
-  @HostListener('window:unload', [ '$event' ])
-  unloadHandler(event) {
-    localStorage.clear();
-  }
-
-  @HostListener('window:beforeunload', [ '$event' ])
-  beforeUnloadHandler(event) {
-    localStorage.clear();
-  }
+ 
 
   constructor(
     private formBuilder: FormBuilder,

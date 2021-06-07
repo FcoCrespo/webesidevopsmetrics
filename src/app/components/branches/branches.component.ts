@@ -18,16 +18,7 @@ export interface BranchesData {
 
 export class BranchesComponent implements OnInit {
 
-  @HostListener('window:unload', [ '$event' ])
-  unloadHandler(event) {
-    localStorage.clear();
-  }
-
-  @HostListener('window:beforeunload', [ '$event' ])
-  beforeUnloadHandler(event) {
-    localStorage.clear();
-  }
-
+ 
   data: BranchesData[] = [];
   branches: BranchesData[] = [];
   public username: string = "";
@@ -66,13 +57,25 @@ export class BranchesComponent implements OnInit {
     this.commitService.getBranches(this.tokenpass, this.repositoryName, this.owner)
       .subscribe((data: BranchesData[]) => {
         this.data = data;
-        console.log(this.data);
-        this.branchesLenght = data.length;
-        this.branches = this.data;
-        localStorage.setItem('branches', JSON.stringify(this.branches));
-        this.repositoryName = this.branches[0].repository;
-        document.getElementById("repositoryname")!.style.visibility = "visible";
         document.getElementById('userlogin')!.innerText = this.username;
+        if(this.data.length==0){
+          console.log("Needs order.")
+          document.getElementById("labelorderrepository")!.style.visibility = "visible";
+          document.getElementById("buttonorderrepository")!.style.visibility = "visible";
+        }
+        else{
+          console.log(this.data);
+          this.branchesLenght = data.length;
+          this.branches = this.data;
+          localStorage.setItem('branches', JSON.stringify(this.branches));
+        
+          this.repositoryName = this.branches[0].repository;
+          document.getElementById("repositoryname")!.style.visibility = "visible";
+        }
+
+
+        
+        
     });
 
   }
@@ -92,6 +95,19 @@ export class BranchesComponent implements OnInit {
   clickEvent(branch: BranchesData){
     localStorage.setItem('BranchData', JSON.stringify(branch));
     this.router.navigate(['/commitsmetrics']);      
+  }
+
+  OrderRepository(){
+    console.log(this.repositoryName+" "+this.owner);
+
+    this.commitService.getBranchesFirstCommit(this.tokenpass, this.repositoryName, this.owner)
+            .subscribe(data => {
+              window.location.reload();
+    }
+    ,
+        (err) => {console.log(err)
+          window.location.reload();
+    });
   }
 
   goHome(){

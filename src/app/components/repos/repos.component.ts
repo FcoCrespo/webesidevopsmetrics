@@ -8,6 +8,13 @@ export interface RepositoryData {
   owner: string;
 }
 
+export interface BranchesData {
+  idGithub:string;  
+  repository: string;
+  name: string;
+  order: string;
+}
+
 @Component({
   selector: 'app-repos',
   templateUrl: './repos.component.html',
@@ -15,16 +22,7 @@ export interface RepositoryData {
 })
 export class ReposComponent implements OnInit {
 
-  @HostListener('window:unload', [ '$event' ])
-  unloadHandler(event) {
-    localStorage.clear();
-  }
-
-  @HostListener('window:beforeunload', [ '$event' ])
-  beforeUnloadHandler(event) {
-    localStorage.clear();
-  }
-
+  
   data: RepositoryData[] = [];
   repositories: RepositoryData[] = [];
   public username: string = "";
@@ -81,6 +79,45 @@ export class ReposComponent implements OnInit {
   clickEvent(repository: RepositoryData){
     localStorage.setItem('RepositoryData', JSON.stringify(repository));
     this.router.navigate(['/branches']);      
+  }
+
+  
+
+  async AddNewRepository(){
+    var reponameinput= (<HTMLInputElement>document.getElementById('idrespositoryinput')).value;
+    var ownerinput= (<HTMLInputElement>document.getElementById('idownerinput')).value;
+    
+    console.log(reponameinput);
+    console.log(ownerinput);
+
+    if (reponameinput === undefined 
+      || reponameinput === ''
+      || ownerinput === ''
+      || ownerinput === undefined) {
+
+      
+      alert("Some fields needed for a new repository are empty.")
+
+    }
+
+    else{
+
+        await this.commitService.getBranches(this.tokenpass, reponameinput, ownerinput)
+        .subscribe(async data => {
+          await this.commitService.getCommits(this.tokenpass, reponameinput, ownerinput)
+          .subscribe(data => {   
+
+          });
+             
+            alert("Repository added.")
+            window.location.reload();
+        },
+        (err) => {console.log(err)
+                  alert("The repository does not exist or you do not have permissions on it.")
+        });
+       
+    }
+
   }
 
   goHome(){

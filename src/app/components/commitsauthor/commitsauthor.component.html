@@ -211,16 +211,18 @@
                     <table id="imprimir" class="table m-0 table-fixed">
                       <thead>
                         <tr>
+                          <th>oid</th>
                           <th>Date</th>
                           <th>Author</th>
                           <th>Repository</th>
                           <th>Branch</th>
-                          <th>Changed Lines</th>
+                          <th>Changed Files</th>
                           <th>Message</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let commit of commits | filter:['message']:filtro_valor">
+                        <tr *ngFor="let commit of commits | filter:['oid','message']:filtro_valor">
+                          <td>{{ commit.oid }}</td>
                           <td>{{ commit.pushedDate | date: 'medium' }}</td>
                           <td>{{ commit.authorName }}</td>
                           <td>{{ commit.repository }}</td>

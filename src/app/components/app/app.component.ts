@@ -11,15 +11,7 @@ export class AppComponent {
 
   currentUser: any;
 
-  @HostListener('window:unload', [ '$event' ])
-  unloadHandler(event) {
-    localStorage.clear();
-  }
-
-  @HostListener('window:beforeunload', [ '$event' ])
-  beforeUnloadHandler(event) {
-    localStorage.clear();
-  }
+  
 
   constructor(
     private router: Router,

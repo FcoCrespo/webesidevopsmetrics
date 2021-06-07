@@ -54,16 +54,7 @@ export interface CommitsData {
 })
 export class CommitsmetricsComponent implements OnInit {
 
-  @HostListener('window:unload', [ '$event' ])
-  unloadHandler(event) {
-    localStorage.clear();
-  }
-
-  @HostListener('window:beforeunload', [ '$event' ])
-  beforeUnloadHandler(event) {
-    localStorage.clear();
-  }
-
+ 
   public idCanvas: number = 0;
 
   branch = {} as BranchesData;
