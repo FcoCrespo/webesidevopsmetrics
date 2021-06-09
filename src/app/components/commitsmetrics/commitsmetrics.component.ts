@@ -151,7 +151,15 @@ export class CommitsmetricsComponent implements OnInit {
             colores = 0;
           }
         }
+
+        document.getElementById('chartbox')!.innerHTML='<div class="card-body"><div id="divChartBar" class="chart"></div>';
+        document.getElementById('chartbox2')!.innerHTML='<div class="card-body"><div id="divChartCircle" class="chart"></div>';
+        document.getElementById('chartbox3')!.innerHTML='<div class="card-body"><div id="divChartLine" class="chart"></div>';
+        document.getElementById('chartbox4')!.innerHTML='<div class="card-body"><div id="divChartPie" class="chart"></div>';
+
         this.crearCanvasBarCommitAuthor();
+        this.crearCanvasDonutCommitAuthor();
+        this.crearCanvasLineCommitAuthor();
         this.crearCanvasPieCommitAuthor();
         document.getElementById("report")!.style.visibility = "visible";
         console.log(this.charts[0]);
@@ -268,7 +276,7 @@ export class CommitsmetricsComponent implements OnInit {
     var myCanvasExample = document.createElement('canvas');
     myCanvasExample.setAttribute("id", "myChart" + this.idCanvas);
     myCanvasExample.setAttribute("style", "min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;");
-    document.getElementById('divChart')!.appendChild(myCanvasExample);
+    document.getElementById('divChartBar')!.appendChild(myCanvasExample);
     var myRouter = this.router;
     this.charts[0] = new Chart("myChart" + this.idCanvas, {
       type: 'bar',
@@ -294,7 +302,7 @@ export class CommitsmetricsComponent implements OnInit {
     });
   }
 
-  crearCanvasPieCommitAuthor() {
+  crearCanvasDonutCommitAuthor() {
     this.idCanvas = this.idCanvas + 1;
     console.log(this.idCanvas);
     var myCanvasExample = document.createElement('canvas');
@@ -315,6 +323,114 @@ export class CommitsmetricsComponent implements OnInit {
         }]
       }
     });
+  }
+
+  crearCanvasPieCommitAuthor() {
+    this.idCanvas = this.idCanvas + 1;
+    console.log(this.idCanvas);
+    var myCanvasExample = document.createElement('canvas');
+    myCanvasExample.setAttribute("id", "myChart" + this.idCanvas);
+    myCanvasExample.setAttribute("style", "min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;");
+    document.getElementById('divChartPie')!.appendChild(myCanvasExample);
+    var myRouter = this.router;
+    this.charts[1] = new Chart("myChart" + this.idCanvas, {
+      type: 'pie',
+      data: {
+        labels: this.labelsCommitsAuthor,
+        datasets: [{
+          label: 'Number of Commits per Author in ' + this.branch.name + ' Branch ',
+          data: this.numCommitsAuthor,
+          backgroundColor: this.colorsCommits,
+          borderColor: 'rgb(255,255,255)',
+          borderWidth: 1
+        }]
+      }
+    });
+  }
+
+  crearCanvasLineCommitAuthor() {
+    this.idCanvas = this.idCanvas + 1;
+    console.log(this.idCanvas);
+    var myCanvasExample = document.createElement('canvas');
+    myCanvasExample.setAttribute("id", "myChart" + this.idCanvas);
+    myCanvasExample.setAttribute("style", "min-height: 555px; height: 555px; max-height: 250px; max-width: 100%;");
+    document.getElementById('divChartLine')!.appendChild(myCanvasExample);
+    var myRouter = this.router;
+
+    var dataSecond2 = {
+      label: "Alcance",
+      data: [5],
+      lineTension: 0,
+      fill: false,
+      borderColor: 'black'
+    };
+
+    dataSecond2.data.pop();
+
+    var cont:number =0;
+    var alcance:number = 6000;
+    var nalc:number = 12;
+    var inc:number = alcance/nalc;
+  
+    for(var m=0; m<nalc; m++){
+      cont = cont + inc;
+      
+      dataSecond2.data.push(cont);
+    }
+
+
+    var cosas:any [] = [];
+
+    var j =0;
+    for(var i=0; i<24; i++){
+      var anio:number = 2006;
+      anio = anio+i;
+
+      var fecha:String = ""+anio;
+
+      
+
+      var ejemplo = {
+        label: fecha,
+        data: [5],
+        lineTension: 0,
+        fill: false,
+        borderColor: this.colorsCommits[j]
+      };
+
+      ejemplo.data.pop();
+
+      for(var m=0; m<12; m++){
+        ejemplo.data.push(Math.floor(Math.random() * (8000 - 1000 + 1)) + 1000);
+      }
+      
+      cosas.push(ejemplo);
+
+      j++;
+
+      if(j==this.colorsCommits.length){
+        j=0;
+      }
+    }
+
+   
+
+    var elementos={
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [dataSecond2]
+    }
+    //elementos.datasets.pop();
+
+    for(var i=0; i<cosas.length; i++){
+      elementos.datasets.push(cosas[i])
+    }
+
+       
+    this.charts[1] = new Chart("myChart" + this.idCanvas, {
+      type: 'line',
+      data: elementos
+    });
+
   }
 
   async pdf() {

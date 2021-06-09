@@ -91,6 +91,10 @@
         <!-- /.sidebar -->
     </aside>
 
+    
+
+  
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -113,6 +117,11 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+
+    
+    
+
+
 
         <!-- Main content -->
         <section class="content">
@@ -153,11 +162,10 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div id="divChart" class="chart">
-                                    <!--chart-->
-                                </div>
+                            <div id="chartbox">
+
                             </div>
+                            
                             <!-- /.card-body -->
                         </div>
 
@@ -166,7 +174,7 @@
                     <!-- /.col -->
                     <div class="col-md-6">
                         <div class="card card-primary">
-                            <div class="card-header">
+                            <div  class="card-header">
                                 <h3 class="card-title">COMMITS OF {{this.branch.name.toUpperCase()}} BRANCH - PIE CHART
                                 </h3>
 
@@ -179,16 +187,48 @@
                                     </button>
                                 </div>
                             </div>
-                            <div id="divChartCircle" class="card-body">
-                                <!--chart-->
+                            <div id="chartbox2">
+
+                            </div>
+                           
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+
+
+                    
+                    <!-- /.card -->
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div  class="card-header">
+                                <h3 class="card-title">COMMITS OF {{this.branch.name.toUpperCase()}} BRANCH - LINE CHART
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <div id="chartbox3">
+                
                             </div>
                             <!-- /.card-body -->
                         </div>
                     </div>
-                    <!-- /.card -->
+                    
+                    
                 </div>
 
-                <div class="row">
+                
+                <div class="row" >
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
@@ -216,6 +256,29 @@
 
                         </div>
                         <!-- /.card -->
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="card card-primary">
+                            <div  class="card-header">
+                                <h3 class="card-title">COMMITS OF {{this.branch.name.toUpperCase()}} BRANCH - PIE CHART
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <div id="chartbox4">
+                
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
                     </div>
                     <!-- /.col -->
                 </div>

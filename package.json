@@ -30,6 +30,7 @@
     "@angular/router": "~12.0.0",
     "admin-lte": "^3.1.0",
     "bootstrap": "^5.0.1",
+    "chart.js": "^3.3.2",
     "dom-to-image": "^2.6.0",
     "express": "^4.17.1",
     "html2canvas": "^1.0.0-rc.7",
