@@ -10,21 +10,23 @@ export class UserService {
   currentUserSubject: any;
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<any[]>(`${environment.apiUrl}/usuarios`);
-    }
-    getUsersByRole(rol) {
-        return this.http.get<any[]>(`${environment.apiUrl}/usuarios/${rol}`);
+    getAll(tokenpass: string) {
+        return this.http.get<any[]>(`${environment.apiUrl}/usuarios/all?tokenpass=${tokenpass}`);
     }
 
-    register(user) {
-        return this.http.post(`${environment.apiUrl}/usuarios`, user);
+    getUser(tokenpass: string, username:string) {
+        return this.http.get<any[]>(`${environment.apiUrl}/usuarios/getuser?tokenpass=${tokenpass}&username=${tokenpass}`);
     }
 
-    delete(id) {
-        return this.http.delete(`${environment.apiUrl}/usuarios/${id}`);
+    register(tokenpass: string, user) {
+        return this.http.post(`${environment.apiUrl}/usuarios?tokenpass=${tokenpass}`, user);
     }
-    update(user,id) {
-        return this.http.put(`${environment.apiUrl}/usuarios/${id}`, user);
+
+    delete(tokenpass: string, id:string) {
+        return this.http.delete(`${environment.apiUrl}/usuarios/${id}?tokenpass=${tokenpass}`);
+    }
+
+    update(tokenpass: string, username:string, user) {
+        return this.http.put(`${environment.apiUrl}/usuarios/${username}?tokenpass=${tokenpass}`, user);
     }
 }

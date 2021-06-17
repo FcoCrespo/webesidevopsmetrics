@@ -58,9 +58,30 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a (click)="goHome()" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v1</p>
+                                    <p>Repositories</p>
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a (click)="goUserGithub()" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Users Github</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a (click)="goUserOps()" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>User Ops</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a (click)="goAboutMe()" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>About Me</p>
                                 </a>
                             </li>
                             

@@ -36,6 +36,18 @@ export class CommitService {
     return this.http.get<any[]>(`${environment.apiUrl}/commits/commitsbranchauthor?tokenpass=${tokenpass}&branch=${branch}&reponame=${reponame}&authorname=${authorname}&owner=${owner}`);
   }
 
+  getUserGithub(tokenpass: string){
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/usersgithub?tokenpass=${tokenpass}`);
+  }
+
+  getUserGithubRepo(tokenpass: string, reponame: string, owner: string){
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/usersgithubrepo?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
+  }
+
+  getLastCommitRepo(tokenpass: string, reponame: string){
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/getlastcommit?tokenpass=${tokenpass}&reponame=${reponame}`);
+  }
+
   getCommitsBranchAuthorDates(tokenpass: string, message){
     return this.http.post<any[]>(`${environment.apiUrl}/commits/commitsbranchdateauthor?tokenpass=${tokenpass}`, message);
   }

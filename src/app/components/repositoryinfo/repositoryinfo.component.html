@@ -7,7 +7,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a (click)="goHome()" class="nav-link">Home</a>
+                <a (click)="goHome()" class="nav-link">Repositories</a>
             </li>
         </ul>
 
@@ -58,15 +58,9 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a id="repositoriesMenu" (click)="goToRepositories()" class="nav-link">
+                                <a (click)="goHome()" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Repositories</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a (click)="goRepositoryInfo()" class="nav-link">
-                                    <i class="far fa-circle nav-icon text-info"></i>
-                                    <p>Repository Info</p>
                                 </a>
                             </li>
 
@@ -91,7 +85,6 @@
                                 </a>
                             </li>
                             
-                            
                         </ul>
                     </li>
 
@@ -112,7 +105,6 @@
         <!-- /.sidebar -->
     </aside>
 
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -120,30 +112,20 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Branches</h1>
+                        <h1 id="titlePage" class="m-0 text-dark"></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a (click)="goHome()">Home</a></li>
-                            <li class="breadcrumb-item"><a (click)="goToRepositories()">Repositories</a></li>
-                            <li class="breadcrumb-item active">Branches</li>
+                            <li class="breadcrumb-item"><a (click)="goHome()">Repositories</a></li>
+                            <li class="breadcrumb-item active">Repository Info</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-               
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Branches Dashboard</h5>
-
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -152,34 +134,31 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <p id="repositoryname" style="visibility: hidden" class="text-center">
-                                            <strong>BRANCHES OF {{repositoryName.toUpperCase()}} REPOSITORY (Newer->Green / Older -> Red)</strong>
+                                        <p class="text-center">
+                                            <strong>REPOSITORY OPERATIONS</strong>
                                         </p>
                                         <ul>
-                                            <li class="branches" (click)="clickEvent(branch)" *ngFor="let branch of BranchesComplete; let first = first; let last = last" [ngClass]="{ first: first, last: last }" id={{branch.name}}>Branch Name: {{branch.name}} - Last Commit: {{branch.oid}} / Pushed Date: {{branch.pushedDate}}</li>
+                                            <li (click)="clickControlMetrics()">Control Metrics</li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
+                                            <li (click)="clickProductMetrics()">Product Metrics</li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
+                                            <li (click)="clickIssues()">Issues</li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>     
+                                            <li (click)="clickTestMetrics()">Test Metrics</li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
+                                            <li (click)="clickUsers()">Users</li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
                                         </ul>
                                     
                                     </div>
                                    
-                                </div>
-                                <div style="cursor: pointer;" class="col-12 col-sm-6 col-md-3">
-                                    <label style="visibility: hidden;"></label>
-                                    <label id="labelorderrepository" style="visibility: hidden;">You need to order your repository, click Order Repository</label>
-                                    <label style="visibility: hidden;"></label>
-                                    <div id="buttonorderrepository" (click)="OrderRepository()" class="info-box" style="visibility: hidden;">
-                                        <span class="info-box-icon bg-info elevation-1">
-                                            <img src="assets/img/repository.png" class="img-circle elevation-2" alt="Print report">
-                                        </span>
-            
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">Order Repository</span>
-                                        </div>
-                                        <!-- /.info-box-content -->
-                                    </div>
-                                    <!-- /.info-box -->
                                 </div>
                                 <!-- /.row -->
                             </div>
@@ -190,9 +169,17 @@
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
 
-                <!-- Main row -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                
+                
 
+                
                 <!-- /.row -->
             </div>
             <!--/. container-fluid -->
@@ -211,7 +198,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2020-2021 <a href="https://esidevopsmetrics.herokuapp.com/">esidevopsmetrics</a>.</strong>
+        <strong>Copyright &copy; 2020-2021 <a>esidevopsmetrics</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0.0

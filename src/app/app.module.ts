@@ -38,6 +38,13 @@ import { BranchesComponent } from './components/branches/branches.component';
 import { CommitsauthorComponent } from './components/commitsauthor/commitsauthor.component';
 import { SearchcommitsComponent } from './components/searchcommits/searchcommits.component';
 import { CommitsauthorfechasComponent } from './components/commitsauthorfechas/commitsauthorfechas.component';
+import { UseropsComponent } from './components/userops/userops.component';
+import { AboutmeComponent } from './components/aboutme/aboutme.component';
+import { UpdateuserComponent } from './components/updateuser/updateuser.component';
+import { CreateuserComponent } from './components/createuser/createuser.component';
+import { RepositoryinfoComponent } from './components/repositoryinfo/repositoryinfo.component';
+import { RepousersComponent } from './components/repousers/repousers.component';
+import { UsersgithubComponent } from './components/usersgithub/usersgithub.component';
 
 
 //registerLocaleData(localeES, 'es');
@@ -53,7 +60,14 @@ import { CommitsauthorfechasComponent } from './components/commitsauthorfechas/c
     BranchesComponent,
     CommitsauthorComponent,
     SearchcommitsComponent,
-    CommitsauthorfechasComponent
+    CommitsauthorfechasComponent,
+    UseropsComponent,
+    AboutmeComponent,
+    UpdateuserComponent,
+    CreateuserComponent,
+    RepositoryinfoComponent,
+    RepousersComponent,
+    UsersgithubComponent
   ],
   imports: [
     BrowserModule,

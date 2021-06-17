@@ -1,7 +1,8 @@
-import { HostListener, Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 export interface RepositoryData {
   repository:string;  
@@ -15,22 +16,34 @@ export interface BranchesData {
   order: string;
 }
 
+export interface UsersGithub{
+  id:string;
+  idGithub:string;
+  name:String;
+  login:String;
+  avatarURL:String;
+  repositories:RepositoryData[];
+}
+
 @Component({
-  selector: 'app-repos',
-  templateUrl: './repos.component.html',
-  styleUrls: ['./repos.component.css']
+  selector: 'app-repousers',
+  templateUrl: './repousers.component.html',
+  styleUrls: ['./repousers.component.css']
 })
-export class ReposComponent implements OnInit {
+export class RepousersComponent implements OnInit, AfterViewInit {
 
   
-  data: RepositoryData[] = [];
+  data: UsersGithub[] = [];
   repositories: RepositoryData[] = [];
+  usersGithub: UsersGithub[] = [];
   public username: string = "";
   public tokenpass: string = "";
   public role: string = "";
   public names: string = "";
   public chartData: string = "";
   public repositoriesLenght : number = 0;
+  public usersGithubLenght : number = 0;
+  index:number =1;
 
 
   constructor(private route: ActivatedRoute,
@@ -38,13 +51,13 @@ export class ReposComponent implements OnInit {
     private authService: AuthService,
     private commitService : CommitService,) {
 
-    var values = JSON.parse(localStorage.getItem("currentUser")!);
-    this.username = values.username;
-    this.tokenpass = values.tokenPass;
-    console.log(this.tokenpass);
-    this.role = values.role;
-    this.names = "BRANCHES \n";
-    this.repositoriesLenght = 0;
+      var values = JSON.parse(localStorage.getItem("currentUser")!);
+      this.username = values.username;
+      this.tokenpass = values.tokenPass;
+      console.log(this.tokenpass);
+      this.role = values.role;
+      this.names = "BRANCHES \n";
+      this.repositoriesLenght = 0;
 
 
     this.chartData = localStorage.getItem("DataLabelChart") + " " + localStorage.getItem("DataChart");
@@ -52,17 +65,34 @@ export class ReposComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
     document.body.classList.add('bg-img-white');
-    this.commitService.getRepositories(this.tokenpass)
-      .subscribe((data: RepositoryData[]) => {
+    var dataRepository = JSON.parse(localStorage.getItem("RepositoryData")!);
+
+    this.commitService.getUserGithubRepo(this.tokenpass, dataRepository.repository, dataRepository.owner)
+      .subscribe((data: UsersGithub[]) => {
         this.data = data;
         console.log(this.data);
-        this.repositoriesLenght = data.length;
-        this.repositories = this.data;
-        localStorage.setItem('repositories', JSON.stringify(this.repositories));
-        document.getElementById('userlogin')!.innerText = this.username;
+        this.usersGithubLenght = data.length;
+        this.usersGithub = this.data;
+        localStorage.setItem('usersGithubRepo', JSON.stringify(this.usersGithub));
+        
+        
     });
+    
   }
+
+  ngAfterViewInit(){
+
+    console.log("afterinit");
+    setTimeout(() => {
+      document.getElementById('userlogin')!.innerText = this.username;
+      var dataRepository = JSON.parse(localStorage.getItem("RepositoryData")!);
+      document.getElementById('titlePage')!.innerText = "Repository Users of Repository: "+dataRepository.repository+" , Owner: "+dataRepository.owner;
+    });
+    
+   }
 
   get getUsername(): string {
     return this.username;
@@ -78,7 +108,7 @@ export class ReposComponent implements OnInit {
 
   clickEvent(repository: RepositoryData){
     localStorage.setItem('RepositoryData', JSON.stringify(repository));
-    this.router.navigate(['/repositoryinfo']);      
+    this.router.navigate(['/branches']);      
   }
 
   
@@ -132,12 +162,17 @@ export class ReposComponent implements OnInit {
 		this.router.navigate(['/aboutme']); // navigate to other page
 	}
 
+  goRepositoryInfo(){
+    this.router.navigate(['/repositoryinfo']); 
+  }
+
+  goUserRepo(userGithubrepos, userGithub){
+    alert(userGithubrepos.repository +" "+userGithub.id)
+  }
 
   goUserGithub(){
     this.router.navigate(['/usersgithub']); 
   }
-
- 
 
   logout() {
     localStorage.clear();
@@ -147,3 +182,4 @@ export class ReposComponent implements OnInit {
 
 
 }
+

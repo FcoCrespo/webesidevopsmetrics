@@ -199,6 +199,9 @@ export class CommitsauthorfechasComponent  implements OnInit {
 		this.router.navigate(['/commitsmetrics']); // navigate to other page
 	}
 
+  goUserGithub(){
+    this.router.navigate(['/usersgithub']); 
+  }
 
   logout() {
     localStorage.clear();

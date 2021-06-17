@@ -419,7 +419,7 @@ export class CommitsmetricsComponent implements OnInit {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [dataSecond2]
     }
-    //elementos.datasets.pop();
+    elementos.datasets.pop();
 
     for(var i=0; i<cosas.length; i++){
       elementos.datasets.push(cosas[i])
@@ -430,6 +430,42 @@ export class CommitsmetricsComponent implements OnInit {
       type: 'line',
       data: elementos
     });
+
+
+    /*this.charts[1] = new Chart("myChart" + this.idCanvas, {
+      type: 'line',
+      options: {
+        scales: {
+          xAxes: [{
+            type: 'time',
+          }]
+        }
+      },
+      data: {
+        labels: ["2015-03-15T13:03:00.000+00:00", "2015-03-15T13:03:00.000+00:00", "2016-04-15T13:40:00.000+00:00"],
+        datasets: [{
+          label: 'Demo',
+          data: [{
+              t: '2015-03-15T13:03:00.000+00:00',
+              y: 12
+            },
+            {
+              t: '2015-03-15T13:03:00.000+00:00',
+              y: 13
+            },
+            {
+              t: '2016-04-15T13:40:00.000+00:00',
+              y: 32
+            }
+          ],
+          lineTension: 0,
+          fill: false,
+          borderColor: this.colorsCommits[j],
+          pointRadius: 10,
+          pointBackgroundColor: '#39FF14'
+        }]
+      }
+    });*/
 
   }
 
@@ -483,6 +519,10 @@ export class CommitsmetricsComponent implements OnInit {
   goToBranches(){
 		this.router.navigate(['/branches']); // navigate to other page
 	}
+
+  goUserGithub(){
+    this.router.navigate(['/usersgithub']); 
+  }
 
 
   logout() {

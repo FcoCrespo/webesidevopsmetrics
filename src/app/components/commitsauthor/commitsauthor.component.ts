@@ -191,6 +191,9 @@ export class CommitsauthorComponent implements OnInit {
   goToCommits(){
 		this.router.navigate(['/commitsmetrics']); // navigate to other page
 	}
+  goUserGithub(){
+    this.router.navigate(['/usersgithub']); 
+  }
 
 
   logout() {

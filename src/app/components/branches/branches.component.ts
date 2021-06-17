@@ -2,6 +2,7 @@ import { HostListener ,Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 export interface BranchesData {
   idGithub:string;  
@@ -9,6 +10,15 @@ export interface BranchesData {
   name: string;
   order: string;
 }
+
+export interface BranchesLastCommit {
+  idGithub:string;  
+  name:string; 
+  repository: string;
+  oid: string;
+  pushedDate: Date;
+}
+
 
 @Component({
   selector: 'app-branches',
@@ -21,6 +31,9 @@ export class BranchesComponent implements OnInit {
  
   data: BranchesData[] = [];
   branches: BranchesData[] = [];
+  branchesLastCommit: BranchesLastCommit[] = [];
+  branchesLastCommitOrdered: BranchesLastCommit[] = [];
+  BranchesComplete: BranchesLastCommit[] = [];
   public username: string = "";
   public tokenpass: string = "";
   public repositoryName : string = "";
@@ -51,33 +64,57 @@ export class BranchesComponent implements OnInit {
   }
   
 
-  ngOnInit() {
+  async ngOnInit() {
 
     document.body.classList.add('bg-img-white');
-    this.commitService.getBranches(this.tokenpass, this.repositoryName, this.owner)
-      .subscribe((data: BranchesData[]) => {
-        this.data = data;
-        document.getElementById('userlogin')!.innerText = this.username;
-        if(this.data.length==0){
-          console.log("Needs order.")
-          document.getElementById("labelorderrepository")!.style.visibility = "visible";
-          document.getElementById("buttonorderrepository")!.style.visibility = "visible";
-        }
-        else{
-          console.log(this.data);
-          this.branchesLenght = data.length;
-          this.branches = this.data;
-          localStorage.setItem('branches', JSON.stringify(this.branches));
-        
-          this.repositoryName = this.branches[0].repository;
-          document.getElementById("repositoryname")!.style.visibility = "visible";
-        }
 
+    await this.commitService.getLastCommitRepo(this.tokenpass, this.repositoryName)
+          .subscribe(async(data: BranchesLastCommit[]) => {
 
+            this.branchesLastCommit = data;
+            console.log(this.branchesLastCommit);
+            this.branchesLastCommitOrdered = this.sortData();
+            console.log(this.branchesLastCommitOrdered);
+            
+           
+            await this.commitService.getBranches(this.tokenpass, this.repositoryName, this.owner)
+            .subscribe(async(data: BranchesData[]) => {
+                this.data = data;
+                document.getElementById('userlogin')!.innerText = this.username;
+                this.branchesLenght = data.length;
+                this.branches = this.data;
+                console.log(this.branches);
+                if(this.data.length==0){
+                  console.log("Needs order.")
+                  document.getElementById("labelorderrepository")!.style.visibility = "visible";
+                  document.getElementById("buttonorderrepository")!.style.visibility = "visible";
+                }
+                else{
+                  localStorage.setItem('branches', JSON.stringify(this.branches));
         
-        
+                  this.repositoryName = this.branches[0].repository;
+                  document.getElementById("repositoryname")!.style.visibility = "visible";
+
+                  for(var i=0; i<this.branchesLastCommitOrdered.length; i++){
+                    for(var j=0; j<this.branches.length; j++){
+                    
+                      if(this.branches[j].idGithub===this.branchesLastCommitOrdered[i].idGithub){
+                        this.BranchesComplete.push(this.branchesLastCommitOrdered[i]);
+                      }
+
+                    }
+                  }
+
+                }
+            });
     });
 
+  }
+
+  sortData() {
+    return this.branchesLastCommit.sort((a, b) => {
+      return <any>new Date(b.pushedDate) - <any>new Date(a.pushedDate);
+    });
   }
 
   get getUsername(): string {
@@ -92,7 +129,7 @@ export class BranchesComponent implements OnInit {
     return this.chartData;
   }
 
-  clickEvent(branch: BranchesData){
+  clickEvent(branch: BranchesLastCommit){
     localStorage.setItem('BranchData', JSON.stringify(branch));
     this.router.navigate(['/commitsmetrics']);      
   }
@@ -118,6 +155,20 @@ export class BranchesComponent implements OnInit {
 		this.router.navigate(['/repos']); // navigate to other page
 	}
 
+  goUserGithub(){
+    this.router.navigate(['/usersgithub']); 
+  }
+  goUserOps(){
+		this.router.navigate(['/userops']); // navigate to other page
+	}
+
+  goAboutMe(){
+		this.router.navigate(['/aboutme']); // navigate to other page
+	}
+
+  goRepositoryInfo(){
+    this.router.navigate(['/repositoryinfo']); 
+  }
 
   logout() {
     localStorage.clear();
