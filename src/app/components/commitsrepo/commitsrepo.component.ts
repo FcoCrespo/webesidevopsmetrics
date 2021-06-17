@@ -130,13 +130,10 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
           this.commits[i].pushedDateStr=fecha;
         }
 
-        console.log(this.commitsLenght);
-        console.log(this.commits);
+      
 
         this.obtenerLabelsCommitsAuthor();
-        console.log(this.labelsCommitsAuthor);
         this.contarCommitsAuthor();
-        console.log(this.numCommitsAuthor);
         
         var colores = 0;
         for (var cont = 0; cont < this.labelsCommitsAuthor.length; cont++) {
@@ -146,7 +143,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
             colores = 0;
           }
         }
-        console.log(this.colorsCommits)
+        
         document.getElementById('chartTimelineCommits')!.innerHTML='<div class="card-body"><div id="divChartTimelineCommits" class="chart"></div>';
         this.crearCanvasTimelineCommits();
         document.getElementById("report")!.style.visibility = "visible";
@@ -214,32 +211,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
     myCanvasExample.setAttribute("id", "myChart" + this.idCanvas);
     myCanvasExample.setAttribute("style", "min-height: 555px; height: 555px; max-height: 250px; max-width: 100%;");
     document.getElementById('divChartTimelineCommits')!.appendChild(myCanvasExample);
-
-    
-
-    /*for(var i=0; i<3; i++){
-      if(i==0){
-        dataCommits.push({
-          t: '2015-03-15',
-          y: 12
-        })
-      }
-      if(i==1){
-        dataCommits.push({
-          t: '2015-03-19',
-          y: 18
-        })
-      }
-      if(i==2){
-        dataCommits.push({
-          t: '2015-03-23',
-          y: 14
-        })
-      }
-      
-    }*/
-
-
+  
     var cosas=[
       {
         t: '2015-03-15',
@@ -253,7 +225,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
     var auxElement;
           
     for(var i=0; i<this.commits.length; i++){
-      if(this.commits[i].authorName===this.labelsCommitsAuthor[2]){
+      if(this.commits[i].authorName===this.labelsCommitsAuthor[0]){
 
         if(cosas.length==0){
           
@@ -268,9 +240,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
           for(var j=0; j<cosas.length; j++){
             
             if(this.commits[i].pushedDateStr==cosas[j].t){
-              console.log(cosas);
               cosas[j].y = cosas[j].y + 1;
-           
             }
             newElement = false;
             if(this.commits[i].pushedDateStr!==cosas[j].t){
@@ -292,8 +262,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
     }
 
 
-    console.log("lenght aqui al acabar: "+cosas.length);
-    console.log(cosas);
+  
 
     this.charts[1] = new Chart("myChart" + this.idCanvas, {
       type: 'line',
@@ -305,7 +274,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
               unit: 'day',
               unitStepSize: 1,
               displayFormats: {
-                 'day': 'MMM DD'
+                 'day': 'DD MMM YYYY'
               }
             }
           }],
@@ -318,12 +287,12 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
       },
       data: {
         datasets: [{
-          label: this.labelsCommitsAuthor[2],
+          label: this.labelsCommitsAuthor[0],
           data: cosas,
           lineTension: 0,
           fill: false,
           borderColor: this.colorsCommits[0],
-          pointRadius: 2,
+          pointRadius: 3,
           pointBackgroundColor: this.colorsCommits[0]
         }]
       }
