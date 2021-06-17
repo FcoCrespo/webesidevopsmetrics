@@ -154,12 +154,12 @@
                             <div class="card-body">
                                 
                                 <div class="row">
-                                    <div class="col-md-8">
-                                        <p id="repositoryname" style="visibility: hidden" class="text-center">
+                                    <div class="col-md-12">
+                                        <p id="repositoryname" style="visibility: hidden" class="text-left">
                                             <strong>BRANCHES OF {{repositoryName.toUpperCase()}} REPOSITORY (Newer->Green / Older -> Red)</strong>
                                         </p>
                                         <ul>
-                                            <li class="branches" (click)="clickEvent(branch)" *ngFor="let branch of BranchesComplete; let first = first; let last = last" [ngClass]="{ first: first, last: last }" id={{branch.name}}>Branch Name: {{branch.name}} - Last Commit: {{branch.oid}} / Pushed Date: {{branch.pushedDate}}</li>
+                                            <li class="branches" (click)="clickEvent(branch)" *ngFor="let branch of BranchesComplete; let first = first; let last = last" [ngClass]="{ first: first, last: last }" id={{branch.name}}>Branch Name: {{branch.name}} - <br> Last Commit Author: {{branch.authorname}} / <br> Pushed Date: {{branch.pushedDate}}</li>
                                         </ul>
                                     
                                     </div>

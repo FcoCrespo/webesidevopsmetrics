@@ -166,8 +166,10 @@ export class UsersgithubComponent implements OnInit {
     this.router.navigate(['/repositoryinfo']); 
   }
 
-  goUserRepo(userGithubrepos, userGithub){
-    alert(userGithubrepos.repository +" "+userGithub.id)
+  
+  goUserRepo(repository: RepositoryData){
+    localStorage.setItem('RepositoryData', JSON.stringify(repository));
+    this.router.navigate(['/repositoryinfo']);      
   }
 
   goUserGithub(){

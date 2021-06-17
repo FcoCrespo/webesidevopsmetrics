@@ -197,7 +197,7 @@
                                             <strong>Repositories</strong>
                                           </p>
                                           <ul style="list-style-type:none;">
-                                            <li style="cursor: pointer;" (click)="goUserRepo(userGithubrepos, userGithub)" class="userGithubrepos"  *ngFor="let userGithubrepos of userGithub.repositories;">
+                                            <li style="cursor: pointer;" (click)="goUserRepo(userGithubrepos)" class="userGithubrepos"  *ngFor="let userGithubrepos of userGithub.repositories;">
                                                 <b>Repository: </b>  {{userGithubrepos.repository}} - <b>Owner: </b> {{userGithubrepos.owner}} 
                                             </li>
                                         </ul>

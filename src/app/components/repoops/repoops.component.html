@@ -63,7 +63,14 @@
                                     <p>Repositories</p>
                                 </a>
                             </li>
-                            
+
+                            <li class="nav-item">
+                                <a (click)="goRepositoryInfo()" class="nav-link">
+                                    <i class="far fa-circle nav-icon text-info"></i>
+                                    <p>Repository Info</p>
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a (click)="goUserGithub()" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -112,31 +119,21 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Repositories</h1>
+                        <h1 id="titlePage" class="m-0 text-dark"></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a (click)="goHome()">Home</a></li>
-                            <li class="breadcrumb-item active">Repositories</li>
+                            <li class="breadcrumb-item"><a (click)="goHome()">Repositories</a></li>
+                            <li class="breadcrumb-item"><a (click)="goRepositoryInfo()">Repository Info</a></li>
+                            <li class="breadcrumb-item active">Repository Update Ops</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                
-                
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Repositories Dashboard</h5>
-
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -148,10 +145,25 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <p class="text-center">
-                                            <strong>REPOSITORIES OF DEVOPSMETRICS PROJECT</strong>
+                                            <strong>REPOSITORY UPDATE OPERATIONS</strong>
                                         </p>
-                                        <ul>
-                                            <li class="repositories" (click)="clickEvent(repository)" *ngFor="let repository of repositories;" id={{repository.repository}}><b>Repository:</b> {{repository.repository}} , <b>Owner:</b> {{repository.owner}}</li>
+                                        <ul style="list-style-type:none;">
+                                            <li class="ops" (click)="clickUpdateBranches()"><button>Update Branches</button></li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
+                                            <li class="ops" (click)="clickUpdateCommits()"><button>Update Commits</button></li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
+                                            <li class="ops" (click)="clickUpdateIssues()"><button>Update Issues</button></li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>     
+                                            <li class="ops" (click)="clickUpdateTestMetrics()"><button>Update Test Metrics</button></li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
+                                            <li class="ops" (click)="clickUpdateProductMetrics()"><button>Update Product Metrics</button></li>
+                                            <label style="visibility: hidden;"></label>
+                                            <label style="visibility: hidden;"></label>
+                                            
                                         </ul>
                                     
                                     </div>
@@ -166,43 +178,17 @@
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
 
-                <div class="row">
-                    <p class="text-left">
-                        <strong>  New Repository Form</strong>
-                    </p>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <input id="idrespositoryinput" class="form-control form-control-navbar" type="repository" placeholder="repository" aria-label="repository">                   
-                        <!-- /.info-box -->
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <input id="idownerinput" class="form-control form-control-navbar" type="owner" placeholder="owner" aria-label="owner">                   
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <label style="visibility: hidden;"></label>
-                <label style="visibility: hidden;"></label>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                
+                
 
-                <div class="row">
-                    <div style="cursor: pointer;" class="col-12 col-sm-6 col-md-3">
-                        <div id="report" (click)="AddNewRepository()" class="info-box">
-                            <span class="info-box-icon bg-info elevation-1">
-                                <img src="assets/img/repository.png" class="img-circle elevation-2" alt="Print report">
-                            </span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Add New Repository</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-
-                <!-- Main row -->
-
+                
                 <!-- /.row -->
             </div>
             <!--/. container-fluid -->

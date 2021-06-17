@@ -8,11 +8,15 @@ import { environment } from '../../environments/environment';
 export class MetricService {
 
   currentUserSubject: any;
+  
   constructor(private http: HttpClient) { }
 
 
-  saveMetrics(reponame: string, owner: string) {
-      return this.http.get<any[]>(`${environment.apiUrl}/metrics/savemetrics?reponame=${reponame}&owner=${owner}`);
+  saveMetrics(tokenpass: string, reponame: string, owner: string) {
+    const requestOptions: Object = {
+      responseType: 'text'
+    };
+    return this.http.get<any[]>(`${environment.apiUrl}/metrics/savemetrics?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`, requestOptions);
   }
 
   getAllMetrics(tokenpass: string, branch: string, reponame: string, owner: string){
@@ -23,8 +27,11 @@ export class MetricService {
     return this.http.post<any[]>(`${environment.apiUrl}/metrics/allmetricsdate?tokenpass=${tokenpass}`, message);
   }
   
-  saveTestMetrics(reponame: string, owner: string) {
-    return this.http.get<any[]>(`${environment.apiUrl}/metrics/savetestmetrics?reponame=${reponame}&owner=${owner}`);
+  saveTestMetrics(tokenpass: string, reponame: string, owner: string) {
+    const requestOptions: Object = {
+      responseType: 'text'
+    };
+    return this.http.get<any[]>(`${environment.apiUrl}/metrics/savetestmetrics?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`, requestOptions);
   }
 
   getAllTestMetrics(tokenpass: string, branch: string, reponame: string, owner: string){

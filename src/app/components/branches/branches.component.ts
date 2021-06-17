@@ -17,6 +17,9 @@ export interface BranchesLastCommit {
   repository: string;
   oid: string;
   pushedDate: Date;
+  authorname: string;
+  authorid: string;
+  authoridGithub: string;
 }
 
 

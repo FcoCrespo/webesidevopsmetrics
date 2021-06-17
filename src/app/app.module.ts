@@ -45,6 +45,7 @@ import { CreateuserComponent } from './components/createuser/createuser.componen
 import { RepositoryinfoComponent } from './components/repositoryinfo/repositoryinfo.component';
 import { RepousersComponent } from './components/repousers/repousers.component';
 import { UsersgithubComponent } from './components/usersgithub/usersgithub.component';
+import { RepoopsComponent } from './components/repoops/repoops.component';
 
 
 //registerLocaleData(localeES, 'es');
@@ -67,7 +68,8 @@ import { UsersgithubComponent } from './components/usersgithub/usersgithub.compo
     CreateuserComponent,
     RepositoryinfoComponent,
     RepousersComponent,
-    UsersgithubComponent
+    UsersgithubComponent,
+    RepoopsComponent
   ],
   imports: [
     BrowserModule,

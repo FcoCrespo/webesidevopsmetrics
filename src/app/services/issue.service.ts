@@ -12,7 +12,10 @@ export class IssueService {
 
 
   getIssues(tokenpass: string, reponame: string, owner: string) {
-      return this.http.get<any[]>(`${environment.apiUrl}/issues/allissues?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
+    const requestOptions: Object = {
+      responseType: 'text'
+    };
+    return this.http.get<any[]>(`${environment.apiUrl}/issues/allissues?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`, requestOptions);
   }
 
   updateIssues(tokenpass: string, branch: string, reponame: string, owner: string){

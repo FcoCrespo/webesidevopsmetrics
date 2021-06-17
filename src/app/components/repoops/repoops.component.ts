@@ -1,8 +1,10 @@
-import { HostListener, Component, OnInit, AfterViewInit } from '@angular/core';
+import { HostListener, Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
+import { IssueService } from 'src/app/services/issue.service';
+import { MetricService } from 'src/app/services/metric.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup } from '@angular/forms';
 
 export interface RepositoryData {
   repository:string;  
@@ -16,40 +18,33 @@ export interface BranchesData {
   order: string;
 }
 
-export interface UsersGithub{
-  id:string;
-  idGithub:string;
-  name:String;
-  login:String;
-  avatarURL:String;
-  repositories:RepositoryData[];
-}
-
 @Component({
-  selector: 'app-repousers',
-  templateUrl: './repousers.component.html',
-  styleUrls: ['./repousers.component.css']
+  selector: 'app-repoops',
+  templateUrl: './repoops.component.html',
+  styleUrls: ['./repoops.component.css']
 })
-export class RepousersComponent implements OnInit, AfterViewInit {
+export class RepoopsComponent implements OnInit {
 
   
-  data: UsersGithub[] = [];
+  data: RepositoryData[] = [];
+  repositorydata: RepositoryData;
   repositories: RepositoryData[] = [];
-  usersGithub: UsersGithub[] = [];
   public username: string = "";
   public tokenpass: string = "";
   public role: string = "";
   public names: string = "";
   public chartData: string = "";
   public repositoriesLenght : number = 0;
-  public usersGithubLenght : number = 0;
-  index:number =1;
 
+  @ViewChild("userlogin") userlogin: ElementRef;
+  @ViewChild("titlePage") titlePage: ElementRef;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private commitService : CommitService,) {
+    private commitService : CommitService,
+    private issueService : IssueService,
+    private metricService : MetricService) {
 
       var values = JSON.parse(localStorage.getItem("currentUser")!);
       this.username = values.username;
@@ -58,29 +53,16 @@ export class RepousersComponent implements OnInit, AfterViewInit {
       this.role = values.role;
       this.names = "BRANCHES \n";
       this.repositoriesLenght = 0;
-
-
-    this.chartData = localStorage.getItem("DataLabelChart") + " " + localStorage.getItem("DataChart");
+  
+  
+      this.chartData = localStorage.getItem("DataLabelChart") + " " + localStorage.getItem("DataChart");
 
   }
 
   ngOnInit() {
-
-
     document.body.classList.add('bg-img-white');
-    var dataRepository = JSON.parse(localStorage.getItem("RepositoryData")!);
-
-    this.commitService.getUserGithubRepo(this.tokenpass, dataRepository.repository, dataRepository.owner)
-      .subscribe((data: UsersGithub[]) => {
-        this.data = data;
-        console.log(this.data);
-        this.usersGithubLenght = data.length;
-        this.usersGithub = this.data;
-        localStorage.setItem('usersGithubRepo', JSON.stringify(this.usersGithub));
-        
-        
-    });
     
+  
   }
 
   ngAfterViewInit(){
@@ -88,11 +70,11 @@ export class RepousersComponent implements OnInit, AfterViewInit {
     console.log("afterinit");
     setTimeout(() => {
       document.getElementById('userlogin')!.innerText = this.username;
-      var dataRepository = JSON.parse(localStorage.getItem("RepositoryData")!);
-      document.getElementById('titlePage')!.innerText = "Repository Users of Repository: "+dataRepository.repository+" , Owner: "+dataRepository.owner;
+      this.repositorydata = JSON.parse(localStorage.getItem("RepositoryData")!);
+      document.getElementById('titlePage')!.innerText = "Repository Update Ops - Name: "+this.repositorydata.repository+" , Owner: "+this.repositorydata.owner;
     });
     
-   }
+  }
 
   get getUsername(): string {
     return this.username;
@@ -104,11 +86,6 @@ export class RepousersComponent implements OnInit, AfterViewInit {
 
   get getChartData(): string {
     return this.chartData;
-  }
-
-  clickEvent(repository: RepositoryData){
-    localStorage.setItem('RepositoryData', JSON.stringify(repository));
-    this.router.navigate(['/branches']);      
   }
 
   
@@ -154,6 +131,14 @@ export class RepousersComponent implements OnInit, AfterViewInit {
 		this.router.navigate(['/repos']); // navigate to other page
 	}
 
+  goUserGithub(){
+    this.router.navigate(['/usersgithub']); 
+  }
+
+  goRepositoryInfo(){
+    this.router.navigate(['/repositoryinfo']); 
+  }
+
   goUserOps(){
 		this.router.navigate(['/userops']); // navigate to other page
 	}
@@ -162,19 +147,43 @@ export class RepousersComponent implements OnInit, AfterViewInit {
 		this.router.navigate(['/aboutme']); // navigate to other page
 	}
 
-  goRepositoryInfo(){
-    this.router.navigate(['/repositoryinfo']); 
+  async clickUpdateBranches(){
+    await this.commitService.getBranches(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+    .subscribe(data => {
+      console.log(data);
+      alert("Operation completed.");
+    });
   }
 
-  goUserRepo(repository: RepositoryData){
-    localStorage.setItem('RepositoryData', JSON.stringify(repository));
-    this.router.navigate(['/repositoryinfo']);      
+  async clickUpdateCommits(){
+    await this.commitService.getCommits(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+    .subscribe(data => {
+      alert(data);
+    });
   }
 
-  goUserGithub(){
-    this.router.navigate(['/usersgithub']); 
+  async clickUpdateIssues(){
+    await this.issueService.getIssues(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+    .subscribe(data => {
+      alert(data);
+    });
   }
 
+  async clickUpdateTestMetrics(){
+    await this.metricService.saveTestMetrics(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+    .subscribe(data => {
+      alert(data);
+    });
+  }
+
+  async clickUpdateProductMetrics(){
+    await this.metricService.saveMetrics(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+    .subscribe(data => {
+      alert(data);
+    });
+  }
+
+  
   logout() {
     localStorage.clear();
     this.authService.logout();
@@ -183,4 +192,3 @@ export class RepousersComponent implements OnInit, AfterViewInit {
 
 
 }
-

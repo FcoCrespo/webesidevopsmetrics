@@ -15,6 +15,7 @@ import { AboutmeComponent } from './components/aboutme/aboutme.component';
 import { RepositoryinfoComponent } from './components/repositoryinfo/repositoryinfo.component';
 import { RepousersComponent } from './components/repousers/repousers.component';
 import { UsersgithubComponent } from './components/usersgithub/usersgithub.component';
+import { RepoopsComponent } from './components/repoops/repoops.component';
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'repositoryinfo', component: RepositoryinfoComponent, canActivate: [AuthGuard] },
   { path: 'repousers', component: RepousersComponent, canActivate: [AuthGuard] },
   { path: 'usersgithub', component: UsersgithubComponent, canActivate: [AuthGuard] },
+  { path: 'repoops', component: RepoopsComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

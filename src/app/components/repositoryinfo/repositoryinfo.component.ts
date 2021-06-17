@@ -153,6 +153,10 @@ export class RepositoryinfoComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/repos']);
   }
 
+  clickRepoOps(){
+    this.router.navigate(['/repoops']);
+  }
+
   clickUsers(){
     this.router.navigate(['/repousers']);
   }
