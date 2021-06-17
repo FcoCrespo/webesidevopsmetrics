@@ -16,6 +16,10 @@ import { RepositoryinfoComponent } from './components/repositoryinfo/repositoryi
 import { RepousersComponent } from './components/repousers/repousers.component';
 import { UsersgithubComponent } from './components/usersgithub/usersgithub.component';
 import { RepoopsComponent } from './components/repoops/repoops.component';
+import { CommitsrepoComponent } from './components/commitsrepo/commitsrepo.component';
+import { IssuesrepoComponent } from './components/issuesrepo/issuesrepo.component';
+import { ProductmetricsrepoComponent } from './components/productmetricsrepo/productmetricsrepo.component';
+import { TestmetricsrepoComponent } from './components/testmetricsrepo/testmetricsrepo.component';
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -37,6 +41,10 @@ const routes: Routes = [
   { path: 'repousers', component: RepousersComponent, canActivate: [AuthGuard] },
   { path: 'usersgithub', component: UsersgithubComponent, canActivate: [AuthGuard] },
   { path: 'repoops', component: RepoopsComponent, canActivate: [AuthGuard] },
+  { path: 'commitsrepo', component: CommitsrepoComponent, canActivate: [AuthGuard] },
+  { path: 'issuesrepo', component: IssuesrepoComponent, canActivate: [AuthGuard] },
+  { path: 'productmetricsrepo', component: ProductmetricsrepoComponent, canActivate: [AuthGuard] },
+  { path: 'testmetricsrepo', component: TestmetricsrepoComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

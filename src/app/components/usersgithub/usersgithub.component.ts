@@ -79,7 +79,15 @@ export class UsersgithubComponent implements OnInit {
         localStorage.setItem('usersGithubRepo', JSON.stringify(this.usersGithub));
         
         
-    });
+      },
+      (err) => {console.log(err);
+  
+        if(err=="TypeError: Cannot read property 'message' of null"){
+          alert("Expired Session.")
+          this.router.navigate(['/login']);
+        }
+        
+      });
     
   }
 

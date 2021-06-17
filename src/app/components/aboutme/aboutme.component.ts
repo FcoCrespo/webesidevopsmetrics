@@ -1,4 +1,4 @@
-import { HostListener, Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -7,15 +7,30 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './aboutme.component.html',
   styleUrls: ['./aboutme.component.css']
 })
-export class AboutmeComponent implements OnInit {
+export class AboutmeComponent implements OnInit, AfterViewInit {
+
+  public username: string = "";
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+
+      var values = JSON.parse(localStorage.getItem("currentUser")!);
+      this.username = values.username;
+      
+    }
 
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(){
+
+    console.log("afterinit");
+    setTimeout(() => {
+      document.getElementById('userlogin')!.innerText = this.username;
+    });
+    
+  }
 
   webESI(){
 

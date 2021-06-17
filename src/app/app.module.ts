@@ -46,6 +46,10 @@ import { RepositoryinfoComponent } from './components/repositoryinfo/repositoryi
 import { RepousersComponent } from './components/repousers/repousers.component';
 import { UsersgithubComponent } from './components/usersgithub/usersgithub.component';
 import { RepoopsComponent } from './components/repoops/repoops.component';
+import { CommitsrepoComponent } from './components/commitsrepo/commitsrepo.component';
+import { IssuesrepoComponent } from './components/issuesrepo/issuesrepo.component';
+import { ProductmetricsrepoComponent } from './components/productmetricsrepo/productmetricsrepo.component';
+import { TestmetricsrepoComponent } from './components/testmetricsrepo/testmetricsrepo.component';
 
 
 //registerLocaleData(localeES, 'es');
@@ -69,7 +73,11 @@ import { RepoopsComponent } from './components/repoops/repoops.component';
     RepositoryinfoComponent,
     RepousersComponent,
     UsersgithubComponent,
-    RepoopsComponent
+    RepoopsComponent,
+    CommitsrepoComponent,
+    IssuesrepoComponent,
+    ProductmetricsrepoComponent,
+    TestmetricsrepoComponent
   ],
   imports: [
     BrowserModule,

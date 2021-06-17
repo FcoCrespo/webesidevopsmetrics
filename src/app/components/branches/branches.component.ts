@@ -110,7 +110,15 @@ export class BranchesComponent implements OnInit {
 
                 }
             });
-    });
+          },
+          (err) => {console.log(err);
+      
+            if(err=="TypeError: Cannot read property 'message' of null"){
+              alert("Expired Session.")
+              this.router.navigate(['/login']);
+            }
+            
+          });
 
   }
 
@@ -134,7 +142,7 @@ export class BranchesComponent implements OnInit {
 
   clickEvent(branch: BranchesLastCommit){
     localStorage.setItem('BranchData', JSON.stringify(branch));
-    this.router.navigate(['/commitsmetrics']);      
+    this.router.navigate(['/commitsrepo']);      
   }
 
   OrderRepository(){

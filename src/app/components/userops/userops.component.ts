@@ -53,7 +53,15 @@ export class UseropsComponent implements OnInit {
             }
             
           }
-      });    
+        },
+        (err) => {console.log(err);
+    
+          if(err=="TypeError: Cannot read property 'message' of null"){
+            alert("Expired Session.")
+            this.router.navigate(['/login']);
+          }
+          
+        });   
   }
 
   createUser(){

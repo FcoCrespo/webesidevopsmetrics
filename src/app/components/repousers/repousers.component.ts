@@ -79,7 +79,15 @@ export class RepousersComponent implements OnInit, AfterViewInit {
         localStorage.setItem('usersGithubRepo', JSON.stringify(this.usersGithub));
         
         
-    });
+      },
+      (err) => {console.log(err);
+  
+        if(err=="TypeError: Cannot read property 'message' of null"){
+          alert("Expired Session.")
+          this.router.navigate(['/login']);
+        }
+        
+      });
     
   }
 
@@ -109,45 +117,6 @@ export class RepousersComponent implements OnInit, AfterViewInit {
   clickEvent(repository: RepositoryData){
     localStorage.setItem('RepositoryData', JSON.stringify(repository));
     this.router.navigate(['/branches']);      
-  }
-
-  
-
-  async AddNewRepository(){
-    var reponameinput= (<HTMLInputElement>document.getElementById('idrespositoryinput')).value;
-    var ownerinput= (<HTMLInputElement>document.getElementById('idownerinput')).value;
-    
-    console.log(reponameinput);
-    console.log(ownerinput);
-
-    if (reponameinput === undefined 
-      || reponameinput === ''
-      || ownerinput === ''
-      || ownerinput === undefined) {
-
-      
-      alert("Some fields needed for a new repository are empty.")
-
-    }
-
-    else{
-
-        await this.commitService.getBranches(this.tokenpass, reponameinput, ownerinput)
-        .subscribe(async data => {
-          await this.commitService.getCommits(this.tokenpass, reponameinput, ownerinput)
-          .subscribe(data => {   
-
-          });
-             
-            alert("Repository added.")
-            window.location.reload();
-        },
-        (err) => {console.log(err)
-                  alert("The repository does not exist or you do not have permissions on it.")
-        });
-       
-    }
-
   }
 
   goHome(){

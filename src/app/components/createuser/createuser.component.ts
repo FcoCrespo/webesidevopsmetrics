@@ -48,7 +48,15 @@ export class CreateuserComponent implements OnInit {
           document.getElementById('userlogin')!.innerText = this.username;
           this.data = data;
           this.users = this.data;
-      });    
+        },
+        (err) => {console.log(err);
+    
+          if(err=="TypeError: Cannot read property 'message' of null"){
+            alert("Expired Session.")
+            this.router.navigate(['/login']);
+          }
+          
+        });   
   }
   
   createNewUser(){

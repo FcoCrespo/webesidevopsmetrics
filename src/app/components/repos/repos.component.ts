@@ -61,6 +61,14 @@ export class ReposComponent implements OnInit {
         this.repositories = this.data;
         localStorage.setItem('repositories', JSON.stringify(this.repositories));
         document.getElementById('userlogin')!.innerText = this.username;
+    },
+    (err) => {console.log(err);
+
+      if(err=="TypeError: Cannot read property 'message' of null"){
+        alert("Expired Session.")
+        this.router.navigate(['/login']);
+      }
+      
     });
   }
 
@@ -114,6 +122,7 @@ export class ReposComponent implements OnInit {
         },
         (err) => {console.log(err)
                   alert("The repository does not exist or you do not have permissions on it.")
+                  
         });
        
     }

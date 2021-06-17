@@ -23,7 +23,7 @@ export interface BranchesData {
   templateUrl: './repoops.component.html',
   styleUrls: ['./repoops.component.css']
 })
-export class RepoopsComponent implements OnInit {
+export class RepoopsComponent implements OnInit, AfterViewInit {
 
   
   data: RepositoryData[] = [];
@@ -88,45 +88,6 @@ export class RepoopsComponent implements OnInit {
     return this.chartData;
   }
 
-  
-
-  async AddNewRepository(){
-    var reponameinput= (<HTMLInputElement>document.getElementById('idrespositoryinput')).value;
-    var ownerinput= (<HTMLInputElement>document.getElementById('idownerinput')).value;
-    
-    console.log(reponameinput);
-    console.log(ownerinput);
-
-    if (reponameinput === undefined 
-      || reponameinput === ''
-      || ownerinput === ''
-      || ownerinput === undefined) {
-
-      
-      alert("Some fields needed for a new repository are empty.")
-
-    }
-
-    else{
-
-        await this.commitService.getBranches(this.tokenpass, reponameinput, ownerinput)
-        .subscribe(async data => {
-          await this.commitService.getCommits(this.tokenpass, reponameinput, ownerinput)
-          .subscribe(data => {   
-
-          });
-             
-            alert("Repository added.")
-            window.location.reload();
-        },
-        (err) => {console.log(err)
-                  alert("The repository does not exist or you do not have permissions on it.")
-        });
-       
-    }
-
-  }
-
   goHome(){
 		this.router.navigate(['/repos']); // navigate to other page
 	}
@@ -166,7 +127,12 @@ export class RepoopsComponent implements OnInit {
     await this.issueService.getIssues(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
     .subscribe(data => {
       alert(data);
+    
+    },
+    (err) => {
+      alert("The repository does not have any issues to be saved.")
     });
+
   }
 
   async clickUpdateTestMetrics(){
