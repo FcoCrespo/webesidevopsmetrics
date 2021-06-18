@@ -1,4 +1,4 @@
-<div class="wrapper">
+<ngx-spinner bdColor = "rgba(86,111,110,0.8)" size = "large" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner><div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
@@ -141,8 +141,8 @@
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
                         <div id="report" (click)="pdf()" class="info-box" style="cursor: pointer; visibility: hidden;">
-                            <span class="info-box-icon bg-info elevation-1">
-                                <img src="assets/img/reports-200.png" class="img-circle elevation-2" alt="Print report">
+                            <span class="info-box-icon elevation-1">
+                                <img src="assets/img/reports-200.png" style="background-color: white; width:  50px; height: 50px;" alt="Print report">
                             </span>
 
                             <div class="info-box-content">
@@ -154,7 +154,6 @@
                     </div>
                     <!-- /.col -->
                 </div>
-
                 <div class="row ">
                     <div class="col-md-12">
                         <div class="card card-primary">
@@ -172,8 +171,9 @@
                                 </div>
                                 
                             </div>
+                            
                             <div id="chartTimelineCommits">
-                
+                                
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -218,5 +218,6 @@
         </div>
     </footer>
 </div>
+
 <!-- ./wrapper -->
 <router-outlet></router-outlet>

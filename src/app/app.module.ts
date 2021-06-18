@@ -21,17 +21,14 @@ import { AppRoutingModule } from './app-routing.module';
 /*Angular interceptor*/
 import { JwtInterceptor, ErrorInterceptor } from './interceptors';
 
-/*Angular component*/
+/*Angular project*/
 import { AppComponent } from './components/app/app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RepositoriesComponent } from './components/repositories/repositories.component';
-
-
-/*Angular local ES*/
 import { LOCALE_ID} from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { FilterPipe } from './pipes/filter.pipe';
+import { LoginComponent } from './components/login/login.component';
+import { RepositoriesComponent } from './components/repositories/repositories.component';
 import { CommitsmetricsComponent } from './components/commitsmetrics/commitsmetrics.component';
 import { ReposComponent } from './components/repos/repos.component';
 import { BranchesComponent } from './components/branches/branches.component';
@@ -51,6 +48,9 @@ import { IssuesrepoComponent } from './components/issuesrepo/issuesrepo.componen
 import { ProductmetricsrepoComponent } from './components/productmetricsrepo/productmetricsrepo.component';
 import { TestmetricsrepoComponent } from './components/testmetricsrepo/testmetricsrepo.component';
 
+//Externals
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { InterceptorspinnerService } from './services/interceptorspinner.service';
 
 //registerLocaleData(localeES, 'es');
 
@@ -91,12 +91,14 @@ import { TestmetricsrepoComponent } from './components/testmetricsrepo/testmetri
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+    NgxSpinnerModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorspinnerService, multi: true },
     { provide: LOCALE_ID, useValue: 'en-US' },
     DecimalPipe,
     MatDatepickerModule,

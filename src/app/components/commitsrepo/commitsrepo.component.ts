@@ -2,6 +2,7 @@ import { HostListener, Component, OnInit, AfterViewInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Chart } from 'admin-lte/node_modules/chart.js';
 import { Observable } from 'rxjs';
@@ -10,6 +11,7 @@ import domtoimage from 'dom-to-image';
 import autoTable from 'jspdf-autotable';
 import * as moment from 'moment';
 import { ThrowStmt } from '@angular/compiler';
+
 
 export interface RepositoryData {
   repository:string;  
@@ -82,31 +84,34 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
   semitransparentcolorsArray: Array<string> = [];
   charts: Array<Chart> = [];
   arrayDeCadenas: Array<string> = [];
-  colors: Array<string> = ['rgb(255, 99, 132)',
+  colors: Array<string> = [
+    'rgb(255, 99, 132)',
     'rgb(54, 162, 235)',
     'rgb(255, 206, 86)',
     'rgb(75, 192, 192)',
     'rgb(153, 102, 255)',
     'rgb(255, 159, 64)',
-    'rgb(255, 0, 54)',
-    'rgb(219, 217, 36)',
+    'rgb(204, 81, 39)',
+    'rgb(176, 255, 96)',
     'rgb(0, 255, 201)'];
 
-    semitransparentcolors: Array<string> = ['rgba(255, 99, 132,0.3)',
+    semitransparentcolors: Array<string> = [
+    'rgba(255, 99, 132, 0.2)',
     'rgba(54, 162, 235, 0.2)',
     'rgba(255, 206, 86, 0.2)',
     'rgba(75, 192, 192, 0.2)',
     'rgba(153, 102, 255, 0.2)',
     'rgba(255, 159, 64, 0.2)',
-    'rgba(255, 0, 54, 0.2)',
-    'rgba(219, 217, 36, 0.2)',
+    'rgba(204, 81, 39, 0.2)',
+    'rgba(176, 255, 96, 0.2)',
     'rgba(0, 255, 201, 0.2)'];
 
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private commitService : CommitService) {
+    private commitService : CommitService,
+    private spinnerService: SpinnerService) {
 
       var repository = JSON.parse(localStorage.getItem("RepositoryData")!);
       this.repositoryName = repository.repository;
@@ -128,7 +133,6 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     document.body.classList.add('bg-img-white');
-
     this.commitService.getCommitsBranch(this.tokenpass, this.branch.name, this.branch.repository, this.owner)
       .subscribe((data: CommitsData[]) => {
         
@@ -137,7 +141,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         this.commits = this.data;
 
         for(var i=0; i<this.commits.length; i++){
-          var fecha = moment(new Date(this.commits[i].pushedDate)).format('DD-MMM-YYYY');
+          var fecha = moment(new Date(this.commits[i].pushedDate)).format('YYYY-MM-DD');
           this.commits[i].pushedDateStr=fecha;
         }
 
@@ -160,6 +164,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         this.crearCanvasTimelineCommits();
         document.getElementById("report")!.style.visibility = "visible";
 
+       
       },
       (err) => {console.log(err);
   
@@ -169,24 +174,19 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         }
         
       });
-
   }
 
   ngAfterViewInit(){
-
-    console.log("afterinit");
+   
     setTimeout(() => {
-
       document.getElementById('userlogin')!.innerText = this.username;
       this.repositorydata = JSON.parse(localStorage.getItem("RepositoryData")!);
       document.getElementById('titlePage')!.innerText = "Repository Commits - Name: "+this.repositorydata.repository+" , Owner: "+this.repositorydata.owner;
-      
-     
-      
-    
     });
     
   }
+
+ 
 
   obtenerLabelsCommitsAuthor() {
     var labelsCommitsAuthoraux = [];
@@ -223,8 +223,6 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
     myCanvasExample.setAttribute("id", "myChart" + this.idCanvas);
     myCanvasExample.setAttribute("style", "min-height: 555px; height: 555px; max-height: 250px; max-width: 100%;");
     document.getElementById('divChartTimelineCommits')!.appendChild(myCanvasExample);
-  
-    var ejemplo;
 
     var cosas=[
         {
@@ -241,8 +239,6 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         }
     ];
     
-   
-    console.log(cosas);
     var newElement = false;
     var auxElement;
 
@@ -295,8 +291,6 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
     }];
    datasets.pop();
 
-    console.log(this.commits);
-    console.log("Lenght de datasets: "+datasets.length)
 
     var color=0;
     for(var a=0; a<this.labelsCommitsAuthor.length; a++){
@@ -357,7 +351,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         backgroundColor: this.semitransparentcolorsArray[color],
         borderColor: this.colorsArray[color],
         pointRadius: 4,
-        pointBackgroundColor: this.semitransparentcolorsArray[color],
+        pointBackgroundColor: this.colorsArray[color],
         pointBorderColor: this.colorsArray[color]
       }
       molde.data=[];
@@ -365,9 +359,8 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         molde.data.push(cosas[c])
       }
       cosas=[]
-      console.log(molde);
+
       datasets.push(molde);
-      console.log("Lenght de datasets tras meter molde: "+datasets.length)
       color++;
       if(this.colorsArray.length==color){
         color=0;
