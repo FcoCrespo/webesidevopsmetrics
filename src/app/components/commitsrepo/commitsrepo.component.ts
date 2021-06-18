@@ -137,7 +137,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         this.commits = this.data;
 
         for(var i=0; i<this.commits.length; i++){
-          var fecha = moment(new Date(this.commits[i].pushedDate)).format('YYYY-MM-DD');
+          var fecha = moment(new Date(this.commits[i].pushedDate)).format('DD-MMM-YYYY');
           this.commits[i].pushedDateStr=fecha;
         }
 
