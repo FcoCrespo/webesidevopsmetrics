@@ -78,7 +78,8 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
   numCommitsAuthor: Array<number> = [];
 
   ordersBranches: Array<string> = [];
-  colorsCommits: Array<string> = [];
+  colorsArray: Array<string> = [];
+  semitransparentcolorsArray: Array<string> = [];
   charts: Array<Chart> = [];
   arrayDeCadenas: Array<string> = [];
   colors: Array<string> = ['rgb(255, 99, 132)',
@@ -90,6 +91,16 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
     'rgb(255, 0, 54)',
     'rgb(219, 217, 36)',
     'rgb(0, 255, 201)'];
+
+    semitransparentcolors: Array<string> = ['rgba(255, 99, 132,0.3)',
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)',
+    'rgba(255, 0, 54, 0.2)',
+    'rgba(219, 217, 36, 0.2)',
+    'rgba(0, 255, 201, 0.2)'];
 
 
   constructor(private route: ActivatedRoute,
@@ -137,7 +148,8 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         
         var colores = 0;
         for (var cont = 0; cont < this.labelsCommitsAuthor.length; cont++) {
-          this.colorsCommits.push(this.colors[colores])
+          this.colorsArray.push(this.colors[colores]);
+          this.semitransparentcolorsArray.push(this.semitransparentcolors[colores]);
           colores = colores + 1;
           if (colores == this.colors.length) {
             colores = 0;
@@ -212,57 +224,156 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
     myCanvasExample.setAttribute("style", "min-height: 555px; height: 555px; max-height: 250px; max-width: 100%;");
     document.getElementById('divChartTimelineCommits')!.appendChild(myCanvasExample);
   
+    var ejemplo;
+
     var cosas=[
-      {
-        t: '2015-03-15',
-        y: 12
-      }
+        {
+          t: '2015-03-18',
+          y: 12
+        },
+        {
+          t: '2015-03-30',
+          y: 13
+        },
+        {
+          t: '2016-02-14',
+          y: 32
+        }
     ];
     
-    cosas=[];
+   
     console.log(cosas);
     var newElement = false;
     var auxElement;
-          
-    for(var i=0; i<this.commits.length; i++){
-      if(this.commits[i].authorName===this.labelsCommitsAuthor[0]){
 
-        if(cosas.length==0){
-          
-          var commitDate =  {
-            t: this.commits[i].pushedDateStr,
-            y: 1
-          }
-          cosas.push(commitDate);
-        }
-        else{
-          
-          for(var j=0; j<cosas.length; j++){
+    var molde = {
+        data:  [{
+          t: '2015-03-18',
+          y: 12
+          },
+          {
+            t: '2015-03-30',
+            y: 13
+          },
+          {
+            t: '2016-02-14',
+            y: 32
+        }],
+        label: this.labelsCommitsAuthor[0],
+        lineTension: 0,
+        fill: true,
+        backgroundColor: this.semitransparentcolorsArray[0],
+        borderColor: this.colorsArray[0],
+        pointRadius: 4,
+        pointBackgroundColor: this.semitransparentcolorsArray[0],
+        pointBorderColor: this.colorsArray[0]
+   };
+
+   cosas=[];
+
+   var datasets=[{
+        data: [{
+          t: '2015-03-18',
+          y: 12
+          },
+          {
+            t: '2015-03-30',
+            y: 13
+          },
+          {
+            t: '2016-02-14',
+            y: 32
+        }],
+        label: this.labelsCommitsAuthor[0],
+        lineTension: 0,
+        fill: true,
+        backgroundColor: this.semitransparentcolorsArray[0],
+        borderColor: this.colorsArray[0],
+        pointRadius: 4,
+        pointBackgroundColor: this.semitransparentcolorsArray[0],
+        pointBorderColor: this.colorsArray[0]
+    }];
+   datasets.pop();
+
+    console.log(this.commits);
+    console.log("Lenght de datasets: "+datasets.length)
+
+    var color=0;
+    for(var a=0; a<this.labelsCommitsAuthor.length; a++){
+      for(var i=0; i<this.commits.length; i++){
+        if(this.commits[i].authorName===this.labelsCommitsAuthor[a]){
+  
+          if(cosas.length==0){
             
-            if(this.commits[i].pushedDateStr==cosas[j].t){
-              cosas[j].y = cosas[j].y + 1;
+            var commitDate =  {
+              t: this.commits[i].pushedDateStr,
+              y: 1
             }
-            newElement = false;
-            if(this.commits[i].pushedDateStr!==cosas[j].t){
-              auxElement =  {
-                t: this.commits[i].pushedDateStr,
-                y: 1
+            cosas.push(commitDate);
+          }
+          else{
+            
+            for(var j=0; j<cosas.length; j++){
+              
+              if(this.commits[i].pushedDateStr==cosas[j].t){
+                cosas[j].y = cosas[j].y + 1;
               }
-              newElement=true;
+              newElement = false;
+              if(this.commits[i].pushedDateStr!==cosas[j].t){
+                auxElement =  {
+                  t: this.commits[i].pushedDateStr,
+                  y: 1
+                }
+                newElement=true;
+              }
+            }
+            
+            if(newElement==true){
+              cosas.push(auxElement);
+              newElement=false;
             }
           }
-          
-          if(newElement==true){
-            cosas.push(auxElement);
-            newElement=false;
-          }
+          newElement = false;
+  
         }
-
+        newElement = false;
+      }
+      molde={
+        data: [{
+          t: '2015-03-18',
+          y: 12
+          },
+          {
+            t: '2015-03-30',
+            y: 13
+          },
+          {
+            t: '2016-02-14',
+            y: 32
+        }],
+        label: this.labelsCommitsAuthor[a],
+        lineTension: 0,
+        fill: true,
+        backgroundColor: this.semitransparentcolorsArray[color],
+        borderColor: this.colorsArray[color],
+        pointRadius: 4,
+        pointBackgroundColor: this.semitransparentcolorsArray[color],
+        pointBorderColor: this.colorsArray[color]
+      }
+      molde.data=[];
+      for(var c=0; c<cosas.length; c++){
+        molde.data.push(cosas[c])
+      }
+      cosas=[]
+      console.log(molde);
+      datasets.push(molde);
+      console.log("Lenght de datasets tras meter molde: "+datasets.length)
+      color++;
+      if(this.colorsArray.length==color){
+        color=0;
       }
     }
-
-
-  
+    
 
     this.charts[1] = new Chart("myChart" + this.idCanvas, {
       type: 'line',
@@ -286,17 +397,10 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
         }
       },
       data: {
-        datasets: [{
-          label: this.labelsCommitsAuthor[0],
-          data: cosas,
-          lineTension: 0,
-          fill: false,
-          borderColor: this.colorsCommits[0],
-          pointRadius: 3,
-          pointBackgroundColor: this.colorsCommits[0]
-        }]
+          datasets
       }
     });
+    
   }
 
   pdf(){
@@ -347,4 +451,3 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
 
 
 }
-
