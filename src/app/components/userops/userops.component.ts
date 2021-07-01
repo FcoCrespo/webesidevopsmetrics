@@ -155,7 +155,7 @@ export class UseropsComponent implements OnInit {
   }
 
   hashPassword(password: string){
-    return "*".repeat(password.length)
+    return "*".repeat(password.length/2)
   }
 
 

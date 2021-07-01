@@ -9,3 +9,7 @@ td {
     text-align: center; 
     vertical-align: middle;
 }
+
+.info-box{
+    cursor: pointer;
+}

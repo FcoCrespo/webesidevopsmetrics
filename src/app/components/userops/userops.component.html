@@ -136,7 +136,7 @@
                             <div class="card-header">
                                 <div class="card-body p-0">
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 col-md-3">
+                                        
                                             <div id="idcreatenewuseraction" (click)="createUser()" class="info-box">
                                                 <span class="info-box-icon bg-info elevation-1">
                                                     <img src="assets/img/plus.jpg" class="img-circle elevation-2" alt="newuser">
@@ -148,7 +148,7 @@
                                                 <!-- /.info-box-content -->
                                             </div>
                                             <!-- /.info-box -->
-                                        </div>
+                                       
                                         <!-- /.col -->
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@
                                                     <ng-container *ngIf="user.username !== 'admin'">
                                                         <td>{{ user?.username }}</td>
                                                         <td><div class="row">
-                                                            <div class="col-12 col-sm-6 col-md-3">
+                                                            
                                                                 <div id="idcreatenewuseraction" (click)="updateUser(user)" class="info-box">
                                                                     <span class="info-box-icon bg-info elevation-1">
                                                                         <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateuser">
@@ -190,11 +190,11 @@
                                                                     <!-- /.info-box-content -->
                                                                 </div>
                                                                 <!-- /.info-box -->
-                                                            </div>
+                                                           
                                                             <!-- /.col -->
                                                         </div></td>   
                                                         <td><div class="row">
-                                                            <div class="col-12 col-sm-6 col-md-3">
+                                                            
                                                                 <div id="idcreatenewuseraction" (click)="deleteUser(user)" class="info-box">
                                                                     <span class="info-box-icon bg-info elevation-1">
                                                                         <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="deleteuser">
@@ -206,7 +206,7 @@
                                                                     <!-- /.info-box-content -->
                                                                 </div>
                                                                 <!-- /.info-box -->
-                                                            </div>
+                                                           
                                                             <!-- /.col -->
                                                         </div></td> 
                                                     </ng-container>
@@ -231,7 +231,7 @@
                             <div class="card-header">
                                 <div class="card-body p-0">
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 col-md-3">
+                                     
                                             <div id="idcreatenewuseraction" (click)="createToken()" class="info-box">
                                                 <span class="info-box-icon bg-info elevation-1">
                                                     <img src="assets/img/plus.jpg" class="img-circle elevation-2" alt="createToken">
@@ -243,7 +243,7 @@
                                                 <!-- /.info-box-content -->
                                             </div>
                                             <!-- /.info-box -->
-                                        </div>
+                                      
                                         <!-- /.col -->
                                     </div>
                                 </div>
@@ -273,7 +273,7 @@
                                                     <td>{{ token?.owner }}</td>
                                                     <td>{{ hashPassword(token.secretT) }}</td>
                                                     <td><div class="row">
-                                                        <div class="col-12 col-sm-6 col-md-3">
+                                                        
                                                             <div id="idcreatenewuseraction" (click)="updateToken(token)" class="info-box">
                                                                 <span class="info-box-icon bg-info elevation-1">
                                                                     <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateToken">
@@ -285,11 +285,11 @@
                                                                 <!-- /.info-box-content -->
                                                             </div>
                                                             <!-- /.info-box -->
-                                                        </div>
+                                                        
                                                         <!-- /.col -->
                                                     </div></td>   
                                                     <td><div class="row">
-                                                        <div class="col-12 col-sm-6 col-md-3">
+                                                       
                                                             <div id="idcreatenewuseraction" (click)="deleteToken(token)" class="info-box">
                                                                 <span class="info-box-icon bg-info elevation-1">
                                                                     <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="delete">
@@ -300,8 +300,7 @@
                                                                 </div>
                                                                 <!-- /.info-box-content -->
                                                             </div>
-                                                            <!-- /.info-box -->
-                                                        </div>
+                                                       
                                                         <!-- /.col -->
                                                     </div></td> 
                                                 </tr>
