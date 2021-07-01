@@ -1,6 +1,11 @@
 li { cursor: pointer;
     margin: 0 0 5px 0; }
 
-    .titulo{
+.titulo{
         cursor: pointer;
-    }
+}
+
+td {
+    text-align: center; 
+    vertical-align: middle;
+}

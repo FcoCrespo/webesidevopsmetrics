@@ -2,11 +2,18 @@ import { HostListener, Component, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { CommitService } from 'src/app/services/commit.service';
 
 export interface Users {
   id: string;
   username: string;
   role: string;
+}
+
+export interface Tokens {
+  id: string;
+  owner: string;
+  secretT: string;
 }
 
 
@@ -22,6 +29,9 @@ export class UseropsComponent implements OnInit {
   data: Users[] = [];
   users: Users[] = [];
 
+  dataToken: Tokens[] = [];
+  tokens: Tokens[] = [];
+
 
   public username: string = "";
   public tokenpass: string = "";
@@ -30,7 +40,8 @@ export class UseropsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService, 
-    private userService: UserService) { }
+    private userService: UserService,
+    private commitService: CommitService) { }
 
     async ngOnInit() {
       document.body.classList.add('bg-img-white');
@@ -61,7 +72,28 @@ export class UseropsComponent implements OnInit {
             this.router.navigate(['/login']);
           }
           
-        });   
+      });   
+
+      await this.commitService.getAllTokens(this.tokenpass)
+        .subscribe((data: Tokens[]) => {
+
+          this.dataToken = data;
+
+          for(var i=0; i<this.dataToken.length; i++){
+            
+              this.tokens.push(this.dataToken[i]);
+            
+            
+          }
+        },
+        (err) => {console.log(err);
+    
+          if(err=="TypeError: Cannot read property 'message' of null"){
+            alert("Expired Session.")
+            this.router.navigate(['/login']);
+          }
+          
+      });  
   }
 
   createUser(){
@@ -85,6 +117,27 @@ export class UseropsComponent implements OnInit {
     this.router.navigate(['/updateuser']); 
   }
 
+  createToken(){
+    this.router.navigate(['/createtoken']); 
+  }
+
+  deleteToken(token:Tokens){
+    if(confirm("Are you sure to delete this token?")) {
+      this.commitService.deleteToken(this.tokenpass, token.owner)
+            .subscribe(data => {
+
+      });
+
+      alert("Token deleted correctly.")
+      window.location.reload();
+    }
+  }
+
+  updateToken(token:Tokens){
+    localStorage.setItem('updatetoken', JSON.stringify(token.owner));
+    this.router.navigate(['/updatetoken']); 
+  }
+
   goHome(){
 		this.router.navigate(['/repos']); // navigate to other page
 	}
@@ -99,6 +152,10 @@ export class UseropsComponent implements OnInit {
 
   goUserGithub(){
     this.router.navigate(['/usersgithub']); 
+  }
+
+  hashPassword(password: string){
+    return "*".repeat(password.length)
   }
 
 

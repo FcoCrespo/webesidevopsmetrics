@@ -129,19 +129,24 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <div class="row" >
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-body p-0">
-                                    <button (click)="goUserOps()">Back to User Ops Menu</button>
-                                </div>
+
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div id="idcreatenewuseraction" (click)="goUserOps()" class="info-box">
+                            <span class="info-box-icon bg-info elevation-1">
+                                <img src="assets/img/back.png" class="img-circle elevation-2" alt="back">
+                            </span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Back to User Ops Menu</span>
                             </div>
-                            <!-- /.card-header -->
+                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.card -->
+                        <!-- /.info-box -->
                     </div>
+                    <!-- /.col -->
                 </div>
+                
                 <div class="row">
                     <p class="text-left">
                         <strong>  New User Form</strong>

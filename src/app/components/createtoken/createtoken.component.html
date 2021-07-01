@@ -63,7 +63,7 @@
                                     <p>Repositories</p>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a (click)="goUserGithub()" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -112,13 +112,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">User Ops</h1>
+                        <h1 class="m-0 text-dark">Create Token</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a (click)="goHome()">Home</a></li>
                             <li class="breadcrumb-item"><a (click)="goUserOps()">User Ops</a></li>
-                            <li class="breadcrumb-item active">Update User</li>
+                            <li class="breadcrumb-item active">Create Token</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -129,7 +129,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                
+
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
                         <div id="idcreatenewuseraction" (click)="goUserOps()" class="info-box">
@@ -146,52 +146,39 @@
                     </div>
                     <!-- /.col -->
                 </div>
-
-                <div class="row">
-                    <p class="text-left">
-                        <strong>  Update User Form</strong>
-                    </p>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <input disabled id="idusernameinput" [(ngModel)]="usernamevalue" class="form-control form-control-navbar" type="text" aria-label="text">                   
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <label style="visibility: hidden;"></label>
-                <label style="visibility: hidden;"></label>
-                
                 
                 <div class="row">
                     <p class="text-left">
-                        <strong> The password must be greater than 8 characters and must include capital letters and numbers</strong>
+                        <strong>  New Token Form</strong>
                     </p>
                     <div class="col-12 col-sm-6 col-md-3">
-                        <input id="idnewpassinput" [(ngModel)]="newpassvalue" class="form-control form-control-navbar" type="password" placeholder="new password" aria-label="repository">                   
+                        <input id="idownerinput" [(ngModel)]="ownervalue" class="form-control form-control-navbar" type="text" placeholder="owner" aria-label="owner">                   
                         <!-- /.info-box -->
                     </div>
                     <!-- /.col -->
                 </div>
                 <label style="visibility: hidden;"></label>
                 <label style="visibility: hidden;"></label>
-                <div class="row">
+                <div class="row">      
                     <div class="col-12 col-sm-6 col-md-3">
-                        <input id="idnewrepeatpassinput" [(ngModel)]="newrepeatpassvalue"  class="form-control form-control-navbar" type="password" placeholder="repeat new password" aria-label="repository">                   
+                        <input id="idsecretTinput" type="password" class="form-control form-control-navbar" placeholder="token" aria-label="token">                   
                         <!-- /.info-box -->
                     </div>
                     <!-- /.col -->
                 </div>
+               
                 <label style="visibility: hidden;"></label>
                 <label style="visibility: hidden;"></label>
 
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
-                        <div id="idupdateuseraction" (click)="UpdateUser()" class="info-box">
+                        <div id="idcreatenewuseraction" (click)="createNewToken()" class="info-box">
                             <span class="info-box-icon bg-info elevation-1">
-                                <img src="assets/img/updateuser.png" class="img-circle elevation-2" alt="New User">
+                                <img src="assets/img/plus.jpg" class="img-circle elevation-2" alt="New User">
                             </span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Update User</span>
+                                <span class="info-box-text">Add New Token</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -199,8 +186,7 @@
                     </div>
                     <!-- /.col -->
                 </div>
-                
-              
+             
                 
             </div>
             <!--/. container-fluid -->

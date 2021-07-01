@@ -135,7 +135,22 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-body p-0">
-                                    <button (click)="createUser()">Create new user</button>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-3">
+                                            <div id="idcreatenewuseraction" (click)="createUser()" class="info-box">
+                                                <span class="info-box-icon bg-info elevation-1">
+                                                    <img src="assets/img/plus.jpg" class="img-circle elevation-2" alt="newuser">
+                                                </span>
+                    
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Create New User</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -145,7 +160,7 @@
                 </div>
                 
                 <div class="row" >
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">USERS OF DEVOPSMETRICS</h3>
@@ -159,14 +174,136 @@
                                             </thead>
                                             <tbody id=tableBodyUsers>
                                                 <tr *ngFor="let user of users">
-                                                    <ng-container *ngIf="user.username === 'admin'">
-                                                        <td>{{ user?.username }}</td>
-                                                    </ng-container>
+
                                                     <ng-container *ngIf="user.username !== 'admin'">
                                                         <td>{{ user?.username }}</td>
-                                                        <td><button (click)="updateUser(user)">Update User</button></td>   
-                                                        <td><button (click)="deleteUser(user)">Delete User</button></td> 
+                                                        <td><div class="row">
+                                                            <div class="col-12 col-sm-6 col-md-3">
+                                                                <div id="idcreatenewuseraction" (click)="updateUser(user)" class="info-box">
+                                                                    <span class="info-box-icon bg-info elevation-1">
+                                                                        <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateuser">
+                                                                    </span>
+                                        
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-text">Update User</span>
+                                                                    </div>
+                                                                    <!-- /.info-box-content -->
+                                                                </div>
+                                                                <!-- /.info-box -->
+                                                            </div>
+                                                            <!-- /.col -->
+                                                        </div></td>   
+                                                        <td><div class="row">
+                                                            <div class="col-12 col-sm-6 col-md-3">
+                                                                <div id="idcreatenewuseraction" (click)="deleteUser(user)" class="info-box">
+                                                                    <span class="info-box-icon bg-info elevation-1">
+                                                                        <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="deleteuser">
+                                                                    </span>
+                                        
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-text">Delete User</span>
+                                                                    </div>
+                                                                    <!-- /.info-box-content -->
+                                                                </div>
+                                                                <!-- /.info-box -->
+                                                            </div>
+                                                            <!-- /.col -->
+                                                        </div></td> 
                                                     </ng-container>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+
+                            </div>
+                            <!-- /.card-header -->
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div class="row" >
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-body p-0">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-3">
+                                            <div id="idcreatenewuseraction" (click)="createToken()" class="info-box">
+                                                <span class="info-box-icon bg-info elevation-1">
+                                                    <img src="assets/img/plus.jpg" class="img-circle elevation-2" alt="createToken">
+                                                </span>
+                    
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Add New Token</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div class="row" >
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">REPOSITORIES TOKENS OF DEVOPSMETRICS</h3>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Owner</th>
+                                                    <th>Token</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id=tableBodyTokens>
+                                                <tr *ngFor="let token of tokens">
+                                                    <td>{{ token?.owner }}</td>
+                                                    <td>{{ hashPassword(token.secretT) }}</td>
+                                                    <td><div class="row">
+                                                        <div class="col-12 col-sm-6 col-md-3">
+                                                            <div id="idcreatenewuseraction" (click)="updateToken(token)" class="info-box">
+                                                                <span class="info-box-icon bg-info elevation-1">
+                                                                    <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateToken">
+                                                                </span>
+                                    
+                                                                <div class="info-box-content">
+                                                                    <span class="info-box-text">Update Token</span>
+                                                                </div>
+                                                                <!-- /.info-box-content -->
+                                                            </div>
+                                                            <!-- /.info-box -->
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div></td>   
+                                                    <td><div class="row">
+                                                        <div class="col-12 col-sm-6 col-md-3">
+                                                            <div id="idcreatenewuseraction" (click)="deleteToken(token)" class="info-box">
+                                                                <span class="info-box-icon bg-info elevation-1">
+                                                                    <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="delete">
+                                                                </span>
+                                    
+                                                                <div class="info-box-content">
+                                                                    <span class="info-box-text">Delete Token</span>
+                                                                </div>
+                                                                <!-- /.info-box-content -->
+                                                            </div>
+                                                            <!-- /.info-box -->
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div></td> 
                                                 </tr>
                                             </tbody>
                                         </table>

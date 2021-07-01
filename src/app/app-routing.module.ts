@@ -11,6 +11,8 @@ import { CommitsauthorfechasComponent } from './components/commitsauthorfechas/c
 import { UseropsComponent } from './components/userops/userops.component';
 import { UpdateuserComponent } from './components/updateuser/updateuser.component';
 import { CreateuserComponent } from './components/createuser/createuser.component';
+import { CreatetokenComponent } from './components/createtoken/createtoken.component';
+import { UpdatetokenComponent } from './components/updatetoken/updatetoken.component';
 import { AboutmeComponent } from './components/aboutme/aboutme.component';
 import { RepositoryinfoComponent } from './components/repositoryinfo/repositoryinfo.component';
 import { RepousersComponent } from './components/repousers/repousers.component';
@@ -36,7 +38,9 @@ const routes: Routes = [
   { path: 'userops', component: UseropsComponent, canActivate: [AuthGuard] },
   { path: 'aboutme', component: AboutmeComponent, canActivate: [AuthGuard] },
   { path: 'updateuser', component: UpdateuserComponent, canActivate: [AuthGuard] },
+  { path: 'updatetoken', component: UpdatetokenComponent, canActivate: [AuthGuard] },
   { path: 'createuser', component: CreateuserComponent, canActivate: [AuthGuard] },
+  { path: 'createtoken', component: CreatetokenComponent, canActivate: [AuthGuard] },
   { path: 'repositoryinfo', component: RepositoryinfoComponent, canActivate: [AuthGuard] },
   { path: 'repousers', component: RepousersComponent, canActivate: [AuthGuard] },
   { path: 'usersgithub', component: UsersgithubComponent, canActivate: [AuthGuard] },

@@ -20,8 +20,23 @@ export class CommitService {
   }
 
   getBranchesFirstCommit(tokenpass: string, reponame: string, owner: string) {
-    console.log(`${environment.apiUrl}/commits/branchesfirstcommit?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
     return this.http.get<any[]>(`${environment.apiUrl}/commits/branchesfirstcommit?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
+  }
+
+  getAllTokens(tokenpass: string) {
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/alltokens?tokenpass=${tokenpass}`);
+  }
+  
+  saveToken(tokenpass: string, tokenInfo) {
+    return this.http.post<any[]>(`${environment.apiUrl}/commits/savetoken?tokenpass=${tokenpass}`, tokenInfo);
+  }
+
+  updateToken(tokenpass: string, tokenInfo) {
+    return this.http.put<any[]>(`${environment.apiUrl}/commits/updatetoken?tokenpass=${tokenpass}`, tokenInfo);
+  }
+
+  deleteToken(tokenpass: string, owner: string) {
+    return this.http.delete<any[]>(`${environment.apiUrl}/commits/deletetoken?tokenpass=${tokenpass}&owner=${owner}`);
   }
 
   getCommits(tokenpass: string, reponame: string, owner: string) {

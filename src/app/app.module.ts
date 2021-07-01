@@ -51,6 +51,8 @@ import { TestmetricsrepoComponent } from './components/testmetricsrepo/testmetri
 //Externals
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { InterceptorspinnerService } from './services/interceptorspinner.service';
+import { CreatetokenComponent } from './components/createtoken/createtoken.component';
+import { UpdatetokenComponent } from './components/updatetoken/updatetoken.component';
 
 //registerLocaleData(localeES, 'es');
 
@@ -77,7 +79,9 @@ import { InterceptorspinnerService } from './services/interceptorspinner.service
     CommitsrepoComponent,
     IssuesrepoComponent,
     ProductmetricsrepoComponent,
-    TestmetricsrepoComponent
+    TestmetricsrepoComponent,
+    CreatetokenComponent,
+    UpdatetokenComponent
   ],
   imports: [
     BrowserModule,
