@@ -22,6 +22,7 @@ export interface UsersGithub{
   name:String;
   login:String;
   avatarURL:String;
+  email:String;
   repositories:RepositoryData[];
 }
 

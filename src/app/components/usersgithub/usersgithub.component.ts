@@ -22,6 +22,7 @@ export interface UsersGithub{
   name:String;
   login:String;
   avatarURL:String;
+  email:String;
   repositories:RepositoryData[];
 }
 
@@ -70,7 +71,7 @@ export class UsersgithubComponent implements OnInit {
     document.body.classList.add('bg-img-white');
     var dataRepository = JSON.parse(localStorage.getItem("RepositoryData")!);
 
-    this.commitService.getUserGithub(this.tokenpass)
+    this.commitService.getUsersGithub(this.tokenpass)
       .subscribe((data: UsersGithub[]) => {
         this.data = data;
         console.log(this.data);

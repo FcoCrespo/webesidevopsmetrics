@@ -54,7 +54,7 @@ export class CommitService {
     return this.http.get<any[]>(`${environment.apiUrl}/commits/commitsbranchauthor?tokenpass=${tokenpass}&branch=${branch}&reponame=${reponame}&authorname=${authorname}&owner=${owner}`);
   }
 
-  getUserGithub(tokenpass: string){
+  getUsersGithub(tokenpass: string){
     return this.http.get<any[]>(`${environment.apiUrl}/commits/usersgithub?tokenpass=${tokenpass}`);
   }
 
