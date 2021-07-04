@@ -1,6 +1,7 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommitService } from 'src/app/services/commit.service';
+import { IssueService } from 'src/app/services/issue.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 export interface RepositoryData {
@@ -36,7 +37,8 @@ export class ReposComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private commitService : CommitService,) {
+    private commitService : CommitService,
+    private issueService : IssueService) {
 
     var values = JSON.parse(localStorage.getItem("currentUser")!);
     this.username = values.username;
@@ -91,7 +93,7 @@ export class ReposComponent implements OnInit {
 
   
 
-  async AddNewRepository(){
+  AddNewRepository(){
     var reponameinput= (<HTMLInputElement>document.getElementById('idrespositoryinput')).value;
     var ownerinput= (<HTMLInputElement>document.getElementById('idownerinput')).value;
     
@@ -109,22 +111,32 @@ export class ReposComponent implements OnInit {
     }
 
     else{
+      var existe = false;
+      for(var i=0; i<this.repositories.length; i++){
+        if(this.repositories[i].owner === ownerinput && this.repositories[i].repository === reponameinput){
+          existe =true;
+        }
+      }
 
-        await this.commitService.getBranches(this.tokenpass, reponameinput, ownerinput)
-        .subscribe(async data => {
-          await this.commitService.getCommits(this.tokenpass, reponameinput, ownerinput)
-          .subscribe(data => {   
-
+      if(existe){
+        alert("This repository is already in the system.")
+      }
+      else{
+        this.commitService.getCommits(this.tokenpass, reponameinput, ownerinput)
+        .subscribe(dataCommits => {   
+          this.issueService.getIssues(this.tokenpass, reponameinput, ownerinput)
+          .subscribe(dataIssues => {   
           });
-             
-            alert("Repository added.")
-            window.location.reload();
         },
         (err) => {console.log(err)
                   alert("The repository does not exist or you do not have permissions on it.")
-                  
+                  window.location.reload();
         });
-       
+        alert("Adding repository.")
+        window.location.reload();
+      }
+        
+        
     }
 
   }

@@ -108,45 +108,45 @@ export class RepoopsComponent implements OnInit, AfterViewInit {
 		this.router.navigate(['/aboutme']); // navigate to other page
 	}
 
-  async clickUpdateBranches(){
-    await this.commitService.getBranches(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
-    .subscribe(data => {
-      console.log(data);
-      alert("Operation completed.");
-    });
-  }
-
-  async clickUpdateCommits(){
-    await this.commitService.getCommits(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
-    .subscribe(data => {
-      alert(data);
-    });
-  }
-
-  async clickUpdateIssues(){
-    await this.issueService.getIssues(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
-    .subscribe(data => {
-      alert(data);
+  clickUpdateCommits(){
     
+    this.commitService.getCommits(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+    .subscribe(data => {
+     
+    });
+    alert("Updating commits.")
+  }
+
+  clickUpdateIssues(){
+    
+    this.issueService.getIssues(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+    .subscribe(data => {
+      this.issueService.updateIssues(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+      .subscribe(dataupdate => {
+      });
     },
     (err) => {
       alert("The repository does not have any issues to be saved.")
     });
-
+    alert("Updating issues.")
   }
 
-  async clickUpdateTestMetrics(){
-    await this.metricService.saveTestMetrics(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+  clickUpdateTestMetrics(){
+    
+    this.metricService.saveTestMetrics(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
     .subscribe(data => {
-      alert(data);
+     
     });
+    alert("Updating test metrics.")
   }
 
-  async clickUpdateProductMetrics(){
-    await this.metricService.saveMetrics(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
+  clickUpdateProductMetrics(){
+    
+    this.metricService.saveMetrics(this.tokenpass, this.repositorydata.repository, this.repositorydata.owner)
     .subscribe(data => {
-      alert(data);
+    
     });
+    alert("Updating product metrics.")
   }
 
   

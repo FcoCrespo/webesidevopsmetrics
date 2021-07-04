@@ -87,12 +87,7 @@ export class BranchesComponent implements OnInit {
                 this.branchesLenght = data.length;
                 this.branches = this.data;
                 console.log(this.branches);
-                if(this.data.length==0){
-                  console.log("Needs order.")
-                  document.getElementById("labelorderrepository")!.style.visibility = "visible";
-                  document.getElementById("buttonorderrepository")!.style.visibility = "visible";
-                }
-                else{
+              
                   localStorage.setItem('branches', JSON.stringify(this.branches));
         
                   this.repositoryName = this.branches[0].repository;
@@ -108,7 +103,7 @@ export class BranchesComponent implements OnInit {
                     }
                   }
 
-                }
+                
             });
           },
           (err) => {console.log(err);
@@ -148,6 +143,7 @@ export class BranchesComponent implements OnInit {
   OrderRepository(){
     console.log(this.repositoryName+" "+this.owner);
 
+    alert("Updating repository order, when it be completed the branches will be shown.")
     this.commitService.getBranchesFirstCommit(this.tokenpass, this.repositoryName, this.owner)
             .subscribe(data => {
               window.location.reload();
