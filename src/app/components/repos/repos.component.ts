@@ -124,13 +124,17 @@ export class ReposComponent implements OnInit {
       else{
         this.commitService.getCommits(this.tokenpass, reponameinput, ownerinput)
         .subscribe(dataCommits => {   
-          this.issueService.getIssues(this.tokenpass, reponameinput, ownerinput)
-          .subscribe(dataIssues => {   
-          });
+          
         },
         (err) => {console.log(err)
                   alert("The repository does not exist or you do not have permissions on it.")
                   window.location.reload();
+        });
+
+
+        this.issueService.getIssues(this.tokenpass, reponameinput, ownerinput)
+          .subscribe(dataIssues => {   
+                
         });
         alert("Adding repository.")
         window.location.reload();
