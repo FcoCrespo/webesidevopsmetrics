@@ -163,23 +163,34 @@
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">USERS OF DEVOPSMETRICS</h3>
+                                <h3 class="card-title">Admin users of ESIDEVOPSMETRICS</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                      <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
                                         <table class="table m-0">
                                             <thead>
                                                 <tr>
-                                                    <th>username</th>
+                                                    <th class="text-center" >username</th>
+                                                    <th class="text-center">role</th>
+                                                    <th class="text-center" >email</th>
+                                                    <th >options</th>
                                                 </tr>
                                             </thead>
                                             <tbody id=tableBodyUsers>
-                                                <tr *ngFor="let user of users">
+                                                <tr *ngFor="let useradmin of usersadmin">
 
-                                                    <ng-container *ngIf="user.username !== 'admin'">
-                                                        <td>{{ user?.username }}</td>
+                                                    <ng-container *ngIf="useradmin.username !== 'admin'">
+                                                        <td class="text-center" >{{ useradmin?.username }}</td>
+                                                        <td class="text-center" >{{ useradmin?.role }}</td>
+                                                        <td class="text-center" >{{ useradmin?.email }}</td>
                                                         <td><div class="row">
                                                             
-                                                                <div id="idcreatenewuseraction" (click)="updateUser(user)" class="info-box">
+                                                                <div id="idcreatenewuseraction" (click)="updateUser(useradmin)" class="info-box">
                                                                     <span class="info-box-icon bg-info elevation-1">
                                                                         <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateuser">
                                                                     </span>
@@ -195,7 +206,7 @@
                                                         </div></td>   
                                                         <td><div class="row">
                                                             
-                                                                <div id="idcreatenewuseraction" (click)="deleteUser(user)" class="info-box">
+                                                                <div id="idcreatenewuseraction" (click)="deleteUser(useradmin)" class="info-box">
                                                                     <span class="info-box-icon bg-info elevation-1">
                                                                         <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="deleteuser">
                                                                     </span>
@@ -217,7 +228,194 @@
                                     <!-- /.table-responsive -->
                                 </div>
 
+                            
+                            <!-- /.card-header -->
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div class="row" >
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Manager users of ESIDEVOPSMETRICS</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                      <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
                             </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" >username</th>
+                                                    <th class="text-center">role</th>
+                                                    <th class="text-center" >email</th>
+                                                    <th class="text-center" >User Github</th>
+                                                    <th >options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id=tableBodyUsers>
+                                                <tr *ngFor="let usermanager of usersmanager">
+
+                                                    <ng-container *ngIf="usermanager.username !== 'admin'">
+                                                        <td class="text-center" >{{ usermanager?.username }}</td>
+                                                        <td class="text-center" >{{ usermanager?.role }}</td>
+                                                        <td class="text-center" >{{ usermanager?.email }}</td>
+                                                        <td><div class="row">
+                                                            <div id="idcreatenewuseraction" (click)="viewUser(usermanager)" class="info-box">
+                                                                <span class="info-box-icon bg-info elevation-1">
+                                                                    <img src="assets/img/projectmanager.png" class="img-circle elevation-2" alt="updateuser">
+                                                                </span>
+                                    
+                                                                <div class="info-box-content">
+                                                                    <span class="info-box-text">View User Info</span>
+                                                                </div>
+                                                                <!-- /.info-box-content -->
+                                                            </div>
+                                                            <!-- /.info-box -->
+                                                       
+                                                        <!-- /.col -->
+                                                        </div></td> 
+                                                        <td><div class="row">
+                                                            
+                                                                <div id="idcreatenewuseraction" (click)="updateUser(usermanager)" class="info-box">
+                                                                    <span class="info-box-icon bg-info elevation-1">
+                                                                        <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateuser">
+                                                                    </span>
+                                        
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-text">Update User</span>
+                                                                    </div>
+                                                                    <!-- /.info-box-content -->
+                                                                </div>
+                                                                <!-- /.info-box -->
+                                                           
+                                                            <!-- /.col -->
+                                                        </div></td>   
+                                                        <td><div class="row">
+                                                            
+                                                                <div id="idcreatenewuseraction" (click)="deleteUser(usermanager)" class="info-box">
+                                                                    <span class="info-box-icon bg-info elevation-1">
+                                                                        <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="deleteuser">
+                                                                    </span>
+                                        
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-text">Delete User</span>
+                                                                    </div>
+                                                                    <!-- /.info-box-content -->
+                                                                </div>
+                                                                <!-- /.info-box -->
+                                                           
+                                                            <!-- /.col -->
+                                                        </div></td> 
+                                                    </ng-container>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+
+                            
+                            <!-- /.card-header -->
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div class="row" >
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Dev users of ESIDEVOPSMETRICS</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                      <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" >username</th>
+                                                    <th class="text-center">role</th>
+                                                    <th class="text-center" >email</th>
+                                                    <th class="text-center" >User Github</th>
+                                                    <th >options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id=tableBodyUsers>
+                                                <tr *ngFor="let userdev of usersdev">
+
+                                                    <ng-container *ngIf="userdev.username !== 'admin'">
+                                                        <td class="text-center" >{{ userdev?.username }}</td>
+                                                        <td class="text-center" >{{ userdev?.role }}</td>
+                                                        <td class="text-center" >{{ userdev?.email }}</td>
+                                                        <td><div class="row">
+                                                            
+                                                            <div id="idcreatenewuseraction" (click)="viewUser(userdev)" class="info-box">
+                                                                <span class="info-box-icon bg-info elevation-1">
+                                                                    <img src="assets/img/developer.png" class="img-circle elevation-2" alt="updateuser">
+                                                                </span>
+                                    
+                                                                <div class="info-box-content">
+                                                                    <span class="info-box-text">View User Info</span>
+                                                                </div>
+                                                                <!-- /.info-box-content -->
+                                                            </div>
+                                                            <!-- /.info-box -->
+                                                       
+                                                        <!-- /.col -->
+                                                        </div></td>  
+                                                        <td><div class="row">
+                                                            
+                                                                <div id="idcreatenewuseraction" (click)="updateUser(userdev)" class="info-box">
+                                                                    <span class="info-box-icon bg-info elevation-1">
+                                                                        <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateuser">
+                                                                    </span>
+                                        
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-text">Update User</span>
+                                                                    </div>
+                                                                    <!-- /.info-box-content -->
+                                                                </div>
+                                                                <!-- /.info-box -->
+                                                           
+                                                            <!-- /.col -->
+                                                        </div></td>   
+                                                        <td><div class="row">
+                                                            
+                                                                <div id="idcreatenewuseraction" (click)="deleteUser(userdev)" class="info-box">
+                                                                    <span class="info-box-icon bg-info elevation-1">
+                                                                        <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="deleteuser">
+                                                                    </span>
+                                        
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-text">Delete User</span>
+                                                                    </div>
+                                                                    <!-- /.info-box-content -->
+                                                                </div>
+                                                                <!-- /.info-box -->
+                                                           
+                                                            <!-- /.col -->
+                                                        </div></td> 
+                                                    </ng-container>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+
+                            
                             <!-- /.card-header -->
 
                         </div>
@@ -258,7 +456,14 @@
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">REPOSITORIES TOKENS OF DEVOPSMETRICS</h3>
+                                <h3 class="card-title">Repositories Tokens of ESIDEVOPSMETRICS</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                      <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
                                         <table class="table m-0">
@@ -310,8 +515,7 @@
                                     <!-- /.table-responsive -->
                                 </div>
 
-                            </div>
-                            <!-- /.card-header -->
+                            
 
                         </div>
                         <!-- /.card -->

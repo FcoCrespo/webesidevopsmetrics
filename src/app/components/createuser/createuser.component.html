@@ -147,6 +147,7 @@
                     <!-- /.col -->
                 </div>
                 
+                
                 <div class="row">
                     <p class="text-left">
                         <strong>  New User Form</strong>
@@ -160,30 +161,43 @@
                 <label style="visibility: hidden;"></label>
                 <label style="visibility: hidden;"></label>
                 <div class="row">
-                    <p class="text-left">
-                        <strong> The password must be greater than 8 characters. Must include at least one capital letter and one number</strong>
-                    </p>
                     <div class="col-12 col-sm-6 col-md-3">
-                        <input id="idpassinput" type="password" [(ngModel)]="passvalue" class="form-control form-control-navbar" placeholder="password" aria-label="password">                   
+                        <input id="emailinput" type="email" [(ngModel)]="emailvalue" class="form-control form-control-navbar" placeholder="email" aria-label="email">                   
                         <!-- /.info-box -->
                     </div>
                     <!-- /.col -->
                 </div>
-                <label style="visibility: hidden;"></label>
-                <label style="visibility: hidden;"></label>
+                <br>
+                
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
-                        <input id="idrepeatpassinput" type="password"  [(ngModel)]="repeatpassvalue"class="form-control form-control-navbar" placeholder="repeat password" aria-label="password">                   
-                        <!-- /.info-box -->
+                        <label id="roleslabel">Choose a role:
+                        <select [ngModel]="selectedRole" (ngModelChange)="onChangeRole($event)" name="selectRole">
+                            <option [value]="i" *ngFor="let i of roles">{{i}}</option>
+                        </select>
+                        </label>
                     </div>
                     <!-- /.col -->
                 </div>
-                <label style="visibility: hidden;"></label>
-                <label style="visibility: hidden;"></label>
+                <br>
+                <div class="row">
+                    
+                    <div class="minimal" id="usersfreebox" style="display: none;" class="col-12 col-sm-6 col-md-3">
+                        <label id="usersfreelabel" style="display: none;">Choose a user from github:
+                        <select [ngModel]="selectedUserFree" (ngModelChange)="onChangeUser($event)" required>
+                            <option *ngFor="let userfree of usersfree" [ngValue]="userfree">{{userfree.name}}</option>   
+                        </select>
+                        </label>
+                    </div>
+                    
+                    
+                    <!-- /.col -->
+                </div>
 
+                <br>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
-                        <div id="idcreatenewuseraction" (click)="createNewUser()" class="info-box">
+                        <div  id="idcreatenewuseraction" (click)="createNewUser()" class="info-box">
                             <span class="info-box-icon bg-info elevation-1">
                                 <img src="assets/img/newuser.png" class="img-circle elevation-2" alt="New User">
                             </span>
@@ -198,7 +212,7 @@
                     <!-- /.col -->
                 </div>
              
-                
+                <br>
             </div>
             <!--/. container-fluid -->
         </section>

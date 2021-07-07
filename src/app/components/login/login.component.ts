@@ -92,6 +92,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+  goRecover(){
+    this.router.navigate(['/recoverpass']);
+  }
+
   logout() {
     localStorage.clear();
     this.authService.logout();

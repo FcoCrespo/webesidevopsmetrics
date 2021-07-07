@@ -53,6 +53,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { InterceptorspinnerService } from './services/interceptorspinner.service';
 import { CreatetokenComponent } from './components/createtoken/createtoken.component';
 import { UpdatetokenComponent } from './components/updatetoken/updatetoken.component';
+import { RecoverpassComponent } from './components/recoverpass/recoverpass.component';
+import { UsergithubopsComponent } from './components/usergithubops/usergithubops.component';
 
 //registerLocaleData(localeES, 'es');
 
@@ -81,7 +83,9 @@ import { UpdatetokenComponent } from './components/updatetoken/updatetoken.compo
     ProductmetricsrepoComponent,
     TestmetricsrepoComponent,
     CreatetokenComponent,
-    UpdatetokenComponent
+    UpdatetokenComponent,
+    RecoverpassComponent,
+    UsergithubopsComponent
   ],
   imports: [
     BrowserModule,

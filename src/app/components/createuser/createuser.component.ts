@@ -1,12 +1,33 @@
-import { HostListener, Component, OnInit} from '@angular/core';
+import { HostListener, Component, OnInit, NgModule} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
+
 
 export interface Users {
   id: string;
   username: string;
   role: string;
+  email: string;
+  userGithub: string;
+}
+
+export interface Rol {
+  value: string;
+  viewValue: string;
+}
+
+export interface Repository {
+  repository: string;
+  owner: string;
+}
+
+export interface UsersGithubFree{
+  id: string;
+  name: string;
+  login: string;
+  repositories : Repository[];
 }
 
 
@@ -21,13 +42,39 @@ export class CreateuserComponent implements OnInit {
   data: Users[] = [];
   users: Users[] = [];
 
+
+  datafree: UsersGithubFree[] = [];
+  usersfree: UsersGithubFree[] = [];
+
   public username: string = "";
   public tokenpass: string = "";
   public role: string = "";
 
   usernamevalue: string="";
-  passvalue: string="";
-  repeatpassvalue: string="";
+  emailvalue: string="";
+
+  
+  roles : string[]=['admin', 'manager', 'dev'];
+  selectedRole= 'admin';
+
+  form = new FormGroup({
+    website: new FormControl('', Validators.required)
+  });
+
+  selectedUserFree: UsersGithubFree;
+  
+  get f(){
+    return this.form.controls;
+  }
+  
+  submit(){
+    console.log(this.form.value);
+  }
+  changeWebsite(e) {
+    console.log(e.target.value);
+  }
+
+  
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -56,24 +103,62 @@ export class CreateuserComponent implements OnInit {
             this.router.navigate(['/login']);
           }
           
-        });   
+      });   
+
+      await this.userService.getusersgithubfree(this.tokenpass)
+        .subscribe((data: UsersGithubFree[]) => {
+
+          
+          this.datafree = data;
+          this.usersfree = this.datafree;
+
+          document.getElementById("idcreatenewuseraction")!.style.visibility = "visible";
+        },
+        (err) => {console.log(err);
+    
+          if(err=="TypeError: Cannot read property 'message' of null"){
+            alert("Expired Session.")
+            this.router.navigate(['/login']);
+          }
+          
+      });   
   }
-  
+
+  onChangeRole(newValue) {
+    console.log(newValue);
+    this.selectedRole = newValue;
+
+    if(this.selectedRole==='manager' || this.selectedRole==='dev'){
+      document.getElementById("usersfreebox")!.style.display = "block";
+      document.getElementById("usersfreelabel")!.style.display= "block";
+    }
+    else{
+      document.getElementById("usersfreebox")!.style.display = "none";
+      document.getElementById("usersfreelabel")!.style.display = "none";
+    }
+    
+    
+  }
+
+  onChangeUser(value){
+    this.selectedUserFree = value;
+    console.log(this.selectedUserFree.name +" "+ this.selectedUserFree.id)
+  }
+
   createNewUser(){
 
-    var usernameinput= (<HTMLInputElement>document.getElementById('idusernameinput')).value;
-    var passinput= (<HTMLInputElement>document.getElementById('idpassinput')).value;
-    var repeatpassinput= (<HTMLInputElement>document.getElementById('idrepeatpassinput')).value;
+    alert(this.selectedRole+" "+this.selectedUserFree.id+" "+this.selectedUserFree.name)
+
+    /*var usernameinput= (<HTMLInputElement>document.getElementById('idusernameinput')).value;
+    var emailinput= (<HTMLInputElement>document.getElementById('emailinput')).value;
 
     var existe = false;
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+    var strongRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
 
     if (usernameinput === undefined 
       || usernameinput === ''
-      || passinput === ''
-      || passinput === undefined
-      || repeatpassinput === ''
-      || repeatpassinput === undefined) {
+      || emailinput === ''
+      || emailinput === undefined) {
 
       
       alert("Some fields needed for a new user are empty.")
@@ -94,14 +179,12 @@ export class CreateuserComponent implements OnInit {
       }
       else{
         
-        if(passinput===repeatpassinput){
-          
-
-          if(strongRegex.test(passinput)){
+          if(strongRegex.test(emailinput)){
 
             const message = {username:usernameinput,
-              password:passinput,
-              role:'admin'};
+              email:emailinput,
+              role:'',
+              userGithub:''};
 
             this.userService.register(this.tokenpass, message)
             .subscribe(data => {
@@ -112,26 +195,18 @@ export class CreateuserComponent implements OnInit {
             this.goUserOps();
           }
           else{
-            console.log(passinput)
-            alert("The password must be greater than 8 characters. Must include at least one capital letter and one number");
-            this.passvalue='';
-            this.repeatpassvalue='';
+            alert("The email is not in correct format (...@...)");
+            this.emailvalue = '';
           }
-        }
-
-
-        else{
-          alert("The passwords fields are different");
-          this.passvalue='';
-          this.repeatpassvalue='';
-        }
-
       }
 
-    }
+
+    }*/
 
 
   }
+
+  
 
   goHome(){
 		this.router.navigate(['/repos']); // navigate to other page

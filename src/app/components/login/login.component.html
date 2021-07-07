@@ -17,9 +17,16 @@
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">You must enter the password</div>
             </div>
-
+            <label style="visibility: hidden;"></label>
             <button id="botonAcceso" type="submit" class="form-group" value="Login">
                 Login
+            </button>
+
+            <label style="visibility: hidden;"></label>
+            <label style="visibility: hidden;"></label>
+    
+            <button id="botonRecover" type="submit" class="form-group" (click)="goRecover()">
+                Recover password
             </button>
         </div>
     </form>

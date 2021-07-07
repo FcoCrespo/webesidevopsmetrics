@@ -23,12 +23,14 @@ import { IssuesrepoComponent } from './components/issuesrepo/issuesrepo.componen
 import { ProductmetricsrepoComponent } from './components/productmetricsrepo/productmetricsrepo.component';
 import { TestmetricsrepoComponent } from './components/testmetricsrepo/testmetricsrepo.component';
 import { LoginComponent } from './components/login/login.component';
-
+import { RecoverpassComponent } from './components/recoverpass/recoverpass.component';
+import { UsergithubopsComponent } from './components/usergithubops/usergithubops.component';
 
 import { AuthGuard } from './guards';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'recoverpass', component: RecoverpassComponent },
   //{ path: 'repositories', component: RepositoriesComponent, canActivate: [AuthGuard] },
   { path: 'repos', component: ReposComponent, canActivate: [AuthGuard] },
   { path: 'branches', component: BranchesComponent, canActivate: [AuthGuard] },
@@ -44,6 +46,7 @@ const routes: Routes = [
   { path: 'repositoryinfo', component: RepositoryinfoComponent, canActivate: [AuthGuard] },
   { path: 'repousers', component: RepousersComponent, canActivate: [AuthGuard] },
   { path: 'usersgithub', component: UsersgithubComponent, canActivate: [AuthGuard] },
+  { path: 'usersgithubops', component: UsergithubopsComponent, canActivate: [AuthGuard] },
   { path: 'repoops', component: RepoopsComponent, canActivate: [AuthGuard] },
   { path: 'commitsrepo', component: CommitsrepoComponent, canActivate: [AuthGuard] },
   { path: 'issuesrepo', component: IssuesrepoComponent, canActivate: [AuthGuard] },

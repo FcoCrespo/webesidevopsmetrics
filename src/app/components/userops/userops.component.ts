@@ -8,6 +8,8 @@ export interface Users {
   id: string;
   username: string;
   role: string;
+  email: string;
+  userGithub: string;
 }
 
 export interface Tokens {
@@ -27,7 +29,10 @@ export class UseropsComponent implements OnInit {
 
   usersTable = {} as Users;
   data: Users[] = [];
-  users: Users[] = [];
+  usersadmin: Users[] = [];
+  usersmanager: Users[] = [];
+  usersdev: Users[] = [];
+  
 
   dataToken: Tokens[] = [];
   tokens: Tokens[] = [];
@@ -60,7 +65,13 @@ export class UseropsComponent implements OnInit {
           for(var i=0; i<this.data.length; i++){
             
             if(this.data[i].role=="admin"){
-              this.users.push(this.data[i]);
+              this.usersadmin.push(this.data[i]);
+            }
+            if(this.data[i].role=="manager"){
+              this.usersmanager.push(this.data[i]);
+            }
+            if(this.data[i].role=="dev"){
+              this.usersdev.push(this.data[i]);
             }
             
           }
@@ -115,6 +126,11 @@ export class UseropsComponent implements OnInit {
   updateUser(user:Users){
     localStorage.setItem('updateuser', JSON.stringify(user));
     this.router.navigate(['/updateuser']); 
+  }
+
+  viewUser(user:Users){
+    localStorage.setItem('usergithubid', JSON.stringify(user));
+    this.router.navigate(['/usersgithubops']); 
   }
 
   createToken(){

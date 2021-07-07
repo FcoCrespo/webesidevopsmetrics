@@ -1,0 +1,25 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+<div class="login">
+    <div class="logo-image">
+        <!--src : https://idgrup.com/wp-content/uploads/2018/07/devops1-1024x524.png -->
+        <img src="assets/img/devops-login.png" alt="Logo" title="Logo" width="400">
+    </div>
+    <h2 class="login-header">DevOps Metrics</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
+        <div class="form-group">
+            <input type="UserName" placeholder="user" id="username" formControlName="username" class="form-control" />
+            <input type="email" [(ngModel)]="emailvalue" placeholder="email" id="email" formControlName="email" class="form-control" />
+            <label style="visibility: hidden;"></label>
+            <label style="visibility: hidden;"></label>
+            <button id="botonRecover" type="submit" class="form-group" value="Login">
+                Recover password
+            </button>
+            <label style="visibility: hidden;"></label>
+            <label style="visibility: hidden;"></label>
+            <button id="botonLogin" type="submit" (click)="GoToLogin()" class="form-group" value="Login">
+                Back to Login
+            </button>
+        </div>
+    </form>
+</div>
