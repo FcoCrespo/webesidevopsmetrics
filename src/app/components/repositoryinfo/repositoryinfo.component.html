@@ -110,6 +110,7 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
+                
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 id="titlePage" class="m-0 text-dark"></h1>
@@ -122,8 +123,25 @@
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div id="idback" (click)="goHome()" class="info-box">
+                            <span class="info-box-icon bg-info elevation-1">
+                                <img src="assets/img/back.png" class="img-circle elevation-2" alt="back">
+                            </span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Back to Repository Info</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-tools">
@@ -135,29 +153,87 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-6">
                                         <p class="text-center">
                                             <strong>REPOSITORY OPERATIONS</strong>
                                         </p>
-                                        <ul>
-                                            <li class="ops" (click)="clickControlMetrics()">Control Metrics</li>
-                                            <label style="visibility: hidden;"></label>
-                                            <label style="visibility: hidden;"></label>
-                                            <li class="ops" (click)="clickProductMetrics()">Product Metrics</li>
-                                            <label style="visibility: hidden;"></label>
-                                            <label style="visibility: hidden;"></label>
-                                            <li class="ops" (click)="clickIssues()">Issues</li>
-                                            <label style="visibility: hidden;"></label>
-                                            <label style="visibility: hidden;"></label>     
-                                            <li class="ops" (click)="clickTestMetrics()">Test Metrics</li>
-                                            <label style="visibility: hidden;"></label>
-                                            <label style="visibility: hidden;"></label>
-                                            <li class="ops" (click)="clickRepoOps()">Repository Ops</li>
-                                            <label style="visibility: hidden;"></label>
-                                            <label style="visibility: hidden;"></label>
-                                            <li class="ops" (click)="clickUsers()">Users</li>
-                                            <label style="visibility: hidden;"></label>
-                                            <label style="visibility: hidden;"></label>
+                                        <ul style="list-style-type:none; padding: 0; margin: 0;">
+                                            <li class="ops" (click)="clickControlMetrics()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/metrics1.png" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Control Metrics</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
+                                            
+                                            
+                                            <li class="ops" (click)="clickProductMetrics()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/metrics2.png" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Product Metrics</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
+                                            <li class="ops" (click)="clickIssues()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/metrics5.jpg" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Issues</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
+                                            <li class="ops" (click)="clickTestMetrics()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/metrics3.png" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Test Metrics</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
+                                            <li class="ops" (click)="clickRepoOps()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/operationsgood.jpg" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Repository Ops</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
+                                            
+                                            <li class="ops" (click)="clickUsers()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/usersgood.jpg" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Users Github Info</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
+                                            
                                         </ul>
                                     
                                     </div>

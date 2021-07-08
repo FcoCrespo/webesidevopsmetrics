@@ -48,6 +48,8 @@ export class RecoverpassComponent implements OnInit {
   onSubmit() {
     var usernameinput= (<HTMLInputElement>document.getElementById('username')).value;
     var emailinput= (<HTMLInputElement>document.getElementById('email')).value;
+
+    console.log(usernameinput + " " + emailinput)
     var strongRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
 
     if (usernameinput === ''
@@ -63,7 +65,7 @@ export class RecoverpassComponent implements OnInit {
     else{
 
       if(strongRegex.test(emailinput)){
-        document.getElementById('botonAcceso')!.setAttribute("disabled", "disabled");
+        document.getElementById('botonRecover')!.setAttribute("disabled", "disabled");
         this.submitted = true;
   
         // resetea las alarmas al acceder

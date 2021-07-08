@@ -130,8 +130,26 @@
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div id="idback" (click)="goRepositoryInfo()" class="info-box">
+                            <span class="info-box-icon bg-info elevation-1">
+                                <img src="assets/img/back.png" class="img-circle elevation-2" alt="back">
+                            </span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Back to Repository Info</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-tools">
@@ -143,22 +161,66 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-6">
                                         <p class="text-center">
                                             <strong>REPOSITORY UPDATE OPERATIONS</strong>
                                         </p>
-                                        <ul style="list-style-type:none;">
+                                        <ul style="list-style-type:none; padding: 0; margin: 0;">
                         
-                                            <li class="ops" (click)="clickUpdateCommits()"><button>Update Commits</button></li>
+                                            <li class="ops" (click)="clickUpdateCommits()">
+                                                <div class="info-box">
+                                                <span class="info-box-icon bg-info elevation-1">
+                                                    <img src="assets/img/update3.png" class="img-circle elevation-2" alt="New User">
+                                                </span>
+                    
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Update Commits</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
                                             <label style="visibility: hidden;"></label>
                                             <label style="visibility: hidden;"></label>
-                                            <li class="ops" (click)="clickUpdateIssues()"><button>Update Issues</button></li>
+                                            <li class="ops" (click)="clickUpdateIssues()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/update2.png" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Update Issues</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
                                             <label style="visibility: hidden;"></label>
                                             <label style="visibility: hidden;"></label>     
-                                            <li class="ops" (click)="clickUpdateTestMetrics()"><button>Update Test Metrics</button></li>
+                                            <li class="ops" (click)="clickUpdateTestMetrics()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/updatetest.png" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Update Test Metrics</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
                                             <label style="visibility: hidden;"></label>
                                             <label style="visibility: hidden;"></label>
-                                            <li class="ops" (click)="clickUpdateProductMetrics()"><button>Update Product Metrics</button></li>
+                                            <li class="ops" (click)="clickUpdateProductMetrics()">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/update4.png" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Update Product Metrics</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </li>
                                             <label style="visibility: hidden;"></label>
                                             <label style="visibility: hidden;"></label>
                                             

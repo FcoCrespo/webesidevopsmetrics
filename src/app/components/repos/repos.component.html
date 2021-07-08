@@ -132,7 +132,7 @@
                 
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Repositories Dashboard</h5>
@@ -146,12 +146,24 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-6">
                                         <p class="text-center">
                                             <strong>REPOSITORIES OF DEVOPSMETRICS PROJECT</strong>
                                         </p>
-                                        <ul>
-                                            <li class="repositories" (click)="clickEvent(repository)" *ngFor="let repository of repositories;" id={{repository.repository}}><b>Repository:</b> {{repository.repository}} , <b>Owner:</b> {{repository.owner}}</li>
+                                        <ul style="list-style-type:none; padding: 0; margin: 0;">
+                                            <li class="repositories" (click)="clickEvent(repository)" *ngFor="let repository of repositories;">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-info elevation-1">
+                                                        <img src="assets/img/repo.png" class="img-circle elevation-2" alt="New User">
+                                                    </span>
+                        
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text"><b>Repository:</b> {{repository.repository}} <br> <b>Owner:</b> {{repository.owner}}</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                                
+                                            </li>
                                         </ul>
                                     
                                     </div>

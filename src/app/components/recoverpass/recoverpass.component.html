@@ -9,7 +9,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
         <div class="form-group">
             <input type="UserName" placeholder="user" id="username" formControlName="username" class="form-control" />
-            <input type="email" [(ngModel)]="emailvalue" placeholder="email" id="email" formControlName="email" class="form-control" />
+            <input type="email" placeholder="email" id="email" formControlName="email" class="form-control" />
             <label style="visibility: hidden;"></label>
             <label style="visibility: hidden;"></label>
             <button id="botonRecover" type="submit" class="form-group" value="Login">

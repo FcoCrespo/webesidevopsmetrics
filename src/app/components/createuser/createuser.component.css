@@ -153,3 +153,6 @@ li { cursor: pointer;
         max-width: 30rem;
       }
       
+      #idcreatenewuseraction{
+        cursor: pointer;
+    }

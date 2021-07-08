@@ -147,9 +147,9 @@ export class CreateuserComponent implements OnInit {
 
   createNewUser(){
 
-    alert(this.selectedRole+" "+this.selectedUserFree.id+" "+this.selectedUserFree.name)
+    
 
-    /*var usernameinput= (<HTMLInputElement>document.getElementById('idusernameinput')).value;
+    var usernameinput= (<HTMLInputElement>document.getElementById('idusernameinput')).value;
     var emailinput= (<HTMLInputElement>document.getElementById('emailinput')).value;
 
     var existe = false;
@@ -181,10 +181,16 @@ export class CreateuserComponent implements OnInit {
         
           if(strongRegex.test(emailinput)){
 
+            var userGithubvalue = '';
+
+            if(this.selectedRole !== 'admin'){
+              userGithubvalue = this.selectedUserFree.id;
+            }
+
             const message = {username:usernameinput,
               email:emailinput,
-              role:'',
-              userGithub:''};
+              role: this.selectedRole,
+              userGithub: userGithubvalue};
 
             this.userService.register(this.tokenpass, message)
             .subscribe(data => {
@@ -201,7 +207,7 @@ export class CreateuserComponent implements OnInit {
       }
 
 
-    }*/
+    }
 
 
   }

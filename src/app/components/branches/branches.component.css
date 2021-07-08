@@ -19,3 +19,13 @@ font-weight: bold;
 color: red;
 font-weight: bold;
 }
+#idback{
+    cursor: pointer;
+}
+
+.newer { 
+    color: green;
+}
+.older { 
+    color: red;
+}
