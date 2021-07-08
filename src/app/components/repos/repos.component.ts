@@ -9,12 +9,12 @@ export interface RepositoryData {
   owner: string;
 }
 
-export interface BranchesData {
-  idGithub:string;  
-  repository: string;
-  name: string;
-  order: string;
+export interface UserGithubRepo {
+   idusergithub: string;
+   repository: string;
+   owner: string;
 }
+
 
 @Component({
   selector: 'app-repos',
@@ -26,6 +26,8 @@ export class ReposComponent implements OnInit {
   
   data: RepositoryData[] = [];
   repositories: RepositoryData[] = [];
+
+  reposuser: UserGithubRepo[] = [];
   public username: string = "";
   public tokenpass: string = "";
   public role: string = "";
@@ -43,7 +45,6 @@ export class ReposComponent implements OnInit {
     var values = JSON.parse(localStorage.getItem("currentUser")!);
     this.username = values.username;
     this.tokenpass = values.tokenPass;
-    console.log(this.tokenpass);
     this.role = values.role;
     this.names = "BRANCHES \n";
     this.repositoriesLenght = 0;
@@ -57,14 +58,40 @@ export class ReposComponent implements OnInit {
     document.body.classList.add('bg-img-white');
     this.commitService.getRepositories(this.tokenpass)
       .subscribe((data: RepositoryData[]) => {
-        this.data = data;
-        console.log(this.data);
-        this.repositoriesLenght = data.length;
-        this.repositories = this.data;
+
+        if(this.role!=='admin'){
+          console.log("entro")
+          var values = JSON.parse(localStorage.getItem("currentUser")!);
+          console.log(values.userGithub)
+          this.commitService.getReposUserGithub(this.tokenpass, values.userGithub)
+          .subscribe((datareposuser: UserGithubRepo[]) => {
+
+            this.reposuser = datareposuser;
+
+            for(var i = 0; i<this.reposuser.length; i++){
+        
+              for(var j = 0; j<data.length; j++){
+             
+                if(this.reposuser[i].repository === data[j].repository && this.reposuser[i].owner === data[j].owner){
+
+                  this.repositories.push(data[j]);
+                }
+                
+              }
+            }
+
+          });
+        }
+        else{
+          this.data = data;
+          this.repositoriesLenght = data.length;
+          this.repositories = this.data;
+        }
+        
         localStorage.setItem('repositories', JSON.stringify(this.repositories));
         document.getElementById('userlogin')!.innerText = this.username;
     },
-    (err) => {console.log(err);
+    (err) => {
 
       if(err=="TypeError: Cannot read property 'message' of null"){
         alert("Expired Session.")
@@ -97,9 +124,7 @@ export class ReposComponent implements OnInit {
     var reponameinput= (<HTMLInputElement>document.getElementById('idrespositoryinput')).value;
     var ownerinput= (<HTMLInputElement>document.getElementById('idownerinput')).value;
     
-    console.log(reponameinput);
-    console.log(ownerinput);
-
+  
     if (reponameinput === undefined 
       || reponameinput === ''
       || ownerinput === ''
@@ -128,7 +153,7 @@ export class ReposComponent implements OnInit {
             alert("Adding repository "+ reponameinput+ ".")
             window.location.reload();
         },
-        (err) => {console.log(err)
+        (err) => {
                   alert("The repository does not exist or you do not have permissions on it.")
                   window.location.reload();
         });

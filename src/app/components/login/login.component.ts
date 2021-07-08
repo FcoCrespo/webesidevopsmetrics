@@ -66,12 +66,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.f.username.value, this.f.password.value)
       .subscribe(
         data => {
-          switch (this.authService.currentUserValue.role) {
+          /*switch (this.authService.currentUserValue.role) {
             case "admin": {
               this.router.navigate(['/repos']);
               break;
             }
-          }
+          }*/
+          this.router.navigate(['/repos']);
         },
         error => {
           document.getElementById('botonAcceso')!.removeAttribute("disabled");
@@ -82,14 +83,15 @@ export class LoginComponent implements OnInit {
 
   checkLogin() {
     if (this.authService.currentUserValue) {
-      switch (this.authService.currentUserValue.role) {
+      /*switch (this.authService.currentUserValue.role) {
         case "admin": {
           this.router.navigate(['/repos']);
           break;
         }
-      }
+      }*/
+      this.router.navigate(['/repos']);
     }
-
+    
   }
 
   goRecover(){

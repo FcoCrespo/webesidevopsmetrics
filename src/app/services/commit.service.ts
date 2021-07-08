@@ -62,6 +62,10 @@ export class CommitService {
     return this.http.get<any[]>(`${environment.apiUrl}/commits/usersgithubrepo?tokenpass=${tokenpass}&reponame=${reponame}&owner=${owner}`);
   }
 
+  getReposUserGithub(tokenpass: string, idusergithub: string){
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/getuserrepos?tokenpass=${tokenpass}&idusergithub=${idusergithub}`);
+  }
+
   getLastCommitRepo(tokenpass: string, reponame: string){
     return this.http.get<any[]>(`${environment.apiUrl}/commits/getlastcommit?tokenpass=${tokenpass}&reponame=${reponame}`);
   }
