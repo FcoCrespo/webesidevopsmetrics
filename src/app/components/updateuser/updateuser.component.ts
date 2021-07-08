@@ -26,6 +26,7 @@ export class UpdateuserComponent implements OnInit {
   public role: string = "";
 
   public updateusername: string = "";
+  public updaterole: string = "";
 
   usernamevalue: string="";
   newpassvalue: string="";
@@ -47,7 +48,7 @@ export class UpdateuserComponent implements OnInit {
       var updateuser = JSON.parse(localStorage.getItem("updateuser")!);
       console.log(updateuser)
       this.updateusername = updateuser.username;
-      console.log(this.updateusername)
+
 
       await this.userService.getAll(this.tokenpass)
         .subscribe((data: Users[]) => {
@@ -90,8 +91,7 @@ export class UpdateuserComponent implements OnInit {
           if(strongRegex.test(newpassinput)){
 
             const message = {username: this.usernamevalue,
-                password:newpassinput,
-                role:'admin'};
+                password:newpassinput};
             
 
             this.userService.update(this.tokenpass, this.usernamevalue, message)
