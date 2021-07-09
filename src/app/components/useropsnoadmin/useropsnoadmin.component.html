@@ -113,18 +113,15 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 id="titlePage" class="m-0 text-dark"></h1>
+                            <h1 class="m-0 text-dark">User Ops</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a (click)="goHome()">Home</a></li>
-                                <li class="breadcrumb-item"><a (click)="goUserOps()">UserOps</a></li>
-                                <li class="breadcrumb-item active">Users Github Data</li>
+                                <li class="breadcrumb-item active">User Ops</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-                    
-                    <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
@@ -132,107 +129,89 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div id="idcreatenewuseraction" (click)="goUserOps()" class="info-box">
-                                <span class="info-box-icon bg-info elevation-1">
-                                    <img src="assets/img/back.png" class="img-circle elevation-2" alt="back">
-                                </span>
+                  
     
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Back to User Ops Menu</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    
-                   
-                    <ul style="list-style-type:none;">
-                        <li class="usersgithub"  *ngFor="let userGithub of usersGithub;let i = index">
-                            <div class="row">
-                                <div class="col-md-12">
-                                  <div class="card">
-                                    <div class="card-header">
-                                      <h3 class="card-title">User Github # {{i+1}}</h3>
-                      
-                                      <div class="card-tools">
+                    <div class="row" >
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">User Info / Options</h3>
+                                    <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                           <i class="fas fa-minus"></i>
                                         </button>
-                                      </div>
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                      <div class="row">
-                                        <div class="col-md-4">
-                                          <p class="text-left">
-                                            <strong>Avatar</strong>
-                                          </p>
-                      
-                                          <div class="text-center">
-                                            <!-- Sales Chart Canvas -->
-                                            <img style="float: left;
-                                            width:  200px;
-                                            height: 200px;
-                                            object-fit: cover;" src={{userGithub.avatarURL}} class="rounded" alt="avatar">                  
-    
-                                          </div>
-                                          <!-- /.chart-responsive -->
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-md-8">
-                                          <p class="text-left">
-                                            <strong>Information</strong>
-                                          </p>
-                      
-                                          <div class="progress-group">
-                                            <b>Login:</b> {{userGithub.login}}
-                                          </div>
-                                          <div class="progress-group">
-                                            <b>Name:</b> {{userGithub.name}}
-                                          </div>
-                                          <div class="progress-group">
-                                            <b>IdGithub:</b> {{userGithub.idGithub}}
-                                          </div>
-                                          <div class="progress-group">
-                                            <b>email: <a href="mailto:{{userGithub.email}}">{{userGithub.email}}</a></b>
-                                          </div>
-                                          <label style="visibility: hidden;"></label>
-                                          <label style="visibility: hidden;"></label>
-                                          <div class="progress-group">
-                                            <p class="text-left">
-                                                <strong>Repositories</strong>
-                                              </p>
-                                              <ul style="list-style-type:none;">
-                                                <li style="cursor: pointer;" (click)="goUserRepo(userGithubrepos)" class="userGithubrepos"  *ngFor="let userGithubrepos of userGithub.repositories;">
-                                                    <b>Repository: </b>  {{userGithubrepos.repository}} - <b>Owner: </b> {{userGithubrepos.owner}} 
-                                                </li>
-                                            </ul>
-                                          </div>
-                                         
-                                        </div>
-                                        <!-- /.col -->
-                                      </div>
-                                      <!-- /.row -->
-                                    </div>
-                                    <!-- ./card-body -->
-                                   
-                                    <!-- /.card-footer -->
-                                  </div>
-                                  <!-- /.card -->
                                 </div>
-                                <!-- /.col -->
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table m-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" >username</th>
+                                                        <th class="text-center">role</th>
+                                                        <th class="text-center" >email</th>
+                                                        <th class="text-center" >User Github</th>
+                                                        <th >options</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id=tableBodyUsers>
+                                                    <tr *ngFor="let user of users">
+    
+                                                        <ng-container *ngIf="user.username !== 'admin'">
+                                                            <td class="text-center" >{{ user?.username }}</td>
+                                                            <td class="text-center" >{{ user?.role }}</td>
+                                                            <td class="text-center" >{{ user?.email }}</td>
+                                                            <td><div class="row">
+                                                                <div id="idcreatenewuseraction" (click)="viewUser(user)" class="info-box">
+                                                                    <span class="info-box-icon bg-info elevation-1">
+                                                                        <img src="assets/img/projectmanager.png" class="img-circle elevation-2" alt="updateuser">
+                                                                    </span>
+                                        
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-text">View User Info</span>
+                                                                    </div>
+                                                                    <!-- /.info-box-content -->
+                                                                </div>
+                                                                <!-- /.info-box -->
+                                                           
+                                                            <!-- /.col -->
+                                                            </div></td> 
+                                                            <td><div class="row">
+                                                                
+                                                                    <div id="idcreatenewuseraction" (click)="updateUser(user)" class="info-box">
+                                                                        <span class="info-box-icon bg-info elevation-1">
+                                                                            <img src="assets/img/update.png" class="img-circle elevation-2" alt="updateuser">
+                                                                        </span>
+                                            
+                                                                        <div class="info-box-content">
+                                                                            <span class="info-box-text">Update User</span>
+                                                                        </div>
+                                                                        <!-- /.info-box-content -->
+                                                                    </div>
+                                                                    <!-- /.info-box -->
+                                                               
+                                                                <!-- /.col -->
+                                                            </div></td>   
+                                                        
+                                                        </ng-container>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.table-responsive -->
+                                    </div>
+    
                                 
-                                <!-- /.card -->
+                                <!-- /.card-header -->
+    
                             </div>
-                        </li>
-                    </ul>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+    
+                 
+    
                     
-                    <!-- /.row -->
                 </div>
                 <!--/. container-fluid -->
             </section>
@@ -259,4 +238,3 @@
     </div>
     <!-- ./wrapper -->
     <router-outlet></router-outlet>
-    

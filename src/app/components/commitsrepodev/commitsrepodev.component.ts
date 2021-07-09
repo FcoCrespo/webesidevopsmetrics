@@ -45,11 +45,11 @@ export interface CommitsData {
 }
 
 @Component({
-  selector: 'app-commitsrepo',
-  templateUrl: './commitsrepo.component.html',
-  styleUrls: ['./commitsrepo.component.css']
+  selector: 'app-commitsrepodev',
+  templateUrl: './commitsrepodev.component.html',
+  styleUrls: ['./commitsrepodev.component.css']
 })
-export class CommitsrepoComponent implements OnInit, AfterViewInit {
+export class CommitsrepodevComponent implements OnInit {
 
   
   repositorydata: RepositoryData;
@@ -59,6 +59,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
   public owner : string = "";
   public repositoryName : string = "";
   public role: string = "";
+  public idusergithub: string = "";
   public names: string = "";
   public chartData: string = "";
   public repositoriesLenght : number = 0;
@@ -121,6 +122,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
       this.tokenpass = values.tokenPass;
       console.log(this.tokenpass);
       this.role = values.role;
+      this.idusergithub = values.userGithub;
       this.names = "BRANCHES \n";
       this.repositoriesLenght = 0;
 
@@ -133,7 +135,7 @@ export class CommitsrepoComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     document.body.classList.add('bg-img-white');
-    this.commitService.getCommitsBranch(this.tokenpass, this.branch.name, this.branch.repository, this.owner)
+    this.commitService.getCommitsBranchAuthor(this.tokenpass, this.branch.name, this.idusergithub, this.branch.repository, this.owner)
       .subscribe((data: CommitsData[]) => {
         
         this.data = data;

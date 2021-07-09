@@ -39,6 +39,10 @@ export class CommitService {
     return this.http.delete<any[]>(`${environment.apiUrl}/commits/deletetoken?tokenpass=${tokenpass}&owner=${owner}`);
   }
 
+  deleteRepository(tokenpass: string, owner: string, reponame: string) {
+    return this.http.delete<any[]>(`${environment.apiUrl}/commits/deleterepository?tokenpass=${tokenpass}&owner=${owner}&reponame=${reponame}`);
+  }
+
   getCommits(tokenpass: string, reponame: string, owner: string) {
     const requestOptions: Object = {
       responseType: 'text'
@@ -50,8 +54,8 @@ export class CommitService {
     return this.http.get<any[]>(`${environment.apiUrl}/commits/commitsbranch?tokenpass=${tokenpass}&branch=${branch}&reponame=${reponame}&owner=${owner}`);
   }
   
-  getCommitsBranchAuthor(tokenpass: string, branch: string, authorname: string, reponame: string, owner: string){
-    return this.http.get<any[]>(`${environment.apiUrl}/commits/commitsbranchauthor?tokenpass=${tokenpass}&branch=${branch}&reponame=${reponame}&authorname=${authorname}&owner=${owner}`);
+  getCommitsBranchAuthor(tokenpass: string, branch: string, idusergithub: string, reponame: string, owner: string){
+    return this.http.get<any[]>(`${environment.apiUrl}/commits/commitsbranchauthor?tokenpass=${tokenpass}&branch=${branch}&reponame=${reponame}&idusergithub=${idusergithub}&owner=${owner}`);
   }
 
   getUsersGithub(tokenpass: string){

@@ -55,6 +55,8 @@ import { CreatetokenComponent } from './components/createtoken/createtoken.compo
 import { UpdatetokenComponent } from './components/updatetoken/updatetoken.component';
 import { RecoverpassComponent } from './components/recoverpass/recoverpass.component';
 import { UsergithubopsComponent } from './components/usergithubops/usergithubops.component';
+import { UseropsnoadminComponent } from './components/useropsnoadmin/useropsnoadmin.component';
+import { CommitsrepodevComponent } from './components/commitsrepodev/commitsrepodev.component';
 
 //registerLocaleData(localeES, 'es');
 
@@ -85,7 +87,9 @@ import { UsergithubopsComponent } from './components/usergithubops/usergithubops
     CreatetokenComponent,
     UpdatetokenComponent,
     RecoverpassComponent,
-    UsergithubopsComponent
+    UsergithubopsComponent,
+    UseropsnoadminComponent,
+    CommitsrepodevComponent
   ],
   imports: [
     BrowserModule,

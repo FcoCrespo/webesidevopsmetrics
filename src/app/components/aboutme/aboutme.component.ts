@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AboutmeComponent implements OnInit, AfterViewInit {
 
   public username: string = "";
+  public role: string = "";
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -17,6 +18,7 @@ export class AboutmeComponent implements OnInit, AfterViewInit {
 
       var values = JSON.parse(localStorage.getItem("currentUser")!);
       this.username = values.username;
+      this.role  = values.role;
       
     }
 
@@ -48,7 +50,13 @@ export class AboutmeComponent implements OnInit, AfterViewInit {
 	}
 
   goUserOps(){
-		this.router.navigate(['/userops']); // navigate to other page
+    if(this.role==='admin'){
+      this.router.navigate(['/userops']); // navigate to other page
+    }
+    else{
+      this.router.navigate(['/useroptions']); // navigate to other page
+    }
+		
 	}
 
   goAboutMe(){

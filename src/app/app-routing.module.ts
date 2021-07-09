@@ -25,6 +25,8 @@ import { TestmetricsrepoComponent } from './components/testmetricsrepo/testmetri
 import { LoginComponent } from './components/login/login.component';
 import { RecoverpassComponent } from './components/recoverpass/recoverpass.component';
 import { UsergithubopsComponent } from './components/usergithubops/usergithubops.component';
+import { UseropsnoadminComponent } from './components/useropsnoadmin/useropsnoadmin.component';
+import { CommitsrepodevComponent } from './components/commitsrepodev/commitsrepodev.component';
 
 import { AuthGuard } from './guards';
 
@@ -52,6 +54,8 @@ const routes: Routes = [
   { path: 'issuesrepo', component: IssuesrepoComponent, canActivate: [AuthGuard] },
   { path: 'productmetricsrepo', component: ProductmetricsrepoComponent, canActivate: [AuthGuard] },
   { path: 'testmetricsrepo', component: TestmetricsrepoComponent, canActivate: [AuthGuard] },
+  { path: 'useroptions', component: UseropsnoadminComponent, canActivate: [AuthGuard] },
+  { path: 'commitsrepodev', component: CommitsrepodevComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

@@ -90,6 +90,16 @@ export class ReposComponent implements OnInit {
         
         localStorage.setItem('repositories', JSON.stringify(this.repositories));
         document.getElementById('userlogin')!.innerText = this.username;
+
+        if(this.role === 'admin'){
+          document.getElementById("addrepo")!.style.display= "block";
+
+          document.getElementById("addrepob")!.style.display= "block";
+
+          document.getElementById("deleterepo")!.style.display= "block";
+
+          document.getElementById("deleterepob")!.style.display= "block";
+        }
     },
     (err) => {
 
@@ -118,7 +128,34 @@ export class ReposComponent implements OnInit {
     this.router.navigate(['/repositoryinfo']);      
   }
 
+  deleteRepo(){
+
+    var reponameinput= (<HTMLInputElement>document.getElementById('idrespositoryinputd')).value;
+    var ownerinput= (<HTMLInputElement>document.getElementById('idownerinputd')).value;
+    
   
+    if (reponameinput === undefined 
+      || reponameinput === ''
+      || ownerinput === ''
+      || ownerinput === undefined) {
+
+      
+      alert("Some fields needed for a new repository are empty.")
+
+    }
+    else{
+      if(confirm("Are you sure to delete this repository?")) {
+        this.commitService.deleteRepository(this.tokenpass, ownerinput, reponameinput)
+              .subscribe(data => {
+  
+        });
+  
+        alert("Repository deleted correctly.")
+        window.location.reload();
+      }
+    }
+    
+  }
 
   AddNewRepository(){
     var reponameinput= (<HTMLInputElement>document.getElementById('idrespositoryinput')).value;
@@ -181,7 +218,12 @@ export class ReposComponent implements OnInit {
 	}
 
   goUserOps(){
-		this.router.navigate(['/userops']); // navigate to other page
+    if(this.role ==='admin'){
+      this.router.navigate(['/userops']); // navigate to other page
+    }
+    else{
+      this.router.navigate(['/useroptions']); // navigate to other page
+    }
 	}
 
   goAboutMe(){

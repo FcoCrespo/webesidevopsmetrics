@@ -45,11 +45,8 @@ export class RepositoryinfoComponent implements OnInit, AfterViewInit {
       this.tokenpass = values.tokenPass;
       console.log(this.tokenpass);
       this.role = values.role;
-      this.names = "BRANCHES \n";
       this.repositoriesLenght = 0;
   
-  
-      this.chartData = localStorage.getItem("DataLabelChart") + " " + localStorage.getItem("DataChart");
 
   }
 
@@ -66,6 +63,10 @@ export class RepositoryinfoComponent implements OnInit, AfterViewInit {
       document.getElementById('userlogin')!.innerText = this.username;
       var dataRepository = JSON.parse(localStorage.getItem("RepositoryData")!);
       document.getElementById('titlePage')!.innerText = "Repository Info - Name: "+dataRepository.repository+" , Owner: "+dataRepository.owner;
+      if(this.role!=='dev'){
+        document.getElementById("ops")!.style.display= "block";
+      }
+    
     });
     
   }
@@ -92,7 +93,12 @@ export class RepositoryinfoComponent implements OnInit, AfterViewInit {
 	}
 
   goUserOps(){
-		this.router.navigate(['/userops']); // navigate to other page
+    if(this.role==='admin'){
+      this.router.navigate(['/userops']); // navigate to other page
+    }
+    else{
+      this.router.navigate(['/useroptions']); // navigate to other page
+    }
 	}
 
   goAboutMe(){

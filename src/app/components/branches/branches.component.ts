@@ -137,7 +137,13 @@ export class BranchesComponent implements OnInit {
 
   clickEvent(branch: BranchesLastCommit){
     localStorage.setItem('BranchData', JSON.stringify(branch));
-    this.router.navigate(['/commitsrepo']);      
+    if(this.role==='dev'){
+      this.router.navigate(['/commitsrepodev']); 
+    }
+    else{
+      this.router.navigate(['/commitsrepo']); 
+    }
+         
   }
 
   OrderRepository(){
@@ -170,7 +176,12 @@ export class BranchesComponent implements OnInit {
 	}
 
   goAboutMe(){
-		this.router.navigate(['/aboutme']); // navigate to other page
+    if(this.role==='admin'){
+      this.router.navigate(['/userops']); // navigate to other page
+    }
+    else{
+      this.router.navigate(['/useroptions']); // navigate to other page
+    }
 	}
 
   goRepositoryInfo(){

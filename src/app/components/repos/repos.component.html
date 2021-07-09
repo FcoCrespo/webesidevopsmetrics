@@ -179,7 +179,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div id="addrepo" class="row" style="display: none;">
                     <p class="text-left">
                         <strong>  New Repository Form</strong>
                     </p>
@@ -196,7 +196,7 @@
                 <label style="visibility: hidden;"></label>
                 <label style="visibility: hidden;"></label>
 
-                <div class="row">
+                <div id="addrepob" class="row" style="display: none;">
                     <div style="cursor: pointer;" class="col-12 col-sm-6 col-md-3">
                         <div id="report" (click)="AddNewRepository()" class="info-box">
                             <span class="info-box-icon bg-info elevation-1">
@@ -205,6 +205,40 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Add New Repository</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div id="deleterepo" class="row" style="display: none;">
+                    <p class="text-left">
+                        <strong>  Delete Repository Form</strong>
+                    </p>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <input id="idrespositoryinputd" class="form-control form-control-navbar" type="repository" placeholder="repository" aria-label="repository">                   
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <input id="idownerinputd" class="form-control form-control-navbar" type="owner" placeholder="owner" aria-label="owner">                   
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <label style="visibility: hidden;"></label>
+                <label style="visibility: hidden;"></label>
+
+                <div id="deleterepob" class="row" style="display: none;">
+                    <div style="cursor: pointer;" class="col-12 col-sm-6 col-md-3">
+                        <div id="report" (click)="deleteRepo()" class="info-box">
+                            <span class="info-box-icon bg-info elevation-1">
+                                <img src="assets/img/papelera.jpg" class="img-circle elevation-2" alt="Print report">
+                            </span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Delete Repository</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>

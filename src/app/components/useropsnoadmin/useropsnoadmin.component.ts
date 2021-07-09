@@ -20,18 +20,17 @@ export interface Tokens {
 
 
 @Component({
-  selector: 'app-userops',
-  templateUrl: './userops.component.html',
-  styleUrls: ['./userops.component.css']
+  selector: 'app-useropsnoadmin',
+  templateUrl: './useropsnoadmin.component.html',
+  styleUrls: ['./useropsnoadmin.component.css']
 })
-export class UseropsComponent implements OnInit {
+export class UseropsnoadminComponent implements OnInit {
 
 
   usersTable = {} as Users;
   data: Users[] = [];
-  usersadmin: Users[] = [];
-  usersmanager: Users[] = [];
-  usersdev: Users[] = [];
+  users: Users[] = [];
+  
   
 
   dataToken: Tokens[] = [];
@@ -41,6 +40,7 @@ export class UseropsComponent implements OnInit {
   public username: string = "";
   public tokenpass: string = "";
   public role: string = "";
+  public idusergithub: string = "";
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -55,6 +55,7 @@ export class UseropsComponent implements OnInit {
       this.username = values.username;
       this.tokenpass = values.tokenPass;
       this.role = values.role;
+      this.idusergithub = values.userGithub;
 
       await this.userService.getAll(this.tokenpass)
         .subscribe((data: Users[]) => {
@@ -64,15 +65,13 @@ export class UseropsComponent implements OnInit {
 
           for(var i=0; i<this.data.length; i++){
             
-            if(this.data[i].role=="admin"){
-              this.usersadmin.push(this.data[i]);
+            
+            if(this.data[i].userGithub === this.idusergithub){
+
+              this.users.push(this.data[i]);
+
             }
-            if(this.data[i].role=="manager"){
-              this.usersmanager.push(this.data[i]);
-            }
-            if(this.data[i].role=="dev"){
-              this.usersdev.push(this.data[i]);
-            }
+            
             
           }
         },
@@ -107,22 +106,7 @@ export class UseropsComponent implements OnInit {
       });  
   }
 
-  createUser(){
-    this.router.navigate(['/createuser']); 
-  }
-
-  deleteUser(user:Users){
-    if(confirm("Are you sure to delete "+user.username)) {
-      this.userService.delete(this.tokenpass, user.id)
-            .subscribe(data => {
-
-      });
-
-      alert("User deleted correctly.")
-      window.location.reload();
-    }
-  }
-
+  
   updateUser(user:Users){
     localStorage.setItem('updateuser', JSON.stringify(user));
     this.router.navigate(['/updateuser']); 
@@ -133,33 +117,12 @@ export class UseropsComponent implements OnInit {
     this.router.navigate(['/usersgithubops']); 
   }
 
-  createToken(){
-    this.router.navigate(['/createtoken']); 
-  }
-
-  deleteToken(token:Tokens){
-    if(confirm("Are you sure to delete this token?")) {
-      this.commitService.deleteToken(this.tokenpass, token.owner)
-            .subscribe(data => {
-
-      });
-
-      alert("Token deleted correctly.")
-      window.location.reload();
-    }
-  }
-
-  updateToken(token:Tokens){
-    localStorage.setItem('updatetoken', JSON.stringify(token.owner));
-    this.router.navigate(['/updatetoken']); 
-  }
-
   goHome(){
 		this.router.navigate(['/repos']); // navigate to other page
 	}
 
   goUserOps(){
-    if(this.role==='admin'){
+		if(this.role==='admin'){
       console.log("soy admin");
       this.router.navigate(['/userops']); // navigate to other page
     }
@@ -175,10 +138,6 @@ export class UseropsComponent implements OnInit {
 
   goUserGithub(){
     this.router.navigate(['/usersgithub']); 
-  }
-
-  hashPassword(password: string){
-    return "*".repeat(password.length/2)
   }
 
 

@@ -1,5 +1,4 @@
 <ngx-spinner bdColor = "rgba(86,111,110,0.8)" size = "large" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner><div class="wrapper">
-<div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
@@ -73,6 +72,13 @@
                             </li>
 
                             <li class="nav-item">
+                                <a (click)="goBranches()" class="nav-link">
+                                    <i class="far fa-circle nav-icon text-info"></i>
+                                    <p>Branches</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a (click)="goUserGithub()" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Users Github</p>
@@ -127,19 +133,11 @@
                             <li class="breadcrumb-item"><a (click)="goHome()">Home</a></li>
                             <li class="breadcrumb-item"><a (click)="goHome()">Repositories</a></li>
                             <li class="breadcrumb-item"><a (click)="goRepositoryInfo()">Repository Info</a></li>
-                            <li class="breadcrumb-item active">Repository Users</li>
+                            <li class="breadcrumb-item"><a (click)="goBranches()">Branches</a></li>
+                            <li class="breadcrumb-item active">Repository Commits Metrics</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
-                
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
                         <div id="idback" (click)="goRepositoryInfo()" class="info-box">
@@ -156,88 +154,61 @@
                     </div>
                     <!-- /.col -->
                 </div>
-               
-                <ul style="list-style-type:none;">
-                    <li class="usersgithub"  *ngFor="let userGithub of usersGithub;let i = index">
-                        <div class="row">
-                            <div class="col-md-12">
-                              <div class="card">
-                                <div class="card-header">
-                                  <h3 class="card-title">User Github # {{i+1}}</h3>
-                  
-                                  <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                      <i class="fas fa-minus"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                  <div class="row">
-                                    <div class="col-md-4">
-                                      <p class="text-left">
-                                        <strong>Avatar</strong>
-                                      </p>
-                  
-                                      <div class="text-center">
-                                        <!-- Sales Chart Canvas -->
-                                        <img style="float: left;
-                                        width:  200px;
-                                        height: 200px;
-                                        object-fit: cover;" src={{userGithub.avatarURL}} class="rounded" alt="avatar">                  
 
-                                      </div>
-                                      <!-- /.chart-responsive -->
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-md-8">
-                                      <p class="text-left">
-                                        <strong>Information</strong>
-                                      </p>
-                  
-                                      
-                                      <div class="progress-group">
-                                        <b>Login:</b> {{userGithub.login}}
-                                      </div>
-                                      <div class="progress-group">
-                                        <b>Name:</b> {{userGithub.name}}
-                                      </div>
-                                      <div class="progress-group">
-                                        <b>IdGithub:</b> {{userGithub.idGithub}}
-                                      </div>
-                                      <div class="progress-group">
-                                        <b>email: <a href="mailto:{{userGithub.email}}">{{userGithub.email}}</a></b>
-                                      </div>
-                                      <label style="visibility: hidden;"></label>
-                                      <label style="visibility: hidden;"></label>
-                                      <div class="progress-group">
-                                        <p class="text-left">
-                                            <strong>Repositories</strong>
-                                          </p>
-                                          <ul style="list-style-type:none;">
-                                            <li style="cursor: pointer;" (click)="goUserRepo(userGithubrepos)" class="userGithubrepos"  *ngFor="let userGithubrepos of userGithub.repositories;">
-                                                <b>Repository: </b>  {{userGithubrepos.repository}} - <b>Owner: </b> {{userGithubrepos.owner}} 
-                                            </li>
-                                        </ul>
-                                      </div>
-                                     
-                                    </div>
-                                    <!-- /.col -->
-                                  </div>
-                                  <!-- /.row -->
-                                </div>
-                                <!-- ./card-body -->
-                               
-                                <!-- /.card-footer -->
-                              </div>
-                              <!-- /.card -->
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div id="report" (click)="pdf()" class="info-box" style="cursor: pointer; visibility: hidden;">
+                            <span class="info-box-icon elevation-1">
+                                <img src="assets/img/reports-200.png" style="background-color: white; width:  50px; height: 50px;" alt="Print report">
+                            </span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Print Report</span>
                             </div>
-                            <!-- /.col -->
-                            
-                            <!-- /.card -->
+                            <!-- /.info-box-content -->
                         </div>
-                    </li>
-                </ul>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div  class="card-header">
+                                <h3 class="card-title">COMMITS OF {{this.branch.name.toUpperCase()}} BRANCH - TIMELINE COMMITS
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            
+                            <div id="chartTimelineCommits">
+                                
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                
+                
+
                 
                 <!-- /.row -->
             </div>
@@ -264,5 +235,6 @@
         </div>
     </footer>
 </div>
+
 <!-- ./wrapper -->
 <router-outlet></router-outlet>

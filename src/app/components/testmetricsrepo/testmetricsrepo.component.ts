@@ -172,7 +172,12 @@ export class TestmetricsrepoComponent implements OnInit, AfterViewInit {
   }
 
   goUserOps(){
-		this.router.navigate(['/userops']); // navigate to other page
+    if(this.role==='admin'){
+      this.router.navigate(['/userops']); // navigate to other page
+    }
+    else{
+      this.router.navigate(['/useroptions']); // navigate to other page
+    }
 	}
 
   goAboutMe(){
