@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://devopsmetrics.herokuapp.com'
+  apiUrl: 'https://tfgserveresidevopsmetrics.herokuapp.com'
 };

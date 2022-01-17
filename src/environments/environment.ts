@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://devopsmetrics.herokuapp.com'
+  apiUrl: 'https://tfgserveresidevopsmetrics.herokuapp.com'
 };
 
 /*
